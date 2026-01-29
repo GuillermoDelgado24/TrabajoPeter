@@ -9,19 +9,33 @@ package src.com.tic.pojo;
  * @author tarde
  */
 public class Usuario {
-    private String nombreYApellidos;
+    private int idUsuario;
+    private String nombreDeUsuario;
+    private String nombreApellidos;
     private String usuario;
     private String correo;
-    private String nTelefono;
+    private String numeroTelefono;
     private String contrasena;
 
-    public Usuario(String nombreYApellidos, String usuario, String correo, String nTelefono, String contrasena) {
-        this.nombreYApellidos = nombreYApellidos;
+    public Usuario(String nombreDeUsuario, String nombreApellidos, String usuario, String correo, String numeroTelefono, String contrasena) {
+        this.nombreDeUsuario = nombreDeUsuario;
+        this.nombreApellidos = nombreApellidos;
         this.usuario = usuario;
         this.correo = correo;
-        this.nTelefono = nTelefono;
+        this.numeroTelefono = numeroTelefono;
         this.contrasena = contrasena;
     }
+
+    public Usuario(int idUsuario, String nombreDeUsuario, String nombreApellidos, String usuario, String correo, String numeroTelefono, String contrasena) {
+        this.idUsuario = idUsuario;
+        this.nombreDeUsuario = nombreDeUsuario;
+        this.nombreApellidos = nombreApellidos;
+        this.usuario = usuario;
+        this.correo = correo;
+        this.numeroTelefono = numeroTelefono;
+        this.contrasena = contrasena;
+    }
+
 
     public String getContrasena() {
         return contrasena;
@@ -32,11 +46,11 @@ public class Usuario {
     }
 
     public String getNombreYApellidos() {
-        return nombreYApellidos;
+        return nombreApellidos;
     }
 
-    public void setNombreYApellidos(String nombreYApellidos) {
-        this.nombreYApellidos = nombreYApellidos;
+    public void setNombreYApellidos(String nombreApellidos) {
+        this.nombreApellidos = nombreApellidos;
     }
 
     public String getUsuario() {
@@ -55,13 +69,34 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getnTelefono() {
-        return nTelefono;
+    public int getNombreUsuario() {
+        return idUsuario;
     }
 
-    public void setnTelefono(String nTelefono) {
-        this.nTelefono = nTelefono;
+    public void setNombreUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
-    
+
+    public String getNombreDeUsuario() {
+        return nombreDeUsuario;
+    }
+
+    public void setNombreDeUsuario(String nombreDeUsuario) {
+        this.nombreDeUsuario = nombreDeUsuario;
+    }
+
+    public String getNumeroTelefono() {
+        return numeroTelefono;
+    }
+
+    public void setNumeroTelefono(String numeroTelefono) {
+        this.numeroTelefono = numeroTelefono;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombreDeUsuario=" + nombreDeUsuario + ", nombreApellidos=" + nombreApellidos + ", usuario=" + usuario + ", correo=" + correo + ", numeroTelefono=" + numeroTelefono + ", contrasena=" + contrasena + '}';
+    }
+
     
 }
