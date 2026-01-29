@@ -9,16 +9,16 @@ package src.com.tic.exec;
  *
  * @author tarde
  */
-public class JFrameGestor extends javax.swing.JFrame {
+public class VistaGestor extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameGestor.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaGestor.class.getName());
 
     /**
      * Creates new form NewJFrame
      */
-    public JFrameGestor() {
+    public VistaGestor() {
         initComponents();
-        this.setSize(600, 530);
+        this.setSize(760, 650);
         this.setLocationRelativeTo(null);
     }
 
@@ -38,8 +38,6 @@ public class JFrameGestor extends javax.swing.JFrame {
         jTableTecnico = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableIncidencia = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -120,14 +118,6 @@ public class JFrameGestor extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 500, 360));
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
-
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel1.setText("Incidencias actuales:");
-        jPanel2.add(jLabel1);
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 190, 40));
-
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
@@ -195,19 +185,17 @@ public class JFrameGestor extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JFrameGestor().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new VistaGestor().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
