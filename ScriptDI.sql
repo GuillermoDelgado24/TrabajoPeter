@@ -39,6 +39,9 @@ ON DELETE CASCADE
 ON UPDATE CASCADE
 );
 
+CREATE TABLE Tipos_Incidencias (
+tipo_incidencia VARCHAR(100) PRIMARY KEY
+); 
 
 CREATE TABLE Incidencias (
 ID_Incidencia INT AUTO_INCREMENT PRIMARY KEY,
@@ -46,15 +49,20 @@ estado ENUM('alta','asignada','en curso','cerrada') NOT NULL DEFAULT 'alta',
 resultado_cierre ENUM('con éxito','con éxito parcial','sin_éxito') DEFAULT NULL,
 f_cierre DATE,
 f_entrada DATE NOT NULL,
-tipo_incidencia VARCHAR(100) NOT NULL,
+tipo_incidencia VARCHAR(100),
 ID_Usuario INT,
 ID_Tecnico INT DEFAULT NULL,
+descripcion_incidencia VARCHAR(500) NOT NULL,
+descripcion_solucion VARCHAR(500) DEFAULT NULL,
 CONSTRAINT fk_incidencia_usuario
 FOREIGN KEY (ID_Usuario)
 REFERENCES Usuarios(ID_Usuario),
 CONSTRAINT fk_incidencia_tecnico
 FOREIGN KEY (ID_Tecnico)
 REFERENCES Tecnicos(ID_Tecnico),
+CONSTRAINT fk_tipo_incidencia
+FOREIGN KEY (tipo_incidencia)
+REFERENCES Tipos_Incidencias(tipo_incidencia),
 CHECK ( (estado = 'cerrada' AND resultado_cierre IS NULL) 
 OR (estado = 'cerrada' AND resultado_cierre IS NOT NULL) )
 );
@@ -74,9 +82,10 @@ REFERENCES Espacios(ID_Espacio)
 CREATE TABLE Dispositivos (
 ID_Dispositivo INT AUTO_INCREMENT PRIMARY KEY,
 ID_Espacio INT,
-Descripcion varchar(255),
-Marca varchar(50),
-Modelo varchar(50),
+tipo varchar(100),
+descripcion varchar(255),
+marca varchar(50),
+modelo varchar(50),
 CONSTRAINT FK_DISPOSITIVO_ESPACIO
 FOREIGN KEY (ID_Espacio)
 REFERENCES Espacios(ID_Espacio)

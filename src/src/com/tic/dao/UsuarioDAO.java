@@ -4,10 +4,8 @@
  */
 package src.com.tic.dao;
 
-import java.awt.List;
 import java.util.ArrayList;
 import src.com.tic.pojo.Incidencia;
-import src.com.tic.pojo.Usuario;
 
 /**
  *
@@ -15,12 +13,12 @@ import src.com.tic.pojo.Usuario;
  */
 public interface UsuarioDAO {
 
-    public ArrayList<Incidencia> getIncidenciasUsuario();
+    public ArrayList<Incidencia> getIncidenciasUsuario(int idUsuario) throws Exception;
 
-    public Incidencia getIncidenciaPorId(int id);
+    public Incidencia getIncidenciaPorId(int idIncidencia) throws Exception;
 
-    public void crearIncidencia(Incidencia incidencia);
+    public void crearIncidencia(Incidencia incidencia, int idEspacio) throws Exception;
 
-    public boolean solicitarReapertura(int idIncidencia);
+    public boolean solicitarReapertura(int idIncidencia) throws Exception;
 
 }
