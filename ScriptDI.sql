@@ -82,9 +82,10 @@ REFERENCES Espacios(ID_Espacio)
 CREATE TABLE Dispositivos (
 ID_Dispositivo INT AUTO_INCREMENT PRIMARY KEY,
 ID_Espacio INT,
-Descripcion varchar(255),
-Marca varchar(50),
-Modelo varchar(50),
+tipo varchar(100),
+descripcion varchar(255),
+marca varchar(50),
+modelo varchar(50),
 CONSTRAINT FK_DISPOSITIVO_ESPACIO
 FOREIGN KEY (ID_Espacio)
 REFERENCES Espacios(ID_Espacio)
