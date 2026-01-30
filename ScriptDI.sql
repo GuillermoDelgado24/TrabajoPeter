@@ -39,6 +39,9 @@ ON DELETE CASCADE
 ON UPDATE CASCADE
 );
 
+CREATE TABLE Tipos_Incidencias (
+tipo_incidencia VARCHAR(100) PRIMARY KEY
+); 
 
 CREATE TABLE Incidencias (
 ID_Incidencia INT AUTO_INCREMENT PRIMARY KEY,
@@ -46,7 +49,7 @@ estado ENUM('alta','asignada','en curso','cerrada') NOT NULL DEFAULT 'alta',
 resultado_cierre ENUM('con éxito','con éxito parcial','sin_éxito') DEFAULT NULL,
 f_cierre DATE,
 f_entrada DATE NOT NULL,
-tipo_incidencia VARCHAR(100) NOT NULL,
+tipo_incidencia VARCHAR(100),
 ID_Usuario INT,
 ID_Tecnico INT DEFAULT NULL,
 descripcion_incidencia VARCHAR(500) NOT NULL,
@@ -57,6 +60,9 @@ REFERENCES Usuarios(ID_Usuario),
 CONSTRAINT fk_incidencia_tecnico
 FOREIGN KEY (ID_Tecnico)
 REFERENCES Tecnicos(ID_Tecnico),
+CONSTRAINT fk_tipo_incidencia
+FOREIGN KEY (tipo_incidencia)
+REFERENCES Tipos_Incidencias(tipo_incidencia),
 CHECK ( (estado = 'cerrada' AND resultado_cierre IS NULL) 
 OR (estado = 'cerrada' AND resultado_cierre IS NOT NULL) )
 );
