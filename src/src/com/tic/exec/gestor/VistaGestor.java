@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package src.com.tic.exec;
+package src.com.tic.exec.gestor;
 
 /**
  *
@@ -44,7 +44,7 @@ public class VistaGestor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButtonListarIndicendiaEspera = new javax.swing.JButton();
         jButtonListarIndicendias = new javax.swing.JButton();
-        jButtonListarTipoIndicendias = new javax.swing.JButton();
+        jButtonListarTipoIncidencias = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,10 +134,11 @@ public class VistaGestor extends javax.swing.JFrame {
             }
         });
 
-        jButtonListarTipoIndicendias.setText("Listar por tipo de Indicencia y por ID Tecnico");
-        jButtonListarTipoIndicendias.addActionListener(new java.awt.event.ActionListener() {
+        jButtonListarTipoIncidencias.setText("Listar por tipo de Incidencia y por ID Tecnico");
+        jButtonListarTipoIncidencias.setToolTipText("");
+        jButtonListarTipoIncidencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonListarTipoIndicendiasActionPerformed(evt);
+                jButtonListarTipoIncidenciasActionPerformed(evt);
             }
         });
 
@@ -184,7 +185,7 @@ public class VistaGestor extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addComponent(jButtonListarIndicendias)
                         .addGap(42, 42, 42)
-                        .addComponent(jButtonListarTipoIndicendias)
+                        .addComponent(jButtonListarTipoIncidencias)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -215,7 +216,7 @@ public class VistaGestor extends javax.swing.JFrame {
                     .addComponent(jButtonPonerEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonListarIndicendiaEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonListarIndicendias, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonListarTipoIndicendias, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonListarTipoIncidencias, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(68, 68, 68))
         );
 
@@ -234,9 +235,10 @@ public class VistaGestor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonListarIndicendiasActionPerformed
 
-    private void jButtonListarTipoIndicendiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarTipoIndicendiasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonListarTipoIndicendiasActionPerformed
+    private void jButtonListarTipoIncidenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarTipoIncidenciasActionPerformed
+        jDialogTipoIncidenciaTecnico dTipoIncidenciaTecnico = new jDialogTipoIncidenciaTecnico(this, true);
+        dTipoIncidenciaTecnico.setVisible(true);
+    }//GEN-LAST:event_jButtonListarTipoIncidenciasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,7 +271,7 @@ public class VistaGestor extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAsignarTecnico;
     private javax.swing.JButton jButtonListarIndicendiaEspera;
     private javax.swing.JButton jButtonListarIndicendias;
-    private javax.swing.JButton jButtonListarTipoIndicendias;
+    private javax.swing.JButton jButtonListarTipoIncidencias;
     private javax.swing.JButton jButtonPonerEspera;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

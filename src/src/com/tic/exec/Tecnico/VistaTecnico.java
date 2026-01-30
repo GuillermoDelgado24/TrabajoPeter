@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package src.com.tic.exec;
+package src.com.tic.exec.Tecnico;
 
 /**
  *
@@ -82,8 +82,18 @@ public class VistaTecnico extends javax.swing.JFrame {
         jButtonAtenderIndicencia.setText("Atender Indicencia");
 
         jButtonCerrarIndicencia.setText("Cerrar Incidencia");
+        jButtonCerrarIndicencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarIndicenciaActionPerformed(evt);
+            }
+        });
 
         jButtonAgregarTipo.setText("Agregar tipo de Incidencia");
+        jButtonAgregarTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarTipoActionPerformed(evt);
+            }
+        });
 
         jButtonVerIndicencias.setText("Ver indicencias");
 
@@ -195,6 +205,16 @@ public class VistaTecnico extends javax.swing.JFrame {
     private void jDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDiasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jDiasActionPerformed
+
+    private void jButtonCerrarIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarIndicenciaActionPerformed
+        jDialogCerrarIncidencia dCerrarIncidencia = new jDialogCerrarIncidencia(this, false);
+        dCerrarIncidencia.setVisible(true);
+    }//GEN-LAST:event_jButtonCerrarIndicenciaActionPerformed
+
+    private void jButtonAgregarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarTipoActionPerformed
+        jDialogAgregarTipoIncidencia dAgregarTipoIncidencia = new jDialogAgregarTipoIncidencia(this, true);
+        dAgregarTipoIncidencia.setVisible(true);
+    }//GEN-LAST:event_jButtonAgregarTipoActionPerformed
 
     /**
      * @param args the command line arguments

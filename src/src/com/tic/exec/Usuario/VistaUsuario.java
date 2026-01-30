@@ -1,4 +1,4 @@
-package src.com.tic.exec;
+package src.com.tic.exec.Usuario;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -112,7 +112,6 @@ public class VistaUsuario extends javax.swing.JFrame {
         jLabel1.setText("ID");
 
         jButtonReapertura.setText("Solicitar reapertura");
-        jButtonReapertura.setActionCommand("Solicitar reapertura");
         jButtonReapertura.setEnabled(false);
         jButtonReapertura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +120,6 @@ public class VistaUsuario extends javax.swing.JFrame {
         });
 
         jButtonSalir.setText("Salir");
-        jButtonSalir.setActionCommand("Salir");
         jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalirActionPerformed(evt);
@@ -194,7 +192,8 @@ public class VistaUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearIndicenciaActionPerformed
-        // TODO add your handling code here:
+        JDialogCrearIncidencia dCrearIncidencia = new JDialogCrearIncidencia(this, true);
+        dCrearIncidencia.setVisible(true);
     }//GEN-LAST:event_jButtonCrearIndicenciaActionPerformed
 
     private void jButtonListarIncidenciaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarIncidenciaIdActionPerformed
