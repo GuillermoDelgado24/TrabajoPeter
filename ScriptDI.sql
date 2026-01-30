@@ -49,6 +49,8 @@ f_entrada DATE NOT NULL,
 tipo_incidencia VARCHAR(100) NOT NULL,
 ID_Usuario INT,
 ID_Tecnico INT DEFAULT NULL,
+descripcion_incidencia VARCHAR(500) NOT NULL,
+descripcion_solucion VARCHAR(500) DEFAULT NULL,
 CONSTRAINT fk_incidencia_usuario
 FOREIGN KEY (ID_Usuario)
 REFERENCES Usuarios(ID_Usuario),

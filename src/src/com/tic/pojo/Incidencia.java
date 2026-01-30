@@ -4,7 +4,7 @@
  */
 package src.com.tic.pojo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -15,32 +15,39 @@ public class Incidencia {
     private int idIncidencia;
     private String estado;
     private String resultado_cierre;
-    private Date fechaCierre;
-    private Date fechaEntrada;
+    private LocalDate fechaCierre;
+    private LocalDate fechaEntrada;
     private String tipoIncidencia;
+    private String descripcionIncidencia;
+    private String descripcionSolucion;
     private int idUsuario;
     private int idTecnico;
 
-    public Incidencia(String estado, String resultado_cierre, Date fechaCierre, Date fechaEntrada, String tipoIncidencia, int idUsuario, int idTecnico) {
+    public Incidencia(String estado, String resultado_cierre, LocalDate fechaCierre, LocalDate fechaEntrada, String tipoIncidencia, String descripcionIncidencia, String descripcionSolucion, int idUsuario, int idTecnico) {
         this.estado = estado;
         this.resultado_cierre = resultado_cierre;
         this.fechaCierre = fechaCierre;
         this.fechaEntrada = fechaEntrada;
         this.tipoIncidencia = tipoIncidencia;
+        this.descripcionIncidencia = descripcionIncidencia;
+        this.descripcionSolucion = descripcionSolucion;
         this.idUsuario = idUsuario;
         this.idTecnico = idTecnico;
     }
 
-    public Incidencia(int idIncidencia, String estado, String resultado_cierre, Date fechaCierre, Date fechaEntrada, String tipoIncidencia, int idUsuario, int idTecnico) {
+    public Incidencia(int idIncidencia, String estado, String resultado_cierre, LocalDate fechaCierre, LocalDate fechaEntrada, String tipoIncidencia, String descripcionIncidencia, String descripcionSolucion, int idUsuario, int idTecnico) {
         this.idIncidencia = idIncidencia;
         this.estado = estado;
         this.resultado_cierre = resultado_cierre;
         this.fechaCierre = fechaCierre;
         this.fechaEntrada = fechaEntrada;
         this.tipoIncidencia = tipoIncidencia;
+        this.descripcionIncidencia = descripcionIncidencia;
+        this.descripcionSolucion = descripcionSolucion;
         this.idUsuario = idUsuario;
         this.idTecnico = idTecnico;
     }
+
 
     public int getIdTecnico() {
         return idTecnico;
@@ -74,19 +81,19 @@ public class Incidencia {
         this.resultado_cierre = resultado_cierre;
     }
 
-    public Date getFechaCierre() {
+    public LocalDate getFechaCierre() {
         return fechaCierre;
     }
 
-    public void setFechaCierre(Date fechaCierre) {
+    public void setFechaCierre(LocalDate fechaCierre) {
         this.fechaCierre = fechaCierre;
     }
 
-    public Date getFechaEntrada() {
+    public LocalDate getFechaEntrada() {
         return fechaEntrada;
     }
 
-    public void setFechaEntrada(Date fechaEntrada) {
+    public void setFechaEntrada(LocalDate fechaEntrada) {
         this.fechaEntrada = fechaEntrada;
     }
 
@@ -106,9 +113,25 @@ public class Incidencia {
         this.idUsuario = idUsuario;
     }
 
+    public String getDescripcionIncidencia() {
+        return descripcionIncidencia;
+    }
+
+    public void setDescripcionIncidencia(String descripcionIncidencia) {
+        this.descripcionIncidencia = descripcionIncidencia;
+    }
+
+    public String getDescripcionSolucion() {
+        return descripcionSolucion;
+    }
+
+    public void setDescripcionSolucion(String descripcionSolucion) {
+        this.descripcionSolucion = descripcionSolucion;
+    }
+
     @Override
     public String toString() {
-        return "Incidencia{" + "idIncidencia=" + idIncidencia + ", estado=" + estado + ", resultado_cierre=" + resultado_cierre + ", fechaCierre=" + fechaCierre + ", fechaEntrada=" + fechaEntrada + ", tipoIncidencia=" + tipoIncidencia + ", idUsuario=" + idUsuario + ", idTecnico=" + idTecnico + '}';
+        return "Incidencia{" + "idIncidencia=" + idIncidencia + ", estado=" + estado + ", resultado_cierre=" + resultado_cierre + ", fechaCierre=" + fechaCierre + ", fechaEntrada=" + fechaEntrada + ", tipoIncidencia=" + tipoIncidencia + ", descripcionIncidencia=" + descripcionIncidencia + ", descripcionSolucion=" + descripcionSolucion + ", idUsuario=" + idUsuario + ", idTecnico=" + idTecnico + '}';
     }
 
 }
