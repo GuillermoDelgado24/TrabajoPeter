@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -71,7 +71,7 @@
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       <Component id="jButtonListarIndicendias" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="jButtonListarTipoIndicendias" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonListarTipoIncidencias" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -112,7 +112,7 @@
                   <Component id="jButtonPonerEspera" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="jButtonListarIndicendiaEspera" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="jButtonListarIndicendias" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="jButtonListarTipoIndicendias" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="jButtonListarTipoIncidencias" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
           </Group>
@@ -322,12 +322,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListarIndicendiasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonListarTipoIndicendias">
+    <Component class="javax.swing.JButton" name="jButtonListarTipoIncidencias">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Listar por tipo de Indicencia y por ID Tecnico"/>
+        <Property name="text" type="java.lang.String" value="Listar por tipo de Incidencia y por ID Tecnico"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListarTipoIndicendiasActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListarTipoIncidenciasActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
