@@ -52,7 +52,27 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
 
     @Override
     public void cerrarIncidencia(Incidencia incidencia) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int r = 0;
+        String SQL = "UPDATE Incidencias "
+                + "SET estado = 'cerrada', "
+                + "f_cierre = CURDATE(),"
+                + "tipo_incidencia = ?"
+                + "resultado_cierre = ?, "
+                + "descripcion_solucion = ? "
+                + "WHERE ID_Incidencia = ?;";
+
+        try (Connection con = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = con.prepareStatement(SQL);) {
+            pstm.setString(1, incidencia.getTipoIncidencia());
+            pstm.setString(2, incidencia.getResultado_cierre());
+            pstm.setString(3, incidencia.getDescripcionSolucion());
+            pstm.setInt(4, incidencia.getIdIncidencia());
+            r = pstm.executeUpdate();
+            if (r > 0) {
+                System.out.println("Registros afectados: " + r);
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     @Override
