@@ -83,7 +83,6 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
         try (Connection con = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = con.prepareStatement(sql);) {
             pstm.setInt(1, idIncidencia);
             try (ResultSet resul = pstm.executeQuery();) {
-                while (resul.next()) {
                     estado = resul.getString("estado");
                     resultado_cierre = resul.getString("resultado_cierre");
                     fechaCierre = resul.getDate("f_cierre").toLocalDate();
@@ -94,7 +93,6 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
                     idUsuario = resul.getInt("ID_Usuario");
                     idTecnico = resul.getInt("ID_Tecnico");
                     incidencia = new Incidencia(idIncidencia, estado, resultado_cierre, fechaCierre, fechaEntrada, tipoIncidencia, descripcionIncidencia, descripcionSolucion, idUsuario, idTecnico);
-                }
             }
         } catch (Exception e) {
             throw e;
@@ -106,7 +104,7 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
     public boolean solicitarReapertura(int idIncidencia) throws SQLException {
         int r = 0;
         String SQL = "UPDATE Incidencias "
-                + "SET estado = 'alta', "
+                + "SET estado = NULL, "
                 + "resultado_cierre = NULL "
                 + "WHERE ID_Incidencia = ?;";
 
@@ -127,20 +125,19 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
 
     @Override
     public void crearIncidencia(Incidencia incidencia, int idEspacio) throws Exception {
-        String SQL = "INSERT INTO Incidencias (ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion) VALUES (?,?,?,?,?,?,?,?,?,?);";
+        String SQL = "INSERT INTO Incidencias (estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion) VALUES (?,?,?,?,?,?,?,?,?,?);";
         String SQL2 = "INSERT INTO Incidencias_Espacios (ID_Espacio, ID_Incidencia) VALUES (?,?);";
 
         try (Connection con = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = con.prepareStatement(SQL); PreparedStatement pstm2 = con.prepareStatement(SQL2)) {
-            pstm.setInt(1, incidencia.getIdIncidencia());
-            pstm.setString(2, incidencia.getEstado());
-            pstm.setString(3, incidencia.getResultado_cierre());
-            pstm.setDate(4, java.sql.Date.valueOf(incidencia.getFechaCierre()));
-            pstm.setDate(5, java.sql.Date.valueOf(incidencia.getFechaEntrada()));
-            pstm.setString(6, incidencia.getTipoIncidencia());
-            pstm.setInt(7, incidencia.getIdUsuario());
-            pstm.setInt(8, incidencia.getIdTecnico());
-            pstm.setString(9, incidencia.getDescripcionIncidencia());
-            pstm.setString(10, incidencia.getDescripcionSolucion());
+            pstm.setString(1, incidencia.getEstado());
+            pstm.setString(2, incidencia.getResultado_cierre());
+            pstm.setDate(3, java.sql.Date.valueOf(incidencia.getFechaCierre()));
+            pstm.setDate(4, java.sql.Date.valueOf(incidencia.getFechaEntrada()));
+            pstm.setString(5, incidencia.getTipoIncidencia());
+            pstm.setInt(6, incidencia.getIdUsuario());
+            pstm.setInt(7, incidencia.getIdTecnico());
+            pstm.setString(8, incidencia.getDescripcionIncidencia());
+            pstm.setString(9, incidencia.getDescripcionSolucion());
 
             pstm.executeUpdate();
 

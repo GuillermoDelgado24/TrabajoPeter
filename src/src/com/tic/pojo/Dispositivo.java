@@ -12,23 +12,27 @@ public class Dispositivo {
     private int idDispositivo;
     private int idEspacio;
     private String descripcion;
+    private String tipo;
     private String marca;
     private String modelo;
 
-    public Dispositivo(int idDispositivo, int idEspacio, String descripcion, String marca, String modelo) {
-        this.idDispositivo = idDispositivo;
+    public Dispositivo(int idEspacio, String descripcion, String tipo, String marca, String modelo) {
         this.idEspacio = idEspacio;
         this.descripcion = descripcion;
+        this.tipo = tipo;
         this.marca = marca;
         this.modelo = modelo;
     }
 
-    public Dispositivo(int idEspacio, String descripcion, String marca, String modelo) {
+    public Dispositivo(int idDispositivo, int idEspacio, String descripcion, String tipo, String marca, String modelo) {
+        this.idDispositivo = idDispositivo;
         this.idEspacio = idEspacio;
         this.descripcion = descripcion;
+        this.tipo = tipo;
         this.marca = marca;
         this.modelo = modelo;
     }
+
 
     public String getModelo() {
         return modelo;
@@ -68,6 +72,14 @@ public class Dispositivo {
 
     public void setMarca(String marca) {
         this.marca = marca;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
 }
