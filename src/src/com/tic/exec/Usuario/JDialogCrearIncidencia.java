@@ -4,7 +4,10 @@
  */
 package src.com.tic.exec.Usuario;
 
+import java.time.LocalDate;
+import src.com.tic.dao.UsuarioDAOimpl;
 import src.com.tic.exec.Usuario.VistaUsuario;
+import src.com.tic.pojo.Incidencia;
 
 /**
  *
@@ -40,6 +43,7 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButtonCrearIndicenciaDialog = new javax.swing.JButton();
+        jComboBoxEspacio = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,6 +70,8 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
             }
         });
 
+        jComboBoxEspacio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aula1", "Aula2", "Despacho", "Recepcion", "Sala Reuniones" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,14 +80,19 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCrearIndicenciaDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonCrearIndicenciaDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 20, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 20, Short.MAX_VALUE))
+                        .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBoxEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +101,8 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -104,7 +116,26 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearIndicenciaDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearIndicenciaDialogActionPerformed
-
+        //Crear metodo para que combo box de espacio se vincule a la base de datos, y crear metodo para
+        //seleccionar idEspacio segun el nombre del espacio
+        Object espacioSeleccionado = this.jComboBoxEspacio.getSelectedItem();
+        Object tipoIncidenciaSeleccionado = this.jComboBoxTipoIncidencia.getSelectedItem();
+        String espacio = espacioSeleccionado.toString();
+        String tipoIncidencia = tipoIncidenciaSeleccionado.toString();
+        String descripcion = this.jTextArea1.getText();
+        int idEspacio = 0;
+        if (espacio.equals("Aula1")) {
+            idEspacio = 0;
+        } else if (espacio.equals("Aula2")) {
+            idEspacio = 1;
+        } else if (espacio.equals("Despacho")) {
+            idEspacio = 2;
+        } else if (espacio.equals("Recepcion")) {
+            idEspacio = 3;
+        } else if (espacio.equals("Sala reuinones")) {
+            idEspacio = 4;
+        }
+        //udi.crearIncidencia(i, idEspacio);
     }//GEN-LAST:event_jButtonCrearIndicenciaDialogActionPerformed
 
     /**
@@ -146,6 +177,7 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
     VistaUsuario padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearIndicenciaDialog;
+    private javax.swing.JComboBox<String> jComboBoxEspacio;
     private javax.swing.JComboBox<String> jComboBoxTipoIncidencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -154,4 +186,6 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+    protected UsuarioDAOimpl udi = new UsuarioDAOimpl();
+
 }
