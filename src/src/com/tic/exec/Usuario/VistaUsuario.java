@@ -9,13 +9,13 @@ import src.com.tic.pojo.Incidencia;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author alumno
  */
+
 public class VistaUsuario extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaUsuario.class.getName());
 
     /**
@@ -204,6 +204,13 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private void jButtonListarIncidenciaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarIncidenciaIdActionPerformed
         // TODO add your handling code here:
+        try {
+            int id = Integer.parseInt(this.jTextIncidenciaId.getText());
+            refrescarTablaPorID(id);
+        } catch (Exception e) {
+            System.out.println("Ingrese un numero entero en el campo ID");
+        }
+
     }//GEN-LAST:event_jButtonListarIncidenciaIdActionPerformed
 
     private void jTextIncidenciaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIncidenciaIdActionPerformed
@@ -246,11 +253,25 @@ public class VistaUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new VistaUsuario().setVisible(true));
     }
-    
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCrearIndicencia;
+    private javax.swing.JButton jButtonListarIncidenciaId;
+    private javax.swing.JButton jButtonListarIndicencias;
+    private javax.swing.JButton jButtonReapertura;
+    private javax.swing.JButton jButtonSalir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableUsuario;
+    private javax.swing.JTextField jTextIncidenciaId;
+    // End of variables declaration//GEN-END:variables
     private void refrescarTabla() {
         DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
         m.setNumRows(0);
-        
+
         Incidencia i = null;
         try {
             ArrayList<Incidencia> ai = (ArrayList<Incidencia>) udi.getIncidenciasUsuario(1);
@@ -274,19 +295,34 @@ public class VistaUsuario extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia");
         }
     }
-    protected UsuarioDAOimpl udi = new UsuarioDAOimpl();
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCrearIndicencia;
-    private javax.swing.JButton jButtonListarIncidenciaId;
-    private javax.swing.JButton jButtonListarIndicencias;
-    private javax.swing.JButton jButtonReapertura;
-    private javax.swing.JButton jButtonSalir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableUsuario;
-    private javax.swing.JTextField jTextIncidenciaId;
-    // End of variables declaration//GEN-END:variables
+    private void refrescarTablaPorID(int id) {
+        DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
+        m.setNumRows(0);
+
+        Incidencia i = null;
+        try {
+            i = udi.getIncidenciaPorId(id);
+
+            Object[] o = {
+                i.getIdIncidencia(),
+                i.getEstado(),
+                i.getResultado_cierre(),
+                i.getFechaCierre(),
+                i.getFechaEntrada(),
+                i.getTipoIncidencia(),
+                i.getIdUsuario(),
+                i.getIdTecnico(),
+                i.getDescripcionIncidencia(),
+                i.getDescripcionSolucion()
+            };
+
+            m.addRow(o);
+        } catch (Exception ex) {
+            System.out.println("Error al cargar la tabla");
+        }
+    }
+    protected UsuarioDAOimpl udi = new UsuarioDAOimpl();
 }
+
+
