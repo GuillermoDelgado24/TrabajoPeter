@@ -1,16 +1,21 @@
 package src.com.tic.exec.Usuario;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import src.com.tic.dao.UsuarioDAOimpl;
+import src.com.tic.pojo.Incidencia;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author alumno
  */
+
 public class VistaUsuario extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaUsuario.class.getName());
 
     /**
@@ -18,6 +23,7 @@ public class VistaUsuario extends javax.swing.JFrame {
      */
     public VistaUsuario() {
         initComponents();
+        refrescarTabla();
     }
 
     /**
@@ -198,6 +204,13 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private void jButtonListarIncidenciaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarIncidenciaIdActionPerformed
         // TODO add your handling code here:
+        try {
+            int id = Integer.parseInt(this.jTextIncidenciaId.getText());
+            refrescarTablaPorID(id);
+        } catch (Exception e) {
+            System.out.println("Ingrese un numero entero en el campo ID");
+        }
+
     }//GEN-LAST:event_jButtonListarIncidenciaIdActionPerformed
 
     private void jTextIncidenciaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIncidenciaIdActionPerformed
@@ -241,6 +254,7 @@ public class VistaUsuario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new VistaUsuario().setVisible(true));
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearIndicencia;
     private javax.swing.JButton jButtonListarIncidenciaId;
@@ -254,4 +268,61 @@ public class VistaUsuario extends javax.swing.JFrame {
     private javax.swing.JTable jTableUsuario;
     private javax.swing.JTextField jTextIncidenciaId;
     // End of variables declaration//GEN-END:variables
+    private void refrescarTabla() {
+        DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
+        m.setNumRows(0);
+
+        Incidencia i = null;
+        try {
+            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) udi.getIncidenciasUsuario(1);
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                Object[] o = {
+                    i.getIdIncidencia(),
+                    i.getEstado(),
+                    i.getResultado_cierre(),
+                    i.getFechaCierre(),
+                    i.getFechaEntrada(),
+                    i.getTipoIncidencia(),
+                    i.getIdUsuario(),
+                    i.getIdTecnico(),
+                    i.getDescripcionIncidencia(),
+                    i.getDescripcionSolucion()
+                };
+                m.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+        }
+    }
+
+    private void refrescarTablaPorID(int id) {
+        DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
+        m.setNumRows(0);
+
+        Incidencia i = null;
+        try {
+            i = udi.getIncidenciaPorId(id);
+
+            Object[] o = {
+                i.getIdIncidencia(),
+                i.getEstado(),
+                i.getResultado_cierre(),
+                i.getFechaCierre(),
+                i.getFechaEntrada(),
+                i.getTipoIncidencia(),
+                i.getIdUsuario(),
+                i.getIdTecnico(),
+                i.getDescripcionIncidencia(),
+                i.getDescripcionSolucion()
+            };
+
+            m.addRow(o);
+        } catch (Exception ex) {
+            System.out.println("Error al cargar la tabla");
+        }
+    }
+    protected UsuarioDAOimpl udi = new UsuarioDAOimpl();
 }
+
+
