@@ -4,6 +4,8 @@
  */
 package src.com.tic.exec.Tecnico;
 
+import src.com.tic.dao.TecnicoDAOimpl;
+
 /**
  *
  * @author alumno
@@ -11,12 +13,14 @@ package src.com.tic.exec.Tecnico;
 public class VistaTecnico extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaTecnico.class.getName());
-
+    int IdIncidencia;
+    TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
     /**
      * Creates new form VistaTecnico
      */
     public VistaTecnico() {
         initComponents();
+        
     }
 
     /**
@@ -52,7 +56,7 @@ public class VistaTecnico extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Otro dia mas en el curro");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
 
         jTableTecnico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,9 +81,19 @@ public class VistaTecnico extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableTecnico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableTecnicoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableTecnico);
 
         jButtonAtenderIndicencia.setText("Atender Indicencia");
+        jButtonAtenderIndicencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtenderIndicenciaActionPerformed(evt);
+            }
+        });
 
         jButtonCerrarIndicencia.setText("Cerrar Incidencia");
         jButtonCerrarIndicencia.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +112,11 @@ public class VistaTecnico extends javax.swing.JFrame {
         jButtonVerIndicencias.setText("Ver indicencias");
 
         jButtonVerIndicenciasConcretas.setText("Listar tipo incidencia");
+        jButtonVerIndicenciasConcretas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerIndicenciasConcretasActionPerformed(evt);
+            }
+        });
 
         jTipoIncidencia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jTipoIncidencia.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +128,11 @@ public class VistaTecnico extends javax.swing.JFrame {
         jLabel1.setText("Tipo Indicencia");
 
         jButtonVerIndicenciasTiempoConcreto.setText("Listar incidencia cerradas de hace...");
+        jButtonVerIndicenciasTiempoConcreto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerIndicenciasTiempoConcretoActionPerformed(evt);
+            }
+        });
 
         jDias.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jDias.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +239,23 @@ public class VistaTecnico extends javax.swing.JFrame {
         jDialogAgregarTipoIncidencia dAgregarTipoIncidencia = new jDialogAgregarTipoIncidencia(this, true);
         dAgregarTipoIncidencia.setVisible(true);
     }//GEN-LAST:event_jButtonAgregarTipoActionPerformed
+
+    private void jButtonAtenderIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtenderIndicenciaActionPerformed
+        //tecnicoDAO.atenderIncidencia(IdIncidencia);
+    }//GEN-LAST:event_jButtonAtenderIndicenciaActionPerformed
+
+    private void jTableTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTecnicoMouseClicked
+        int fila = this.jTableTecnico.rowAtPoint(evt.getPoint());
+        IdIncidencia = (int) this.jTableTecnico.getValueAt(fila,0);
+    }//GEN-LAST:event_jTableTecnicoMouseClicked
+
+    private void jButtonVerIndicenciasConcretasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasConcretasActionPerformed
+        //tecnicoDAO.verPorTipoIncidencia(String)
+    }//GEN-LAST:event_jButtonVerIndicenciasConcretasActionPerformed
+
+    private void jButtonVerIndicenciasTiempoConcretoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
+        //tecnicoDAO.verBeetween(int Dias)
+    }//GEN-LAST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
 
     /**
      * @param args the command line arguments

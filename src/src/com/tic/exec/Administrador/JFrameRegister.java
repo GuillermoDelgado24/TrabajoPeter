@@ -1,4 +1,4 @@
-package src.com.tic.exec;
+package src.com.tic.exec.Administrador;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

@@ -88,7 +88,7 @@ public class jDialogAgregarTipoIncidencia extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgregarTipoIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarTipoIncidenciaActionPerformed
-        // TODO add your handling code here:
+        //Para en la insertacion de tipo de incidencia solo le voy a pasar un texto del tipo de incidencia nuevo
     }//GEN-LAST:event_jButtonAgregarTipoIncidenciaActionPerformed
 
     /**

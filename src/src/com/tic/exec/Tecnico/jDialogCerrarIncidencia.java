@@ -4,6 +4,9 @@
  */
 package src.com.tic.exec.Tecnico;
 
+import src.com.tic.dao.TecnicoDAOimpl;
+import src.com.tic.pojo.Incidencia;
+
 /**
  *
  * @author alumno
@@ -11,7 +14,7 @@ package src.com.tic.exec.Tecnico;
 public class jDialogCerrarIncidencia extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(jDialogCerrarIncidencia.class.getName());
-
+    TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
     /**
      * Creates new form jDialogCerrarIncidencia
      */
@@ -70,10 +73,20 @@ public class jDialogCerrarIncidencia extends javax.swing.JDialog {
         jLabel4.setText("ID Indicencia");
 
         jTextFieldIDIncidencia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jTextFieldIDIncidencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIDIncidenciaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Cambio de tipo de Indicencia");
 
         jButtonCerrarIndiencia.setText("Cerrar Indicencia");
+        jButtonCerrarIndiencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarIndienciaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +155,15 @@ public class jDialogCerrarIncidencia extends javax.swing.JDialog {
     private void jComboBoxEstadoCierreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoCierreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEstadoCierreActionPerformed
+
+    private void jTextFieldIDIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIDIncidenciaActionPerformed
+
+    }//GEN-LAST:event_jTextFieldIDIncidenciaActionPerformed
+
+    private void jButtonCerrarIndienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarIndienciaActionPerformed
+        //tecnicoDAO.cerrarIncidencia(incidencia);
+        //Aqui lo que voy a necesitar pasarle no va a ser una Indicencia va a ser un IdIncidencia el estado de cierre y la solucion 2/2/2026
+    }//GEN-LAST:event_jButtonCerrarIndienciaActionPerformed
 
     /**
      * @param args the command line arguments

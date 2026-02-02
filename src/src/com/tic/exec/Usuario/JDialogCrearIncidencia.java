@@ -5,6 +5,7 @@
 package src.com.tic.exec.Usuario;
 
 import src.com.tic.exec.Usuario.VistaUsuario;
+import src.com.tic.pojo.Incidencia;
 
 /**
  *
