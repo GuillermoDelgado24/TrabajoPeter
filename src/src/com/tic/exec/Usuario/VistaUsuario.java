@@ -1,5 +1,10 @@
 package src.com.tic.exec.Usuario;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import src.com.tic.dao.UsuarioDAOimpl;
+import src.com.tic.pojo.Incidencia;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,6 +23,7 @@ public class VistaUsuario extends javax.swing.JFrame {
      */
     public VistaUsuario() {
         initComponents();
+        refrescarTabla();
     }
 
     /**
@@ -240,6 +246,35 @@ public class VistaUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new VistaUsuario().setVisible(true));
     }
+    
+    private void refrescarTabla() {
+        DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
+        m.setNumRows(0);
+        
+        Incidencia i = null;
+        try {
+            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) udi.getIncidenciasUsuario(1);
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                Object[] o = {
+                    i.getIdIncidencia(),
+                    i.getEstado(),
+                    i.getResultado_cierre(),
+                    i.getFechaCierre(),
+                    i.getFechaEntrada(),
+                    i.getTipoIncidencia(),
+                    i.getIdUsuario(),
+                    i.getIdTecnico(),
+                    i.getDescripcionIncidencia(),
+                    i.getDescripcionSolucion()
+                };
+                m.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+        }
+    }
+    protected UsuarioDAOimpl udi = new UsuarioDAOimpl();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearIndicencia;
