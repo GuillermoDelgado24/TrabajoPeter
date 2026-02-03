@@ -306,7 +306,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
         Incidencia i = null;
         try {
-            i = udi.getIncidenciaPorId(id);
+            //i = udi.getIncidenciaPorId(id);
 
             Object[] o = {
                 i.getIdIncidencia(),
