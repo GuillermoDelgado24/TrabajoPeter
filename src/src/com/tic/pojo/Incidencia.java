@@ -23,8 +23,7 @@ public class Incidencia {
     private int idUsuario;
     private int idTecnico;
 
-    public Incidencia(LocalDate fechaEntrada, String tipoIncidencia, String descripcionIncidencia, int idUsuario) {
-        this.fechaEntrada = fechaEntrada;
+    public Incidencia(String tipoIncidencia, String descripcionIncidencia, int idUsuario) {
         this.tipoIncidencia = tipoIncidencia;
         this.descripcionIncidencia = descripcionIncidencia;
         this.idUsuario = idUsuario;

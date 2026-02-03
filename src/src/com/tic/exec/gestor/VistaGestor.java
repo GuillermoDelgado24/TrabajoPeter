@@ -122,14 +122,14 @@ public class VistaGestor extends javax.swing.JFrame {
             }
         });
 
-        JTextIdIncidencia.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
+        JTextIdIncidencia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         JTextIdIncidencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTextIdIncidenciaActionPerformed(evt);
             }
         });
 
-        jTextIdTecnico.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
+        jTextIdTecnico.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTextIdTecnico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextIdTecnicoActionPerformed(evt);
@@ -147,7 +147,7 @@ public class VistaGestor extends javax.swing.JFrame {
             }
         });
 
-        JTextIdIncidencia1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(null)));
+        JTextIdIncidencia1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         JTextIdIncidencia1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTextIdIncidencia1ActionPerformed(evt);
