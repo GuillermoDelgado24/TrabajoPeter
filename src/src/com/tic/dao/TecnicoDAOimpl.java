@@ -32,7 +32,7 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
     Connection con = null;
 
     @Override
-    public void atenderIncidencia(Incidencia incidencia) throws Exception {
+    public void atenderIncidencia(int idIncidencia) throws Exception {
         int r = 0;
         String SQL = "UPDATE Incidencias "
                 + "SET estado = 'en curso', "
@@ -40,7 +40,7 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
                 + "WHERE ID_Incidencia = ?;";
 
         try (Connection con = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = con.prepareStatement(SQL);) {
-            pstm.setInt(1, incidencia.getIdIncidencia());
+            pstm.setInt(1, idIncidencia);
             r = pstm.executeUpdate();
             if (r > 0) {
                 System.out.println("Registros afectados: " + r);

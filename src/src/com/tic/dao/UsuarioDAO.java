@@ -15,7 +15,7 @@ public interface UsuarioDAO {
 
     public ArrayList<Incidencia> getIncidenciasUsuario(int idUsuario) throws Exception;
 
-    public Incidencia getIncidenciaPorId(int idIncidencia) throws Exception;
+    public Incidencia getIncidenciaPorId(int idIncidencia, int idUsuario) throws Exception;
 
     public void crearIncidencia(Incidencia incidencia, int idEspacio) throws Exception;
 
