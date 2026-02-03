@@ -92,7 +92,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         if (this.jTextFieldUsuario.getText().toString().equals("") && this.jPasswordFieldContrasena.getText().toString().equals("")) {
             if (this.jComboBox1.getSelectedItem().toString().equals("Usuario")) {
                 //Metodo para ver si hay un Usuario con esa Id
-                VistaUsuario vistaUs = new VistaUsuario();
+                VistaUsuario vistaUs = new VistaUsuario(1);
                 vistaUs.setVisible(true);
                 dispose();
             } else if (this.jComboBox1.getSelectedItem().toString().equals("Gestor")) {

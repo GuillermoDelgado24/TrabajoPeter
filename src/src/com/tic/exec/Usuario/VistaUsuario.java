@@ -17,12 +17,13 @@ import src.com.tic.pojo.Incidencia;
 public class VistaUsuario extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaUsuario.class.getName());
-
+    private int idUsuario;
     /**
      * Creates new form VistaUsuario
      */
-    public VistaUsuario() {
+    public VistaUsuario(int idUsuario) {
         initComponents();
+        this.idUsuario = idUsuario;
         refrescarTabla();
     }
 
@@ -251,7 +252,6 @@ public class VistaUsuario extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaUsuario().setVisible(true));
     }
 
 

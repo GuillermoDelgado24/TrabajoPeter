@@ -70,7 +70,7 @@ public class jDialogCerrarIncidencia extends javax.swing.JDialog {
 
         jLabel4.setText("ID Indicencia");
 
-        jTextFieldIDIncidencia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(null)));
+        jTextFieldIDIncidencia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jTextFieldIDIncidencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIDIncidenciaActionPerformed(evt);
