@@ -43,7 +43,7 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
         int idTecnico;
         String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE ID_Usuario = ?";
 
-        try (Connection con = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = con.prepareStatement(sql);) {
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.User, Configuration.Password); PreparedStatement pstm = con.prepareStatement(sql);) {
             pstm.setInt(1, idUsuario);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
@@ -80,7 +80,7 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
         int idTecnico;
         String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE ID_Incidencia = ?";
 
-        try (Connection con = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = con.prepareStatement(sql);) {
+        try (Connection con = DriverManager.getConnection(Configuration.URL,Configuration.User, Configuration.Password); PreparedStatement pstm = con.prepareStatement(sql);) {
             pstm.setInt(1, idIncidencia);
             try (ResultSet resul = pstm.executeQuery();) {
                     estado = resul.getString("estado");
@@ -128,7 +128,7 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
         String SQL = "INSERT INTO Incidencias (estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion) VALUES (?,?,?,?,?,?,?,?,?,?);";
         String SQL2 = "INSERT INTO Incidencias_Espacios (ID_Espacio, ID_Incidencia) VALUES (?,?);";
 
-        try (Connection con = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = con.prepareStatement(SQL); PreparedStatement pstm2 = con.prepareStatement(SQL2)) {
+        try (Connection con = DriverManager.getConnection(Configuration.URL,Configuration.User, Configuration.Password); PreparedStatement pstm = con.prepareStatement(SQL); PreparedStatement pstm2 = con.prepareStatement(SQL2)) {
             pstm.setString(1, incidencia.getEstado());
             pstm.setString(2, incidencia.getResultado_cierre());
             pstm.setDate(3, java.sql.Date.valueOf(incidencia.getFechaCierre()));

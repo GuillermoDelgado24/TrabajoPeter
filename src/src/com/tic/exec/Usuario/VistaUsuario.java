@@ -296,6 +296,7 @@ public class VistaUsuario extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             System.out.println("Error al mostrar tabla incidencia");
+            e.printStackTrace();
         }
     }
 
