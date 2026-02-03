@@ -4,7 +4,10 @@
  */
 package src.com.tic.exec.Tecnico;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.TecnicoDAOimpl;
+import src.com.tic.pojo.Incidencia;
 
 /**
  *
@@ -110,6 +113,11 @@ public class VistaTecnico extends javax.swing.JFrame {
         });
 
         jButtonVerIndicencias.setText("Ver indicencias");
+        jButtonVerIndicencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerIndicenciasActionPerformed(evt);
+            }
+        });
 
         jButtonVerIndicenciasConcretas.setText("Listar tipo incidencia");
         jButtonVerIndicenciasConcretas.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +126,7 @@ public class VistaTecnico extends javax.swing.JFrame {
             }
         });
 
-        jTipoIncidencia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jTipoIncidencia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(null)));
         jTipoIncidencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTipoIncidenciaActionPerformed(evt);
@@ -134,7 +142,7 @@ public class VistaTecnico extends javax.swing.JFrame {
             }
         });
 
-        jDias.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jDias.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(null)));
         jDias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDiasActionPerformed(evt);
@@ -250,12 +258,17 @@ public class VistaTecnico extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableTecnicoMouseClicked
 
     private void jButtonVerIndicenciasConcretasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasConcretasActionPerformed
-        //tecnicoDAO.verPorTipoIncidencia(String)
+        refrescarTablaPorTipo(this.jTipoIncidencia.getText());
     }//GEN-LAST:event_jButtonVerIndicenciasConcretasActionPerformed
 
     private void jButtonVerIndicenciasTiempoConcretoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
         //tecnicoDAO.verBeetween(int Dias)
     }//GEN-LAST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
+
+    private void jButtonVerIndicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasActionPerformed
+        refrescarTabla(0);
+        //Aqui tenemos que ver que cuando el tecnico se inicie sesion coja su Id y se guarde
+    }//GEN-LAST:event_jButtonVerIndicenciasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,6 +294,63 @@ public class VistaTecnico extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new VistaTecnico().setVisible(true));
     }
+    
+    private void refrescarTablaPorTipo(String tipo) {
+        DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
+        m.setNumRows(0);
+
+        Incidencia i = null;
+        try {
+            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) tecnicoDAO.getIncidenciasByTipo(tipo);
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                Object[] o = {
+                    i.getIdIncidencia(),
+                    i.getEstado(),
+                    i.getResultado_cierre(),
+                    i.getFechaCierre(),
+                    i.getFechaEntrada(),
+                    i.getTipoIncidencia(),
+                    i.getIdUsuario(),
+                    i.getIdTecnico(),
+                    i.getDescripcionIncidencia(),
+                    i.getDescripcionSolucion()
+                };
+                m.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+        }
+    }
+    
+    private void refrescarTabla(int IdTecnico) {
+        DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
+        m.setNumRows(0);
+
+        Incidencia i = null;
+        try {
+            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) tecnicoDAO.getIncidenciasAsignadas(IdTecnico);
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                Object[] o = {
+                    i.getIdIncidencia(),
+                    i.getEstado(),
+                    i.getResultado_cierre(),
+                    i.getFechaCierre(),
+                    i.getFechaEntrada(),
+                    i.getTipoIncidencia(),
+                    i.getIdUsuario(),
+                    i.getIdTecnico(),
+                    i.getDescripcionIncidencia(),
+                    i.getDescripcionSolucion()
+                };
+                m.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregarTipo;
