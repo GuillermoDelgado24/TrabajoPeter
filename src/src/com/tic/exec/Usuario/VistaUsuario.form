@@ -37,7 +37,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jButtonListarIndicencias" alignment="1" max="32767" attributes="0"/>
                           <Component id="jButtonReapertura" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jButtonListarIncidenciaId" pref="182" max="32767" attributes="0"/>
+                          <Component id="jButtonListarIncidenciaId" pref="0" max="32767" attributes="0"/>
                           <Component id="jButtonCrearIndicencia" max="32767" attributes="0"/>
                       </Group>
                   </Group>

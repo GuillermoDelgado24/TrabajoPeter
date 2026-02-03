@@ -15,7 +15,7 @@ import src.com.tic.pojo.Incidencia;
 public interface TecnicoDAO {
 
     //Poner incidencia en curso:
-    public void atenderIncidencia(Incidencia incidencia) throws Exception;
+    public void atenderIncidencia(int idIncidencia) throws Exception;
 
     //Pone el estado de la incidencia en 'cerrado', establece el resultado de éxito.
     //Se tiene que haber abierto con anterioridad una pantalla

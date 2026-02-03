@@ -13,7 +13,6 @@ import src.com.tic.pojo.Incidencia;
  *
  * @author alumno
  */
-
 public class VistaUsuario extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaUsuario.class.getName());
@@ -228,6 +227,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private void jButtonListarIndicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarIndicenciasActionPerformed
         // TODO add your handling code here:
+        refrescarTabla();
     }//GEN-LAST:event_jButtonListarIndicenciasActionPerformed
 
     /**
@@ -268,6 +268,9 @@ public class VistaUsuario extends javax.swing.JFrame {
     private javax.swing.JTable jTableUsuario;
     private javax.swing.JTextField jTextIncidenciaId;
     // End of variables declaration//GEN-END:variables
+
+    protected UsuarioDAOimpl udi = new UsuarioDAOimpl();
+
     private void refrescarTabla() {
         DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
         m.setNumRows(0);
@@ -319,10 +322,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
             m.addRow(o);
         } catch (Exception ex) {
-            System.out.println("Error al cargar la tabla");
+            System.out.println("Error al cargar la tabla por id");
         }
     }
-    protected UsuarioDAOimpl udi = new UsuarioDAOimpl();
 }
-
-
