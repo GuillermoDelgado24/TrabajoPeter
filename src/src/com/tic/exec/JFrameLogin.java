@@ -1,16 +1,20 @@
 package src.com.tic.exec;
 
+import src.com.tic.exec.Administrador.VistaAdministrador;
+import src.com.tic.exec.Tecnico.VistaTecnico;
+import src.com.tic.exec.Usuario.VistaUsuario;
+import src.com.tic.exec.gestor.VistaGestor;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author tarde
  */
 public class JFrameLogin extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameLogin.class.getName());
 
     /**
@@ -65,6 +69,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 20));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Gestor", "Técnico" }));
+        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, 30));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
@@ -84,7 +89,30 @@ public class JFrameLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        // TODO add your handling code here:
+        if (this.jTextFieldUsuario.getText().toString().equals("") && this.jPasswordFieldContrasena.getText().toString().equals("")) {
+            if (this.jComboBox1.getSelectedItem().toString().equals("Usuario")) {
+                //Metodo para ver si hay un Usuario con esa Id
+                VistaUsuario vistaUs = new VistaUsuario();
+                vistaUs.setVisible(true);
+                dispose();
+            } else if (this.jComboBox1.getSelectedItem().toString().equals("Gestor")) {
+                //Metodo para ver si hay un Gestor con esa Id
+                VistaGestor vistaGes = new VistaGestor();
+                vistaGes.setVisible(true);
+                dispose();
+            } else if (this.jComboBox1.getSelectedItem().toString().equals("Tecnico")) {
+                //Metodo para ver si hay un Tecnico con esa Id
+                VistaTecnico vistaTec = new VistaTecnico();
+                vistaTec.setVisible(true);
+                dispose();
+            } else if (this.jComboBox1.getSelectedItem().toString().equals("Administrador")) {
+                //Metodo para ver si hay un Admin con esa Id
+                VistaAdministrador vistaAdm = new VistaAdministrador();
+                vistaAdm.setVisible(true);
+                dispose();
+
+            }
+        }
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jPasswordFieldContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldContrasenaActionPerformed
@@ -94,6 +122,10 @@ public class JFrameLogin extends javax.swing.JFrame {
     private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

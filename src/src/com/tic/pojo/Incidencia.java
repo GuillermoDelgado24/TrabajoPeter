@@ -23,16 +23,11 @@ public class Incidencia {
     private int idUsuario;
     private int idTecnico;
 
-    public Incidencia(String estado, String resultado_cierre, LocalDate fechaCierre, LocalDate fechaEntrada, String tipoIncidencia, String descripcionIncidencia, String descripcionSolucion, int idUsuario, int idTecnico) {
-        this.estado = estado;
-        this.resultado_cierre = resultado_cierre;
-        this.fechaCierre = fechaCierre;
+    public Incidencia(LocalDate fechaEntrada, String tipoIncidencia, String descripcionIncidencia, int idUsuario) {
         this.fechaEntrada = fechaEntrada;
         this.tipoIncidencia = tipoIncidencia;
         this.descripcionIncidencia = descripcionIncidencia;
-        this.descripcionSolucion = descripcionSolucion;
         this.idUsuario = idUsuario;
-        this.idTecnico = idTecnico;
     }
 
     public Incidencia(int idIncidencia, String estado, String resultado_cierre, LocalDate fechaCierre, LocalDate fechaEntrada, String tipoIncidencia, String descripcionIncidencia, String descripcionSolucion, int idUsuario, int idTecnico) {

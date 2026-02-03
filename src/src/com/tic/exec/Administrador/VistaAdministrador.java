@@ -1,4 +1,4 @@
-package src.com.tic.exec;
+package src.com.tic.exec.Administrador;
 
 import javax.swing.ImageIcon;
 

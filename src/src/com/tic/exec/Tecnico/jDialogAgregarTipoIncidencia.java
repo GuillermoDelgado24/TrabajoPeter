@@ -4,6 +4,7 @@
  */
 package src.com.tic.exec.Tecnico;
 
+import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.exec.Usuario.VistaUsuario;
 
 /**
@@ -13,7 +14,7 @@ import src.com.tic.exec.Usuario.VistaUsuario;
 public class jDialogAgregarTipoIncidencia extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(jDialogAgregarTipoIncidencia.class.getName());
-
+    TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
     /**
      * Creates new form jDialogAgregarTipoIncidencia
      */
@@ -49,6 +50,12 @@ public class jDialogAgregarTipoIncidencia extends javax.swing.JDialog {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
         jLabel1.setText("Agregar tipo incidencia");
+
+        jTextFieldAgregarTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAgregarTipoActionPerformed(evt);
+            }
+        });
 
         jButtonAgregarTipoIncidencia.setText("Agregar Tipo");
         jButtonAgregarTipoIncidencia.setToolTipText("");
@@ -88,8 +95,16 @@ public class jDialogAgregarTipoIncidencia extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgregarTipoIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarTipoIncidenciaActionPerformed
-        // TODO add your handling code here:
+        try {
+            tecnicoDAO.agregarTipoIncidencia(this.jTextFieldAgregarTipo.getText());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jButtonAgregarTipoIncidenciaActionPerformed
+
+    private void jTextFieldAgregarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAgregarTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldAgregarTipoActionPerformed
 
     /**
      * @param args the command line arguments

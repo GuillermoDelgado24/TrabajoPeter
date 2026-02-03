@@ -4,7 +4,11 @@
  */
 package src.com.tic.exec.gestor;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import src.com.tic.dao.GestorDAOimpl;
 import src.com.tic.exec.Usuario.VistaUsuario;
+import src.com.tic.pojo.Incidencia;
 
 /**
  *
@@ -13,7 +17,7 @@ import src.com.tic.exec.Usuario.VistaUsuario;
 public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(jDialogTipoIncidenciaTecnico.class.getName());
-
+    GestorDAOimpl gestorDAO = new GestorDAOimpl();
     /**
      * Creates new form jDialogTipoIndicenciaTecnico
      */
@@ -157,7 +161,7 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        // TODO add your handling code here:
+        //refrescarTablaIdTecnico&Tipo()
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     /**
@@ -197,6 +201,34 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
         });
     }
     VistaGestor padre;
+    
+//    private void refrescarTablaIdTecnico&Tipo(int idTecnico, String tipo) {
+//        DefaultTableModel m = (DefaultTableModel) this.jTableGestor.getModel();
+//        m.setNumRows(0);
+//
+//        Incidencia i = null;
+//        try {
+//            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) gestorDAO.getPorIdTecnico&Tipo(idTecnico, tipo);
+//            for (int j = 0; j < ai.size(); j++) {
+//                i = ai.get(j);
+//                Object[] o = {
+//                    i.getIdIncidencia(),
+//                    i.getEstado(),
+//                    i.getResultado_cierre(),
+//                    i.getFechaCierre(),
+//                    i.getFechaEntrada(),
+//                    i.getTipoIncidencia(),
+//                    i.getIdUsuario(),
+//                    i.getIdTecnico(),
+//                    i.getDescripcionIncidencia(),
+//                    i.getDescripcionSolucion()
+//                };
+//                m.addRow(o);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Error al mostrar tabla incidencia");
+//        }
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConsultar;
