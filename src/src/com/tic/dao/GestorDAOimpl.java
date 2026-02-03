@@ -95,7 +95,7 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
 
         try (Connection con = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = con.prepareStatement(sql); ResultSet resul = pstm.executeQuery();) {
             while (resul.next()) {
-                incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre").toLocalDate(), resul.getDate("f_entrada").toLocalDate(), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
             }
 
         } catch (Exception e) {
@@ -111,7 +111,7 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
 
         try (Connection con = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = con.prepareStatement(sql); ResultSet resul = pstm.executeQuery();) {
             while (resul.next()) {
-                incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre").toLocalDate(), resul.getDate("f_entrada").toLocalDate(), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
             }
 
         } catch (Exception e) {
@@ -129,7 +129,7 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
             pstm.setString(1, tipoIncidencia);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre").toLocalDate(), resul.getDate("f_entrada").toLocalDate(), tipoIncidencia, resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), tipoIncidencia, resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
                 }
             }
 
@@ -148,7 +148,7 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
             pstm.setInt(1, idTecnico);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre").toLocalDate(), resul.getDate("f_entrada").toLocalDate(), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
                 }
             }
         } catch (Exception e) {

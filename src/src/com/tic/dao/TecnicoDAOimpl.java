@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.ArrayList;
 import src.com.tic.pojo.Incidencia;
 import src.com.tic.utils.Configuration;
@@ -95,8 +95,8 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
         int idIncidencia;
         String estado;
         String resultado_cierre;
-        LocalDate fechaCierre;
-        LocalDate fechaEntrada;
+        Date fechaCierre;
+        Date fechaEntrada;
         String tipoIncidencia;
         String descripcionIncidencia;
         String descripcionSolucion;
@@ -109,8 +109,8 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
                     idIncidencia = resul.getInt("ID_Incidencia");
                     estado = resul.getString("estado");
                     resultado_cierre = resul.getString("resultado_cierre");
-                    fechaCierre = resul.getDate("f_cierre").toLocalDate();
-                    fechaEntrada = resul.getDate("f_entrada").toLocalDate();
+                    fechaCierre = resul.getDate("f_cierre");
+                    fechaEntrada = resul.getDate("f_entrada");
                     tipoIncidencia = resul.getString("tipo_incidencia");
                     descripcionIncidencia = resul.getString("descripcion_incidencia");
                     descripcionSolucion = resul.getString("descripcion_solucion");
@@ -131,8 +131,8 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
         int idIncidencia;
         String estado;
         String resultado_cierre;
-        LocalDate fechaCierre;
-        LocalDate fechaEntrada;
+        Date fechaCierre;
+        Date fechaEntrada;
         String descripcionIncidencia;
         String descripcionSolucion;
         int idUsuario;
@@ -146,8 +146,8 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
                     idIncidencia = resul.getInt("ID_Incidencia");
                     estado = resul.getString("estado");
                     resultado_cierre = resul.getString("resultado_cierre");
-                    fechaCierre = resul.getDate("f_cierre").toLocalDate();
-                    fechaEntrada = resul.getDate("f_entrada").toLocalDate();
+                    fechaCierre = resul.getDate("f_cierre");
+                    fechaEntrada = resul.getDate("f_entrada");
                     tipoIncidencia = resul.getString("tipo_incidencia");
                     descripcionIncidencia = resul.getString("descripcion_incidencia");
                     descripcionSolucion = resul.getString("descripcion_solucion");
@@ -164,13 +164,13 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
     }
 
     @Override
-    public ArrayList<Incidencia> getIncidenciasBetweenFechas(LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
+    public ArrayList<Incidencia> getIncidenciasBetweenFechas(Date fechaInicio, Date fechaFin) throws Exception {
         ArrayList<Incidencia> al = new ArrayList<>();
         int idIncidencia;
         String estado;
         String resultado_cierre;
-        LocalDate fechaCierre;
-        LocalDate fechaEntrada;
+        Date fechaCierre;
+        Date fechaEntrada;
         String descripcionIncidencia;
         String descripcionSolucion;
         String tipoIncidencia;
@@ -179,15 +179,15 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
 
         String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE f_cierre BETWEEN ? AND ?";
         try (Connection conn = DriverManager.getConnection(Configuration.URL); PreparedStatement pstm = conn.prepareStatement(SQL)) {
-            pstm.setDate(1, java.sql.Date.valueOf(fechaInicio));
-            pstm.setDate(2, java.sql.Date.valueOf(fechaFin));
+            pstm.setDate(1, fechaInicio);
+            pstm.setDate(2, fechaFin);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
                     idIncidencia = resul.getInt("ID_Incidencia");
                     estado = resul.getString("estado");
                     resultado_cierre = resul.getString("resultado_cierre");
-                    fechaCierre = resul.getDate("f_cierre").toLocalDate();
-                    fechaEntrada = resul.getDate("f_entrada").toLocalDate();
+                    fechaCierre = resul.getDate("f_cierre");
+                    fechaEntrada = resul.getDate("f_entrada");
                     tipoIncidencia = resul.getString("tipo_incidencia");
                     descripcionIncidencia = resul.getString("descripcion_incidencia");
                     descripcionSolucion = resul.getString("descripcion_solucion");

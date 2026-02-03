@@ -4,7 +4,7 @@
  */
 package src.com.tic.pojo;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
@@ -14,14 +14,14 @@ public class Incidencia {
 
     private int idIncidencia;
     private String estado;
-    private String resultado_cierre;
-    private LocalDate fechaCierre;
-    private LocalDate fechaEntrada;
-    private String tipoIncidencia;
+    private String resultado_cierre = null;
+    private Date fechaCierre = null;
+    private Date fechaEntrada;
+    private String tipoIncidencia = null;
     private String descripcionIncidencia;
-    private String descripcionSolucion;
+    private String descripcionSolucion =null;
     private int idUsuario;
-    private int idTecnico;
+    private int idTecnico = -1;
 
     public Incidencia(String tipoIncidencia, String descripcionIncidencia, int idUsuario) {
         this.tipoIncidencia = tipoIncidencia;
@@ -29,7 +29,7 @@ public class Incidencia {
         this.idUsuario = idUsuario;
     }
 
-    public Incidencia(int idIncidencia, String estado, String resultado_cierre, LocalDate fechaCierre, LocalDate fechaEntrada, String tipoIncidencia, String descripcionIncidencia, String descripcionSolucion, int idUsuario, int idTecnico) {
+    public Incidencia(int idIncidencia, String estado, String resultado_cierre, Date fechaCierre, Date fechaEntrada, String tipoIncidencia, String descripcionIncidencia, String descripcionSolucion, int idUsuario, int idTecnico) {
         this.idIncidencia = idIncidencia;
         this.estado = estado;
         this.resultado_cierre = resultado_cierre;
@@ -75,19 +75,19 @@ public class Incidencia {
         this.resultado_cierre = resultado_cierre;
     }
 
-    public LocalDate getFechaCierre() {
+    public Date getFechaCierre() {
         return fechaCierre;
     }
 
-    public void setFechaCierre(LocalDate fechaCierre) {
+    public void setFechaCierre(Date fechaCierre) {
         this.fechaCierre = fechaCierre;
     }
 
-    public LocalDate getFechaEntrada() {
+    public Date getFechaEntrada() {
         return fechaEntrada;
     }
 
-    public void setFechaEntrada(LocalDate fechaEntrada) {
+    public void setFechaEntrada(Date fechaEntrada) {
         this.fechaEntrada = fechaEntrada;
     }
 

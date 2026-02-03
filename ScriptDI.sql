@@ -63,8 +63,11 @@ REFERENCES Tecnicos(ID_Tecnico),
 CONSTRAINT fk_tipo_incidencia
 FOREIGN KEY (tipo_incidencia)
 REFERENCES Tipos_Incidencias(tipo_incidencia),
-CHECK ( (estado = 'cerrada' AND resultado_cierre IS NULL) 
-OR (estado = 'cerrada' AND resultado_cierre IS NOT NULL) )
+CHECK (
+  (estado = 'cerrada' AND resultado_cierre IS NOT NULL)
+  OR
+  (estado <> 'cerrada' AND resultado_cierre IS NULL)
+)
 );
 
 CREATE TABLE Incidencias_Espacios (
