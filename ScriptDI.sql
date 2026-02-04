@@ -13,7 +13,7 @@ nombre_usuario varchar(100) NOT NULL UNIQUE,
 nombre_apellidos VARCHAR(150) NOT NULL,
 correo_electronico VARCHAR(150) NOT NULL,
 telefono VARCHAR(20),
-contrasena varchar(500)
+contrasena varchar(64)
 );
 
 CREATE TABLE Tecnicos (

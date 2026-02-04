@@ -63,6 +63,12 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
 
         jLabel1.setText("Tipo incidencia");
 
+        jComboBoxTipoIncidencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoIncidenciaActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Descripcion de la Indicencia");
 
         jTextArea1.setColumns(20);
@@ -135,6 +141,10 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
     private void jComboBoxEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEspacioActionPerformed
 
     }//GEN-LAST:event_jComboBoxEspacioActionPerformed
+
+    private void jComboBoxTipoIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoIncidenciaActionPerformed
+
+    }//GEN-LAST:event_jComboBoxTipoIncidenciaActionPerformed
 
     /**
      * @param args the command line arguments

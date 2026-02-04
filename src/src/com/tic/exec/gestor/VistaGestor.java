@@ -14,15 +14,18 @@ import src.com.tic.pojo.Incidencia;
  * @author alumno
  */
 public class VistaGestor extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaGestor.class.getName());
     GestorDAOimpl gestorDAO = new GestorDAOimpl();
+    private int idUsuario;
+
     /**
      * Creates new form VistaGestor
      */
-    public VistaGestor() {
+    public VistaGestor(int idUsuario) {
         initComponents();
-        
+        this.idUsuario = idUsuario;
+
     }
 
     /**
@@ -273,7 +276,7 @@ public class VistaGestor extends javax.swing.JFrame {
 
     private void jTableGestorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGestorMouseClicked
         int fila = this.jTableGestor.rowAtPoint(evt.getPoint());
-        this.JTextIdIncidencia.setText((String) this.jTableGestor.getValueAt(fila,0));
+        this.JTextIdIncidencia.setText((String) this.jTableGestor.getValueAt(fila, 0));
     }//GEN-LAST:event_jTableGestorMouseClicked
 
     private void JTextIdIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextIdIncidenciaActionPerformed
@@ -281,8 +284,8 @@ public class VistaGestor extends javax.swing.JFrame {
     }//GEN-LAST:event_JTextIdIncidenciaActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-         int fila = this.jTable1.rowAtPoint(evt.getPoint());
-        this.jTextIdTecnico.setText((String) this.jTable1.getValueAt(fila,0));
+        int fila = this.jTable1.rowAtPoint(evt.getPoint());
+        this.jTextIdTecnico.setText((String) this.jTable1.getValueAt(fila, 0));
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void JTextIdIncidencia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextIdIncidencia1ActionPerformed
@@ -311,10 +314,9 @@ public class VistaGestor extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaGestor().setVisible(true));
     }
-    
-     private void refrescarTablaIncidencias() {
+
+    private void refrescarTablaIncidencias() {
         DefaultTableModel m = (DefaultTableModel) this.jTableGestor.getModel();
         m.setNumRows(0);
 
@@ -341,7 +343,7 @@ public class VistaGestor extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia");
         }
     }
-     
+
 //     private void refrescarTablaTecnicosDisp() {
 //        DefaultTableModel m = (DefaultTableModel) this.jTableGestor.getModel();
 //        m.setNumRows(0);
@@ -369,8 +371,7 @@ public class VistaGestor extends javax.swing.JFrame {
 //            System.out.println("Error al mostrar tabla incidencia");
 //        }
 //    }
-     
-     private void refrescarTablaIncidenciasEspera() {
+    private void refrescarTablaIncidenciasEspera() {
         DefaultTableModel m = (DefaultTableModel) this.jTableGestor.getModel();
         m.setNumRows(0);
 
@@ -397,8 +398,7 @@ public class VistaGestor extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia");
         }
     }
-     
-     
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JTextIdIncidencia;

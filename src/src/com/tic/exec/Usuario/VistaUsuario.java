@@ -267,7 +267,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
         Incidencia i = null;
         try {
-            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) udi.getIncidenciasUsuario(1);
+            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) udi.getIncidenciasUsuario(idUsuario);
             for (int j = 0; j < ai.size(); j++) {
                 i = ai.get(j);
                 Object[] o = {
@@ -294,10 +294,10 @@ public class VistaUsuario extends javax.swing.JFrame {
         DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
         m.setNumRows(0);
 
-        Incidencia i = null;
         try {
-            //i = udi.getIncidenciaPorId(id);
+            Incidencia i = udi.getIncidenciaPorId(id, this.idUsuario);
 
+            //i = udi.getIncidenciaPorId(id);
             Object[] o = {
                 i.getIdIncidencia(),
                 i.getEstado(),
@@ -313,7 +313,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
             m.addRow(o);
         } catch (Exception ex) {
-            System.out.println("Error al cargar la tabla por id");
+            System.out.println("Error al cargar la tabla por id" + ex.getMessage());
         }
     }
 }

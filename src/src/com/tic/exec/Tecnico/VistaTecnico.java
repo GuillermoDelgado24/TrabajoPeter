@@ -14,16 +14,19 @@ import src.com.tic.pojo.Incidencia;
  * @author alumno
  */
 public class VistaTecnico extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaTecnico.class.getName());
     int IdIncidencia;
+    private int idUsuario;
+
     TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
+
     /**
      * Creates new form VistaTecnico
      */
-    public VistaTecnico() {
+    public VistaTecnico(int idUsuario) {
         initComponents();
-        
+        this.idUsuario = idUsuario;
     }
 
     /**
@@ -246,7 +249,7 @@ public class VistaTecnico extends javax.swing.JFrame {
 
     private void jTableTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTecnicoMouseClicked
         int fila = this.jTableTecnico.rowAtPoint(evt.getPoint());
-        IdIncidencia = (int) this.jTableTecnico.getValueAt(fila,0);
+        IdIncidencia = (int) this.jTableTecnico.getValueAt(fila, 0);
     }//GEN-LAST:event_jTableTecnicoMouseClicked
 
     private void jButtonVerIndicenciasConcretasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasConcretasActionPerformed
@@ -284,9 +287,8 @@ public class VistaTecnico extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaTecnico().setVisible(true));
     }
-    
+
     private void refrescarTablaPorTipo(String tipo) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
@@ -314,7 +316,7 @@ public class VistaTecnico extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia");
         }
     }
-    
+
     private void refrescarTabla(int IdTecnico) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);

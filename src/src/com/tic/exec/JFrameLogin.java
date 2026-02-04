@@ -1,5 +1,8 @@
 package src.com.tic.exec;
 
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+import src.com.tic.dao.LoginDAOimpl;
 import src.com.tic.exec.Administrador.VistaAdministrador;
 import src.com.tic.exec.Tecnico.VistaTecnico;
 import src.com.tic.exec.Usuario.VistaUsuario;
@@ -89,29 +92,49 @@ public class JFrameLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        if (this.jTextFieldUsuario.getText().toString().equals("") && this.jPasswordFieldContrasena.getText().toString().equals("")) {
-            if (this.jComboBox1.getSelectedItem().toString().equals("Usuario")) {
-                //Metodo para ver si hay un Usuario con esa Id
-                VistaUsuario vistaUs = new VistaUsuario(1);
-                vistaUs.setVisible(true);
-                dispose();
-            } else if (this.jComboBox1.getSelectedItem().toString().equals("Gestor")) {
-                //Metodo para ver si hay un Gestor con esa Id
-                VistaGestor vistaGes = new VistaGestor();
-                vistaGes.setVisible(true);
-                dispose();
-            } else if (this.jComboBox1.getSelectedItem().toString().equals("Tecnico")) {
-                //Metodo para ver si hay un Tecnico con esa Id
-                VistaTecnico vistaTec = new VistaTecnico();
-                vistaTec.setVisible(true);
-                dispose();
-            } else if (this.jComboBox1.getSelectedItem().toString().equals("Administrador")) {
-                //Metodo para ver si hay un Admin con esa Id
-                VistaAdministrador vistaAdm = new VistaAdministrador();
-                vistaAdm.setVisible(true);
-                dispose();
+        String hash = new String(jPasswordFieldContrasena.getPassword());
+        String usuario = jTextFieldUsuario.getText();
+        int idUsuario;
+        try {
+            idUsuario = limpl.compararContraseña(hash, usuario);
+            System.out.println(idUsuario);
+            if (idUsuario != -1) {
+                if (this.jComboBox1.getSelectedItem().toString().equals("Usuario")) {
+                    //Metodo para ver si hay un Usuario con esa Id
+                    VistaUsuario vistaUs = new VistaUsuario(idUsuario);
+                    vistaUs.setVisible(true);
+                    dispose();
 
+                } else if (this.jComboBox1.getSelectedItem().toString().equals("Gestor")) {
+                    //Metodo para ver si hay un Gestor con esa Id
+                    if (limpl.esGestor(idUsuario)) {
+                        VistaGestor vistaGes = new VistaGestor(idUsuario);
+                        vistaGes.setVisible(true);
+                        dispose();
+                    } else {
+                        // JOptionPane.showMessageDialog(null, "No tiene dinero suficiente para ese helado", "FALTA_DINERO", JOptionPane.ERROR_MESSAGE);
+
+                    }
+                } else if (this.jComboBox1.getSelectedItem().toString().equals("Tecnico")) {
+                    //Metodo para ver si hay un Tecnico con esa Id
+                    if (limpl.esTecnico(idUsuario)) {
+                        VistaTecnico vistaTec = new VistaTecnico(idUsuario);
+                        vistaTec.setVisible(true);
+                        dispose();
+                    }
+                } else if (this.jComboBox1.getSelectedItem().toString().equals("Administrador")) {
+                    //Metodo para ver si hay un Admin con esa Id
+                    if (limpl.esAdministrador(idUsuario)) {
+                        VistaAdministrador vistaAdm = new VistaAdministrador(idUsuario);
+                        vistaAdm.setVisible(true);
+                        dispose();
+                    }
+
+                }
             }
+
+        } catch (Exception ex) {
+            System.out.println("Error de login: " + ex.getMessage());
         }
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
@@ -151,6 +174,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new JFrameLogin().setVisible(true));
     }
+    private LoginDAOimpl limpl = new LoginDAOimpl();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;

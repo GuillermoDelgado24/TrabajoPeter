@@ -14,14 +14,15 @@ import javax.swing.ImageIcon;
 public class VistaAdministrador extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaAdministrador.class.getName());
-
+    private int idUsuario;
     /**
      * Creates new form NewJFrame
      */
-    public VistaAdministrador() {
+    public VistaAdministrador(int idUsuario) {
         initComponents();
         this.setSize(1200, 800);
         this.setLocationRelativeTo(null);
+        this.idUsuario = idUsuario;
     }
 
     /**
@@ -296,7 +297,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaAdministrador().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
