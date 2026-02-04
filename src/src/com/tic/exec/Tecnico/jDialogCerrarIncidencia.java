@@ -139,7 +139,7 @@ public class jDialogCerrarIncidencia extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxEstadoCierreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoCierreActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jComboBoxEstadoCierreActionPerformed
 
     private void jTextFieldIDIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIDIncidenciaActionPerformed
@@ -147,8 +147,15 @@ public class jDialogCerrarIncidencia extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldIDIncidenciaActionPerformed
 
     private void jButtonCerrarIndienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarIndienciaActionPerformed
-        //tecnicoDAO.cerrarIncidencia(incidencia);
-        //Aqui lo que voy a necesitar pasarle no va a ser una Indicencia va a ser un IdIncidencia el estado de cierre y la solucion 2/2/2026
+        Incidencia i = new Incidencia("", "", 0);
+        i.setIdIncidencia(Integer.parseInt(this.jTextFieldIDIncidencia.getText()));
+        i.setDescripcionSolucion(this.jTextArea1.getText());
+        i.setTipoIncidencia(this.jComboBoxEstadoCierre.getSelectedItem().toString());
+        try {
+            tecnicoDAO.cerrarIncidencia(i);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jButtonCerrarIndienciaActionPerformed
 
     /**

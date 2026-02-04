@@ -56,16 +56,14 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
         String SQL = "UPDATE Incidencias "
                 + "SET estado = 'cerrada', "
                 + "f_cierre = CURDATE(),"
-                + "tipo_incidencia = ?"
                 + "resultado_cierre = ?, "
                 + "descripcion_solucion = ? "
                 + "WHERE ID_Incidencia = ?;";
 
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {
-            pstm.setString(1, incidencia.getTipoIncidencia());
-            pstm.setString(2, incidencia.getResultado_cierre());
-            pstm.setString(3, incidencia.getDescripcionSolucion());
-            pstm.setInt(4, incidencia.getIdIncidencia());
+            pstm.setString(1, incidencia.getResultado_cierre());
+            pstm.setString(2, incidencia.getDescripcionSolucion());
+            pstm.setInt(3, incidencia.getIdIncidencia());
             r = pstm.executeUpdate();
             if (r > 0) {
                 System.out.println("Registros afectados: " + r);

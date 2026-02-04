@@ -1,5 +1,6 @@
 package src.com.tic.exec.Usuario;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.UsuarioDAOimpl;
@@ -17,6 +18,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaUsuario.class.getName());
     private int idUsuario;
+    public int IdIncidencia;
 
     /**
      * Creates new form VistaUsuario
@@ -57,7 +59,7 @@ public class VistaUsuario extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Buenas, ¿Que necesitas?");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
 
         jTableUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,6 +75,11 @@ public class VistaUsuario extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableUsuarioMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableUsuario);
@@ -208,17 +215,32 @@ public class VistaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextIncidenciaIdActionPerformed
 
     private void jButtonReaperturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReaperturaActionPerformed
-        // TODO add your handling code here:
+        try {
+            udi.solicitarReapertura(IdIncidencia);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jButtonReaperturaActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void jButtonListarIndicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarIndicenciasActionPerformed
         // TODO add your handling code here:
         refrescarTabla();
     }//GEN-LAST:event_jButtonListarIndicenciasActionPerformed
+
+    private void jTableUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuarioMouseClicked
+        int fila = this.jTableUsuario.rowAtPoint(evt.getPoint());
+        int IdIncidencia = (int) this.jTableUsuario.getValueAt(fila, 0);
+        String estado = this.jTableUsuario.getValueAt(fila, 1).toString();
+        if (estado.equals("cerrada")) {
+            this.jButtonReapertura.setEnabled(true);
+        }else{
+            this.jButtonReapertura.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTableUsuarioMouseClicked
 
     /**
      * @param args the command line arguments

@@ -148,6 +148,11 @@ public class VistaTecnico extends javax.swing.JFrame {
         jLabel2.setText("Dias");
 
         jButtonSalir.setText("Salir");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -244,7 +249,11 @@ public class VistaTecnico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAgregarTipoActionPerformed
 
     private void jButtonAtenderIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtenderIndicenciaActionPerformed
-        //tecnicoDAO.atenderIncidencia(IdIncidencia);
+        try {
+            tecnicoDAO.atenderIncidencia(IdIncidencia);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jButtonAtenderIndicenciaActionPerformed
 
     private void jTableTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTecnicoMouseClicked
@@ -261,9 +270,12 @@ public class VistaTecnico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
 
     private void jButtonVerIndicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasActionPerformed
-        refrescarTabla(0);
-        //Aqui tenemos que ver que cuando el tecnico se inicie sesion coja su Id y se guarde
+        refrescarTabla(this.idUsuario);
     }//GEN-LAST:event_jButtonVerIndicenciasActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments
