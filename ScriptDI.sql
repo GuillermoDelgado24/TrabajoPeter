@@ -4,7 +4,7 @@ USE InterfazTic;
 
 CREATE TABLE Espacios (
 ID_Espacio int AUTO_INCREMENT Primary Key,
-Descripcion varchar(255)
+Descripcion varchar(255) UNIQUE
 );
 
 CREATE TABLE Usuarios (
@@ -62,12 +62,7 @@ FOREIGN KEY (ID_Tecnico)
 REFERENCES Tecnicos(ID_Tecnico),
 CONSTRAINT fk_tipo_incidencia
 FOREIGN KEY (tipo_incidencia)
-REFERENCES Tipos_Incidencias(tipo_incidencia),
-CHECK (
-  (estado = 'cerrada' AND resultado_cierre IS NOT NULL)
-  OR
-  (estado <> 'cerrada' AND resultado_cierre IS NULL)
-)
+REFERENCES Tipos_Incidencias(tipo_incidencia)
 );
 
 CREATE TABLE Incidencias_Espacios (

@@ -31,6 +31,23 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
 
     Connection con = null;
 
+    public int hallarIdTecnico(int idUsuario) throws Exception {
+        int idTecnico = -1;
+        String SQL = "SELECT ID_Tecnico FROM Tecnicos WHERE ID_Usuario = ?";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {
+            pstm.setInt(1, idUsuario);
+            try (ResultSet resul = pstm.executeQuery()){
+                if (resul.next()) {
+                    idTecnico = resul.getInt("ID_Tecnico");
+                }
+            } catch (Exception e) {
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return idTecnico;
+    }
+
     @Override
     public void atenderIncidencia(int idIncidencia) throws Exception {
         int r = 0;
@@ -162,7 +179,7 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
     }
 
     @Override
-    public ArrayList<Incidencia> getIncidenciasBetweenFechas(Date fechaInicio, Date fechaFin) throws Exception {
+    public ArrayList<Incidencia> getIncidenciasBetweenFechas(int Dias) throws Exception {
         ArrayList<Incidencia> al = new ArrayList<>();
         int idIncidencia;
         String estado;
@@ -175,10 +192,9 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
         int idUsuario;
         int idTecnico;
 
-        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE f_cierre BETWEEN ? AND ?";
+        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE TIMESTAMPDIFF(DAY,f_cierre,CURDATE()) <= ?";
         try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(SQL)) {
-            pstm.setDate(1, fechaInicio);
-            pstm.setDate(2, fechaFin);
+            pstm.setInt(1, Dias);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
                     idIncidencia = resul.getInt("ID_Incidencia");

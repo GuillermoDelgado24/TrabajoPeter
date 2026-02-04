@@ -16,7 +16,7 @@ public interface GestorDAO {
 
     //El técnico seleccionado en la tabla será asignado a la incidencia seleccionada.
     //Si el count del ID_Tecnico en incidencias es mayor 5, no se le asignará y se devolverá un false.
-    public boolean asignarTecnico(Tecnico tecnico, Incidencia incidencia) throws Exception;
+    public void asignarTecnico(int idTecnico, int idIncidencia) throws Exception;
 
     //El estado pasará a 'alta' en las Incidencias con estado NULL y 'cerrada'
     public void altaIncidencias(Incidencia incidencia) throws Exception;
@@ -32,5 +32,7 @@ public interface GestorDAO {
 
     //Listar incidencias por tecnico
     public ArrayList<Incidencia> getIncidenciasByTecnico(int idTecnico) throws Exception;
+    
+    public ArrayList<Integer> getTecnicoDisp() throws Exception;
 
 }

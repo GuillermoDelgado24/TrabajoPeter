@@ -5,8 +5,10 @@
 package src.com.tic.exec.Tecnico;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.TecnicoDAOimpl;
+import src.com.tic.dao.UsuarioDAOimpl;
 import src.com.tic.pojo.Incidencia;
 
 /**
@@ -16,8 +18,14 @@ import src.com.tic.pojo.Incidencia;
 public class VistaTecnico extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaTecnico.class.getName());
-    int IdIncidencia;
+    int idIncidencia;
     private int idUsuario;
+    private UsuarioDAOimpl usuarioDAO = new UsuarioDAOimpl();
+
+    private ArrayList<String> al;
+    
+
+    private int idTecnico;
 
     TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
 
@@ -27,6 +35,14 @@ public class VistaTecnico extends javax.swing.JFrame {
     public VistaTecnico(int idUsuario) {
         initComponents();
         this.idUsuario = idUsuario;
+        try {
+            al = usuarioDAO.getTiposIncidencias();
+            refrescarComboBoxTipo(al);
+            this.idTecnico = tecnicoDAO.hallarIdTecnico(idUsuario);
+        } catch (Exception ex) {
+            System.out.println("Error de búsqueda: " + ex.getMessage());
+        }
+        refrescarTabla(idTecnico);
     }
 
     /**
@@ -47,12 +63,12 @@ public class VistaTecnico extends javax.swing.JFrame {
         jButtonAgregarTipo = new javax.swing.JButton();
         jButtonVerIndicencias = new javax.swing.JButton();
         jButtonVerIndicenciasConcretas = new javax.swing.JButton();
-        jTipoIncidencia = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButtonVerIndicenciasTiempoConcreto = new javax.swing.JButton();
         jDias = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButtonSalir = new javax.swing.JButton();
+        jComboBoxTipoIncidencia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,7 +78,7 @@ public class VistaTecnico extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Otro dia mas en el curro");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
         jTableTecnico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,13 +138,6 @@ public class VistaTecnico extends javax.swing.JFrame {
             }
         });
 
-        jTipoIncidencia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jTipoIncidencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTipoIncidenciaActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Tipo Indicencia");
 
         jButtonVerIndicenciasTiempoConcreto.setText("Listar incidencia cerradas de hace...");
@@ -154,6 +163,12 @@ public class VistaTecnico extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxTipoIncidencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoIncidenciaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,34 +176,27 @@ public class VistaTecnico extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonAtenderIndicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonCerrarIndicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonAgregarTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonVerIndicencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonVerIndicenciasConcretas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonVerIndicenciasTiempoConcreto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonVerIndicenciasTiempoConcreto))
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDias, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(48, 48, 48)))
-                .addContainerGap(49, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                            .addComponent(jDias, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButtonSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(379, 379, 379)
+                        .addComponent(jLabel2)))
+                .addGap(1271, 1271, 1271))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,9 +204,6 @@ public class VistaTecnico extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonAtenderIndicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,27 +217,26 @@ public class VistaTecnico extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButtonVerIndicenciasConcretas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(57, 57, 57)
                                 .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonVerIndicenciasTiempoConcreto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDias, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                        .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTipoIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTipoIncidenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTipoIncidenciaActionPerformed
 
     private void jDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDiasActionPerformed
         // TODO add your handling code here:
@@ -250,7 +254,7 @@ public class VistaTecnico extends javax.swing.JFrame {
 
     private void jButtonAtenderIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtenderIndicenciaActionPerformed
         try {
-            tecnicoDAO.atenderIncidencia(IdIncidencia);
+            tecnicoDAO.atenderIncidencia(idIncidencia);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -258,24 +262,33 @@ public class VistaTecnico extends javax.swing.JFrame {
 
     private void jTableTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTecnicoMouseClicked
         int fila = this.jTableTecnico.rowAtPoint(evt.getPoint());
-        IdIncidencia = (int) this.jTableTecnico.getValueAt(fila, 0);
+        idIncidencia = (int) this.jTableTecnico.getValueAt(fila, 0);
     }//GEN-LAST:event_jTableTecnicoMouseClicked
 
     private void jButtonVerIndicenciasConcretasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasConcretasActionPerformed
-        refrescarTablaPorTipo(this.jTipoIncidencia.getText());
+        refrescarTablaPorTipo(this.jComboBoxTipoIncidencia.getSelectedItem().toString());
     }//GEN-LAST:event_jButtonVerIndicenciasConcretasActionPerformed
 
     private void jButtonVerIndicenciasTiempoConcretoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
-        //tecnicoDAO.verBeetween(int Dias)
+        try {
+            ArrayList<Incidencia> al = tecnicoDAO.getIncidenciasBetweenFechas(Integer.parseInt(this.jDias.getText().toString()));
+            refrescarTablaBeetwen(al);
+        } catch (Exception ex) {
+            System.out.println("Error al hacer consulta de fechas: "+ex.getMessage());
+        }
     }//GEN-LAST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
 
     private void jButtonVerIndicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasActionPerformed
-        refrescarTabla(this.idUsuario);
+        refrescarTabla(this.idTecnico);
     }//GEN-LAST:event_jButtonVerIndicenciasActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void jComboBoxTipoIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoIncidenciaActionPerformed
+
+    }//GEN-LAST:event_jComboBoxTipoIncidenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,10 +310,35 @@ public class VistaTecnico extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
     }
+    private void refrescarTablaBeetwen(ArrayList<Incidencia> ai){
+        DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
+        m.setNumRows(0);
 
+        try {
+            Incidencia i;
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                Object[] o = {
+                    i.getIdIncidencia(),
+                    i.getEstado(),
+                    i.getResultado_cierre(),
+                    i.getFechaCierre(),
+                    i.getFechaEntrada(),
+                    i.getTipoIncidencia(),
+                    i.getIdUsuario(),
+                    i.getIdTecnico(),
+                    i.getDescripcionIncidencia(),
+                    i.getDescripcionSolucion()
+                };
+                m.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+        }
+    }
     private void refrescarTablaPorTipo(String tipo) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
@@ -326,6 +364,12 @@ public class VistaTecnico extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             System.out.println("Error al mostrar tabla incidencia");
+        }
+    }
+
+    public void refrescarComboBoxTipo(ArrayList<String> al) {
+        for (String string : al) {
+            this.jComboBoxTipoIncidencia.addItem(string);
         }
     }
 
@@ -366,6 +410,7 @@ public class VistaTecnico extends javax.swing.JFrame {
     private javax.swing.JButton jButtonVerIndicencias;
     private javax.swing.JButton jButtonVerIndicenciasConcretas;
     private javax.swing.JButton jButtonVerIndicenciasTiempoConcreto;
+    private javax.swing.JComboBox<String> jComboBoxTipoIncidencia;
     private javax.swing.JTextField jDias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -373,6 +418,5 @@ public class VistaTecnico extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTecnico;
-    private javax.swing.JTextField jTipoIncidencia;
     // End of variables declaration//GEN-END:variables
 }

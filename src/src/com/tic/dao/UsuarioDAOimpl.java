@@ -132,22 +132,34 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
             r = pstm.executeUpdate();
             if (r > 0) {
                 System.out.println("Registros afectados: " + r);
+                return true;
+
             }
         } catch (SQLException e) {
             throw e;
         }
-        if (r == 0) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
-    public LinkedHashMap<Integer, String> obtenerEspacios() throws Exception {
-        LinkedHashMap<Integer, String> map = new LinkedHashMap();
-        String SQL = "SELECT ID_Espacio, Descripcion FROM Espacios;";
+    public ArrayList<String> getTiposIncidencias() throws Exception {
+        ArrayList<String> al = new ArrayList<>();
+        String SQL = "SELECT tipo_incidencia FROM Tipos_Incidencias;";
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL); ResultSet resul = pstm.executeQuery();) {
             while (resul.next()) {
-                map.put(resul.getInt("ID_Espacio"), resul.getString("Descripcion"));
+                al.add(resul.getString("tipo_incidencia"));
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return al;
+    }
+
+    public LinkedHashMap<String, Integer> obtenerEspacios() throws Exception {
+        LinkedHashMap<String, Integer> map = new LinkedHashMap();
+        String SQL = "SELECT Descripcion, ID_Espacio FROM Espacios;";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL); ResultSet resul = pstm.executeQuery();) {
+            while (resul.next()) {
+                map.put(resul.getString("Descripcion"), resul.getInt("ID_Espacio"));
             }
         } catch (Exception e) {
             throw e;
@@ -160,17 +172,20 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
         String SQL = "INSERT INTO Incidencias (f_entrada, tipo_incidencia, ID_Usuario, descripcion_incidencia) VALUES (CURDATE(), ?, ?, ?);";
         String SQL2 = "INSERT INTO Incidencias_Espacios (ID_Espacio,ID_Incidencia) VALUES (?, ?);";
 
-        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL); PreparedStatement pstm2 = con.prepareStatement(SQL2)) {
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS); PreparedStatement pstm2 = con.prepareStatement(SQL2)) {
             pstm.setString(1, incidencia.getTipoIncidencia());
             pstm.setInt(2, incidencia.getIdUsuario());
             pstm.setString(3, incidencia.getDescripcionIncidencia());
 
             pstm.executeUpdate();
+            try (ResultSet rs = pstm.getGeneratedKeys()) {
+                if (rs.next()) {
+                    pstm2.setInt(1, idEspacio);
+                    pstm2.setInt(2, rs.getInt(1));
+                    pstm2.executeUpdate();
 
-            pstm2.setInt(1, idEspacio);
-            pstm2.setInt(2, incidencia.getIdIncidencia());
-
-            pstm2.executeUpdate();
+                }
+            }
         } catch (Exception e) {
             throw e;
         }

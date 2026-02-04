@@ -33,6 +33,6 @@ public interface TecnicoDAO {
     public ArrayList<Incidencia> getIncidenciasByTipo(String tipoIncidencia) throws Exception;
 
     //Ver incidencias cerradas en un periodo de tiempo 
-    public ArrayList<Incidencia> getIncidenciasBetweenFechas(Date fechaInicio, Date fechaFin) throws Exception;
+    public ArrayList<Incidencia> getIncidenciasBetweenFechas(int Dias) throws Exception;
 
 }

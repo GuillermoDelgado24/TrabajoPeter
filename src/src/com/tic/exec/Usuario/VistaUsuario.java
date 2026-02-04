@@ -18,7 +18,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaUsuario.class.getName());
     private int idUsuario;
-    public int IdIncidencia;
+    public int idIncidencia;
 
     /**
      * Creates new form VistaUsuario
@@ -195,7 +195,7 @@ public class VistaUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearIndicenciaActionPerformed
-        JDialogCrearIncidencia dCrearIncidencia = new JDialogCrearIncidencia(this, true);
+        JDialogCrearIncidencia dCrearIncidencia = new JDialogCrearIncidencia(this, true, idUsuario);
         dCrearIncidencia.setVisible(true);
     }//GEN-LAST:event_jButtonCrearIndicenciaActionPerformed
 
@@ -216,7 +216,8 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private void jButtonReaperturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReaperturaActionPerformed
         try {
-            udi.solicitarReapertura(IdIncidencia);
+            System.out.println(idIncidencia);
+            udi.solicitarReapertura(idIncidencia);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -233,11 +234,15 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private void jTableUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuarioMouseClicked
         int fila = this.jTableUsuario.rowAtPoint(evt.getPoint());
-        int IdIncidencia = (int) this.jTableUsuario.getValueAt(fila, 0);
-        String estado = this.jTableUsuario.getValueAt(fila, 1).toString();
+        String estado ="";
+        idIncidencia = (int) this.jTableUsuario.getValueAt(fila, 0);
+        try {
+            estado = this.jTableUsuario.getValueAt(fila, 1).toString();
+        } catch (Exception e) {
+        }
         if (estado.equals("cerrada")) {
             this.jButtonReapertura.setEnabled(true);
-        }else{
+        } else {
             this.jButtonReapertura.setEnabled(false);
         }
     }//GEN-LAST:event_jTableUsuarioMouseClicked

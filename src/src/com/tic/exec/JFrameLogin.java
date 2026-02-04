@@ -98,7 +98,9 @@ public class JFrameLogin extends javax.swing.JFrame {
         try {
             idUsuario = limpl.compararContraseña(hash, usuario);
             System.out.println(idUsuario);
-            if (idUsuario != -1) {
+            if (idUsuario == -1) {
+                JOptionPane.showMessageDialog(null, "El usuario introducido no existe o la contraseña es incorrecta.", "CREEDENCIALES INCORRECTAS", JOptionPane.ERROR_MESSAGE);
+            } else {
                 if (this.jComboBox1.getSelectedItem().toString().equals("Usuario")) {
                     //Metodo para ver si hay un Usuario con esa Id
                     VistaUsuario vistaUs = new VistaUsuario(idUsuario);
@@ -112,15 +114,17 @@ public class JFrameLogin extends javax.swing.JFrame {
                         vistaGes.setVisible(true);
                         dispose();
                     } else {
-                        // JOptionPane.showMessageDialog(null, "No tiene dinero suficiente para ese helado", "FALTA_DINERO", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "El usuario introducido no es un gestor", "ROL INCORRECTO", JOptionPane.ERROR_MESSAGE);
 
                     }
-                } else if (this.jComboBox1.getSelectedItem().toString().equals("Tecnico")) {
+                } else if (this.jComboBox1.getSelectedItem().toString().equals("Técnico")) {
                     //Metodo para ver si hay un Tecnico con esa Id
                     if (limpl.esTecnico(idUsuario)) {
                         VistaTecnico vistaTec = new VistaTecnico(idUsuario);
                         vistaTec.setVisible(true);
                         dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El usuario introducido no es un técnico", "ROL INCORRECTO", JOptionPane.ERROR_MESSAGE);
                     }
                 } else if (this.jComboBox1.getSelectedItem().toString().equals("Administrador")) {
                     //Metodo para ver si hay un Admin con esa Id
@@ -128,6 +132,9 @@ public class JFrameLogin extends javax.swing.JFrame {
                         VistaAdministrador vistaAdm = new VistaAdministrador(idUsuario);
                         vistaAdm.setVisible(true);
                         dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El usuario introducido no es un administrador", "ROL INCORRECTO", JOptionPane.ERROR_MESSAGE);
+
                     }
 
                 }

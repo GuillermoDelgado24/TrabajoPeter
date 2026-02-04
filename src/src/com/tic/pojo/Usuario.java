@@ -9,33 +9,30 @@ package src.com.tic.pojo;
  * @author tarde
  */
 public class Usuario {
+
     private int idUsuario;
     private String nombreDeUsuario;
     private String nombreApellidos;
-    private String usuario;
     private String correo;
     private String numeroTelefono;
     private String contrasena;
 
-    public Usuario(String nombreDeUsuario, String nombreApellidos, String usuario, String correo, String numeroTelefono, String contrasena) {
+    public Usuario(String nombreDeUsuario, String nombreApellidos, String correo, String numeroTelefono, String contrasena) {
         this.nombreDeUsuario = nombreDeUsuario;
         this.nombreApellidos = nombreApellidos;
-        this.usuario = usuario;
         this.correo = correo;
         this.numeroTelefono = numeroTelefono;
         this.contrasena = contrasena;
     }
 
-    public Usuario(int idUsuario, String nombreDeUsuario, String nombreApellidos, String usuario, String correo, String numeroTelefono, String contrasena) {
+    public Usuario(int idUsuario, String nombreDeUsuario, String nombreApellidos, String correo, String numeroTelefono, String contrasena) {
         this.idUsuario = idUsuario;
         this.nombreDeUsuario = nombreDeUsuario;
         this.nombreApellidos = nombreApellidos;
-        this.usuario = usuario;
         this.correo = correo;
         this.numeroTelefono = numeroTelefono;
         this.contrasena = contrasena;
     }
-
 
     public String getContrasena() {
         return contrasena;
@@ -51,14 +48,6 @@ public class Usuario {
 
     public void setNombreYApellidos(String nombreApellidos) {
         this.nombreApellidos = nombreApellidos;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
     }
 
     public String getCorreo() {
@@ -95,8 +84,23 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", nombreDeUsuario=" + nombreDeUsuario + ", nombreApellidos=" + nombreApellidos + ", usuario=" + usuario + ", correo=" + correo + ", numeroTelefono=" + numeroTelefono + ", contrasena=" + contrasena + '}';
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombreDeUsuario=" + nombreDeUsuario + ", nombreApellidos=" + nombreApellidos + ", correo=" + correo + ", numeroTelefono=" + numeroTelefono + ", contrasena=" + contrasena + '}';
     }
 
-    
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombreApellidos() {
+        return nombreApellidos;
+    }
+
+    public void setNombreApellidos(String nombreApellidos) {
+        this.nombreApellidos = nombreApellidos;
+    }
+
 }

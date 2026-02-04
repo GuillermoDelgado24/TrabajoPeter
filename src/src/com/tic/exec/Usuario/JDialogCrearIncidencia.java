@@ -4,10 +4,10 @@
  */
 package src.com.tic.exec.Usuario;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import src.com.tic.dao.UsuarioDAOimpl;
 import src.com.tic.exec.Usuario.VistaUsuario;
 import src.com.tic.pojo.Incidencia;
@@ -17,18 +17,29 @@ import src.com.tic.pojo.Incidencia;
  * @author alumno
  */
 public class JDialogCrearIncidencia extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogCrearIncidencia.class.getName());
     private UsuarioDAOimpl usuarioDAO = new UsuarioDAOimpl();
-    private HashMap<Integer,String> map = new HashMap<>();
+    private LinkedHashMap<String, Integer> map;
+    private ArrayList<String> al;
+    private int idUsuario;
+
     /**
      * Creates new form CrearIndicencia
      */
-    public JDialogCrearIncidencia(java.awt.Frame parent, boolean modal) {
+    public JDialogCrearIncidencia(java.awt.Frame parent, boolean modal, int idUsuario) {
         super(parent, modal);
+        this.idUsuario = idUsuario;
         this.padre = (VistaUsuario) parent;
         initComponents();
-        //usuarioDAO.obtenerEspacios(map);
+        try {
+            map = usuarioDAO.obtenerEspacios();
+            refrescarComboBox(map);
+            al = usuarioDAO.getTiposIncidencias();
+            refrescarComboBoxTipo(al);
+        } catch (Exception ex) {
+            System.out.println("Error al obtener espacios: " + ex.getMessage());
+        }
     }
 
     /**
@@ -109,7 +120,7 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxEspacio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 44, Short.MAX_VALUE))
+                .addGap(0, 167, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,8 +145,12 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearIndicenciaDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearIndicenciaDialogActionPerformed
-//        Incidencia in = new Incidencia(this.jComboBoxTipoIncidencia.getSelectedItem().toString(),this.jTextArea1.getText() , idUsiario);
-//        usuarioDAO.crearIncidencia(in, HIDE_ON_CLOSE);
+        try {
+            Incidencia in = new Incidencia(this.jComboBoxTipoIncidencia.getSelectedItem().toString(),this.jTextArea1.getText() , this.idUsuario);
+            usuarioDAO.crearIncidencia(in, map.get(this.jComboBoxEspacio.getSelectedItem().toString()));
+        } catch (Exception ex) {
+            System.out.println("Error al crear la incidencia" + ex.getMessage());
+        }
     }//GEN-LAST:event_jButtonCrearIndicenciaDialogActionPerformed
 
     private void jComboBoxEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEspacioActionPerformed
@@ -171,7 +186,7 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JDialogCrearIncidencia dialog = new JDialogCrearIncidencia(new javax.swing.JFrame(), true);
+/*                JDialogCrearIncidencia dialog = new JDialogCrearIncidencia(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -179,19 +194,26 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
                     }
                 });
                 dialog.setVisible(true);
+*/
             }
         });
     }
     
-    public void refrescarComboBox(HashMap<Integer,String> Espacios ) {
-        for (Map.Entry<Integer, String> entry : Espacios.entrySet()) {
-            int key = entry.getKey();
-            String val = entry.getValue();
-            this.jComboBoxEspacio.addItem(val);
-            
+    public void refrescarComboBoxTipo(ArrayList<String> al){
+        for (String string : al) {
+            this.jComboBoxTipoIncidencia.addItem(string);
         }
     }
-    VistaUsuario padre;
+
+    public void refrescarComboBox(LinkedHashMap<String, Integer> espacios) {
+        for (Map.Entry<String, Integer> entry : espacios.entrySet()) {
+            String key = entry.getKey();
+            int val = entry.getValue();
+            this.jComboBoxEspacio.addItem(key);
+
+        }
+    }
+    private VistaUsuario padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearIndicenciaDialog;
     private javax.swing.JComboBox<String> jComboBoxEspacio;
