@@ -34,7 +34,7 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
 
     public void ponerEnEspera(int idIncidencia) throws Exception {
         String SQL = "UPDATE Incidencias "
-                + "SET estado = NULL, "
+                + "SET estado = 'alta', "
                 + "resultado_cierre = NULL "
                 + "WHERE ID_Incidencia = ?;";
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {

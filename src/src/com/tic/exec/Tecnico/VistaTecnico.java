@@ -24,7 +24,7 @@ public class VistaTecnico extends javax.swing.JFrame {
 
     private ArrayList<String> al;
 
-    private int idTecnico;
+    int idTecnico;
 
     TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
 
@@ -315,7 +315,7 @@ public class VistaTecnico extends javax.swing.JFrame {
         /* Create and display the form */
     }
 
-    private void refrescarTablaBeetwen(ArrayList<Incidencia> ai) {
+    public void refrescarTablaBeetwen(ArrayList<Incidencia> ai) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
 
@@ -342,7 +342,7 @@ public class VistaTecnico extends javax.swing.JFrame {
         }
     }
 
-    private void refrescarTablaPorTipo(String tipo) {
+    public void refrescarTablaPorTipo(String tipo) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
 
@@ -376,7 +376,7 @@ public class VistaTecnico extends javax.swing.JFrame {
         }
     }
 
-    private void refrescarTabla(int IdTecnico) {
+    public void refrescarTabla(int IdTecnico) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
 

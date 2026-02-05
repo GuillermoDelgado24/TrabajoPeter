@@ -12,15 +12,19 @@ import src.com.tic.pojo.Incidencia;
  * @author alumno
  */
 public class jDialogCerrarIncidencia extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(jDialogCerrarIncidencia.class.getName());
     TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
+
     /**
      * Creates new form jDialogCerrarIncidencia
      */
     public jDialogCerrarIncidencia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.padre = (VistaTecnico) parent;
         initComponents();
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -153,6 +157,8 @@ public class jDialogCerrarIncidencia extends javax.swing.JDialog {
         i.setTipoIncidencia(this.jComboBoxEstadoCierre.getSelectedItem().toString());
         try {
             tecnicoDAO.cerrarIncidencia(i);
+            this.padre.refrescarTabla(this.padre.idTecnico);
+                    dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -194,7 +200,7 @@ public class jDialogCerrarIncidencia extends javax.swing.JDialog {
             }
         });
     }
-
+    VistaTecnico padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrarIndiencia;
     private javax.swing.JComboBox<String> jComboBoxEstadoCierre;
