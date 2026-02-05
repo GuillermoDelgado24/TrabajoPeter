@@ -67,9 +67,7 @@
                       <Component id="jButtonPonerEspera" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="jButtonListarIndicendiaEspera" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                      <Component id="jButtonListarIndicendias" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
                       <Component id="jButtonListarTipoIncidencias" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -107,7 +105,6 @@
                   <Component id="jButtonAsignarTecnico" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="jButtonPonerEspera" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="jButtonListarIndicendiaEspera" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="jButtonListarIndicendias" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="jButtonListarTipoIncidencias" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -378,14 +375,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListarIndicendiaEsperaActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonListarIndicendias">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Listar Incidencia"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListarIndicendiasActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonListarTipoIncidencias">

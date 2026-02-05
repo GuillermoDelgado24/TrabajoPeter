@@ -72,7 +72,8 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
         int r = 0;
         String SQL = "UPDATE Incidencias "
                 + "SET estado = 'cerrada', "
-                + "f_cierre = CURDATE(),"
+                + "f_cierre = CURDATE(), "
+                + "ID_Tecnico = NULL, "
                 + "resultado_cierre = ?, "
                 + "descripcion_solucion = ? "
                 + "WHERE ID_Incidencia = ?;";
@@ -98,7 +99,7 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
             pstm.setString(1, tipoIncidencia);
 
             int insertados = pstm.executeUpdate();
-            System.out.println("¡Géneros insertados con éxito![" + insertados + "]");
+            System.out.println("Tipos_Incidencias insertados con éxito[" + insertados + "]");
         } catch (Exception e) {
             throw e;
         }

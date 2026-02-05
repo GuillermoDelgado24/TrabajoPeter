@@ -14,6 +14,7 @@ import java.sql.*;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import src.com.tic.pojo.Dispositivo;
 
 /**
  *
@@ -68,6 +69,25 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
             throw e;
         }
         return incidencias;
+    }
+    
+        public ArrayList<Dispositivo> getDispositivosByEspacios(int idEspacio) throws Exception {
+        ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+       
+        String sql = "SELECT ID_Dispositivo, tipo, descripcion, marca, modelo FROM Dispositivos WHERE ID_Espacio = ?";
+
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
+            pstm.setInt(1, idEspacio);
+            try (ResultSet resul = pstm.executeQuery();) {
+                while (resul.next()) {
+                    dispositivos.add(new Dispositivo(resul.getInt("ID_Dispositivo"), idEspacio, resul.getString("descripcion"), resul.getString("tipo"), resul.getString("marca"), resul.getString("modelo")));
+
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return dispositivos;
     }
 
 //    public Incidencia insertarEnIncidencia(LinkedList<Object> variable) {
@@ -124,7 +144,8 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
         int r = 0;
         String SQL = "UPDATE Incidencias "
                 + "SET estado = NULL, "
-                + "resultado_cierre = NULL "
+                + "resultado_cierre = NULL,"
+                + "ID_Tecnico = NULL "
                 + "WHERE ID_Incidencia = ?;";
 
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {

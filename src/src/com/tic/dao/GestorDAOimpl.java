@@ -88,12 +88,13 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
 
     @Override
     public ArrayList<Incidencia> getIncidenciasByEspera() throws Exception {
-        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE estado = NULL OR estado = 'alta';";
+        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE estado IS NULL OR estado = 'alta';";
         ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
-
+        Incidencia i = null;
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql); ResultSet resul = pstm.executeQuery();) {
             while (resul.next()) {
-                incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                i = new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"));
+                incidencias.add(i);
             }
 
         } catch (Exception e) {
@@ -158,6 +159,39 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
     @Override
     public void close() throws Exception {
         con.close();
+    }
+
+    public ArrayList<String> getTiposIncidencias() throws Exception {
+        ArrayList<String> al = new ArrayList<>();
+        String SQL = "SELECT tipo_incidencia FROM Tipos_Incidencias;";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL); ResultSet resul = pstm.executeQuery();) {
+            while (resul.next()) {
+                al.add(resul.getString("tipo_incidencia"));
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return al;
+    }
+
+    public ArrayList<Incidencia> getIncidenciasByTipoandId(int idTecnico, String tipoIncidencia) throws Exception {
+        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE  ID_Tecnico = ? and tipo_incidencia = ?";
+        ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
+
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
+
+            pstm.setInt(1, idTecnico);
+            pstm.setString(2, tipoIncidencia);
+            try (ResultSet resul = pstm.executeQuery();) {
+                while (resul.next()) {
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                }
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+        return incidencias;
     }
 
     public Usuario getTecnicoById(int idTecnico) throws Exception {

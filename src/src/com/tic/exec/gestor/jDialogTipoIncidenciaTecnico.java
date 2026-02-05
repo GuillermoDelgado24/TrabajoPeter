@@ -5,6 +5,7 @@
 package src.com.tic.exec.gestor;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.GestorDAOimpl;
 import src.com.tic.exec.Usuario.VistaUsuario;
@@ -18,6 +19,8 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(jDialogTipoIncidenciaTecnico.class.getName());
     GestorDAOimpl gestorDAO = new GestorDAOimpl();
+    private ArrayList<String> al;
+
     /**
      * Creates new form jDialogTipoIndicenciaTecnico
      */
@@ -25,6 +28,15 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
         super(parent, modal);
         this.padre = (VistaGestor) parent;
         initComponents();
+        this.setLocationRelativeTo(null);
+
+        try {
+
+            al = gestorDAO.getTiposIncidencias();
+            refrescarComboBoxTipo(al);
+        } catch (Exception ex) {
+            System.out.println("Error al obtener tipos: " + ex.getMessage());
+        }
     }
 
     /**
@@ -42,7 +54,7 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBoxTipoIndicencia = new javax.swing.JComboBox<>();
+        jComboBoxTipoIncidencia = new javax.swing.JComboBox<>();
         jTextFieldIDTecnico = new javax.swing.JTextField();
         jButtonConsultar = new javax.swing.JButton();
 
@@ -127,7 +139,7 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
                                 .addComponent(jLabel1)
                                 .addGap(54, 54, 54)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxTipoIndicencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxTipoIncidencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(41, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -150,7 +162,7 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxTipoIndicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldIDTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(65, 65, 65)
                         .addComponent(jButtonConsultar)))
@@ -161,7 +173,13 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        //refrescarTablaIdTecnico&Tipo()
+        if (!jTextFieldIDTecnico.getText().matches("[0-9]")) {
+            JOptionPane.showMessageDialog(null, "Debe introducir un ID de técnico y un Espacio.", "INTRODUZCA LOS PARÁMETROS", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            refrescarTablaIdTecnicoyTipo(Integer.parseInt(jTextFieldIDTecnico.getText()), jComboBoxTipoIncidencia.getSelectedItem().toString());
+
+        }
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     /**
@@ -200,39 +218,46 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
             }
         });
     }
+
+    public void refrescarComboBoxTipo(ArrayList<String> al) {
+        for (String string : al) {
+            this.jComboBoxTipoIncidencia.addItem(string);
+        }
+    }
+
     VistaGestor padre;
-    
-//    private void refrescarTablaIdTecnico&Tipo(int idTecnico, String tipo) {
-//        DefaultTableModel m = (DefaultTableModel) this.jTableGestor.getModel();
-//        m.setNumRows(0);
-//
-//        Incidencia i = null;
-//        try {
-//            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) gestorDAO.getPorIdTecnico&Tipo(idTecnico, tipo);
-//            for (int j = 0; j < ai.size(); j++) {
-//                i = ai.get(j);
-//                Object[] o = {
-//                    i.getIdIncidencia(),
-//                    i.getEstado(),
-//                    i.getResultado_cierre(),
-//                    i.getFechaCierre(),
-//                    i.getFechaEntrada(),
-//                    i.getTipoIncidencia(),
-//                    i.getIdUsuario(),
-//                    i.getIdTecnico(),
-//                    i.getDescripcionIncidencia(),
-//                    i.getDescripcionSolucion()
-//                };
-//                m.addRow(o);
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Error al mostrar tabla incidencia");
-//        }
-//    }
+
+    private void refrescarTablaIdTecnicoyTipo(int idTecnico, String tipo) {
+        DefaultTableModel m = (DefaultTableModel) this.jTableGestor.getModel();
+        m.setNumRows(0);
+
+        Incidencia i = null;
+        try {
+            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) gestorDAO.getIncidenciasByTipoandId(idTecnico, tipo);
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                Object[] o = {
+                    i.getIdIncidencia(),
+                    i.getEstado(),
+                    i.getResultado_cierre(),
+                    i.getFechaCierre(),
+                    i.getFechaEntrada(),
+                    i.getTipoIncidencia(),
+                    i.getIdUsuario(),
+                    i.getIdTecnico(),
+                    i.getDescripcionIncidencia(),
+                    i.getDescripcionSolucion()
+                };
+                m.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConsultar;
-    private javax.swing.JComboBox<String> jComboBoxTipoIndicencia;
+    private javax.swing.JComboBox<String> jComboBoxTipoIncidencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -241,4 +266,5 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
     private javax.swing.JTable jTableGestor;
     private javax.swing.JTextField jTextFieldIDTecnico;
     // End of variables declaration//GEN-END:variables
+
 }

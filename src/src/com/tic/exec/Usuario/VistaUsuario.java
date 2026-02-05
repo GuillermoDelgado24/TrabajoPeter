@@ -25,6 +25,8 @@ public class VistaUsuario extends javax.swing.JFrame {
      */
     public VistaUsuario(int idUsuario) {
         initComponents();
+        this.setLocationRelativeTo(null);
+
         this.idUsuario = idUsuario;
         refrescarTabla();
     }
@@ -234,7 +236,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private void jTableUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuarioMouseClicked
         int fila = this.jTableUsuario.rowAtPoint(evt.getPoint());
-        String estado ="";
+        String estado = "";
         idIncidencia = (int) this.jTableUsuario.getValueAt(fila, 0);
         try {
             estado = this.jTableUsuario.getValueAt(fila, 1).toString();
@@ -288,7 +290,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     protected UsuarioDAOimpl udi = new UsuarioDAOimpl();
 
-    private void refrescarTabla() {
+    public void refrescarTabla() {
         DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
         m.setNumRows(0);
 
@@ -317,7 +319,7 @@ public class VistaUsuario extends javax.swing.JFrame {
         }
     }
 
-    private void refrescarTablaPorID(int id) {
+    public void refrescarTablaPorID(int id) {
         DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
         m.setNumRows(0);
 

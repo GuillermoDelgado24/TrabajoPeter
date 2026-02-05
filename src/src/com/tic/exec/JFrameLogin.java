@@ -99,7 +99,10 @@ public class JFrameLogin extends javax.swing.JFrame {
             idUsuario = limpl.compararContraseña(hash, usuario);
             System.out.println(idUsuario);
             if (idUsuario == -1) {
+                this.jTextFieldUsuario.setText("");
+                this.jPasswordFieldContrasena.setText("");
                 JOptionPane.showMessageDialog(null, "El usuario introducido no existe o la contraseña es incorrecta.", "CREEDENCIALES INCORRECTAS", JOptionPane.ERROR_MESSAGE);
+
             } else {
                 if (this.jComboBox1.getSelectedItem().toString().equals("Usuario")) {
                     //Metodo para ver si hay un Usuario con esa Id
@@ -114,6 +117,8 @@ public class JFrameLogin extends javax.swing.JFrame {
                         vistaGes.setVisible(true);
                         dispose();
                     } else {
+                        this.jTextFieldUsuario.setText("");
+                        this.jPasswordFieldContrasena.setText("");
                         JOptionPane.showMessageDialog(null, "El usuario introducido no es un gestor", "ROL INCORRECTO", JOptionPane.ERROR_MESSAGE);
 
                     }
@@ -124,6 +129,8 @@ public class JFrameLogin extends javax.swing.JFrame {
                         vistaTec.setVisible(true);
                         dispose();
                     } else {
+                        this.jTextFieldUsuario.setText("");
+                        this.jPasswordFieldContrasena.setText("");
                         JOptionPane.showMessageDialog(null, "El usuario introducido no es un técnico", "ROL INCORRECTO", JOptionPane.ERROR_MESSAGE);
                     }
                 } else if (this.jComboBox1.getSelectedItem().toString().equals("Administrador")) {
@@ -133,6 +140,8 @@ public class JFrameLogin extends javax.swing.JFrame {
                         vistaAdm.setVisible(true);
                         dispose();
                     } else {
+                        this.jTextFieldUsuario.setText("");
+                        this.jPasswordFieldContrasena.setText("");
                         JOptionPane.showMessageDialog(null, "El usuario introducido no es un administrador", "ROL INCORRECTO", JOptionPane.ERROR_MESSAGE);
 
                     }

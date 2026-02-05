@@ -28,8 +28,10 @@ public class VistaGestor extends javax.swing.JFrame {
      */
     public VistaGestor(int idUsuario) {
         initComponents();
+        this.setLocationRelativeTo(null);
+
         this.idUsuario = idUsuario;
-        refrescarTablaIncidencias();
+        refrescarTablaIncidenciasEspera();
         refrescarTablaTecnicosDisp();
     }
 
@@ -57,7 +59,6 @@ public class VistaGestor extends javax.swing.JFrame {
         JTextIdIncidencia1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButtonListarIndicendiaEspera = new javax.swing.JButton();
-        jButtonListarIndicendias = new javax.swing.JButton();
         jButtonListarTipoIncidencias = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
 
@@ -165,13 +166,6 @@ public class VistaGestor extends javax.swing.JFrame {
             }
         });
 
-        jButtonListarIndicendias.setText("Listar Incidencia");
-        jButtonListarIndicendias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonListarIndicendiasActionPerformed(evt);
-            }
-        });
-
         jButtonListarTipoIncidencias.setText("Listar por tipo de Incidencia y por ID Tecnico");
         jButtonListarTipoIncidencias.setToolTipText("");
         jButtonListarTipoIncidencias.addActionListener(new java.awt.event.ActionListener() {
@@ -227,9 +221,7 @@ public class VistaGestor extends javax.swing.JFrame {
                         .addComponent(jButtonPonerEspera)
                         .addGap(44, 44, 44)
                         .addComponent(jButtonListarIndicendiaEspera)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButtonListarIndicendias)
-                        .addGap(42, 42, 42)
+                        .addGap(255, 255, 255)
                         .addComponent(jButtonListarTipoIncidencias)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -258,7 +250,6 @@ public class VistaGestor extends javax.swing.JFrame {
                     .addComponent(jButtonAsignarTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPonerEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonListarIndicendiaEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonListarIndicendias, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonListarTipoIncidencias, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,16 +265,13 @@ public class VistaGestor extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println("Error al poner en espera: " + ex.getMessage());
         }
-        refrescarTablaIncidencias();
+        refrescarTablaIncidenciasEspera();
+        refrescarTablaTecnicosDisp();
     }//GEN-LAST:event_jButtonPonerEsperaActionPerformed
 
     private void jButtonListarIndicendiaEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarIndicendiaEsperaActionPerformed
         refrescarTablaIncidenciasEspera();
     }//GEN-LAST:event_jButtonListarIndicendiaEsperaActionPerformed
-
-    private void jButtonListarIndicendiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarIndicendiasActionPerformed
-        refrescarTablaIncidencias();
-    }//GEN-LAST:event_jButtonListarIndicendiasActionPerformed
 
     private void jButtonListarTipoIncidenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarTipoIncidenciasActionPerformed
         jDialogTipoIncidenciaTecnico dTipoIncidenciaTecnico = new jDialogTipoIncidenciaTecnico(this, true);
@@ -300,6 +288,8 @@ public class VistaGestor extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println("Error al asignar técnico:" + ex.getMessage());
         }
+        refrescarTablaIncidenciasEspera();
+        refrescarTablaTecnicosDisp();
     }//GEN-LAST:event_jButtonAsignarTecnicoActionPerformed
 
     private void jTableGestorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGestorMouseClicked
@@ -350,33 +340,33 @@ public class VistaGestor extends javax.swing.JFrame {
         /* Create and display the form */
     }
 
-    private void refrescarTablaIncidencias() {
-        DefaultTableModel m = (DefaultTableModel) this.jTableGestor.getModel();
-        m.setNumRows(0);
-
-        Incidencia i = null;
-        try {
-            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) gestorDAO.getAllIncidencias();
-            for (int j = 0; j < ai.size(); j++) {
-                i = ai.get(j);
-                Object[] o = {
-                    i.getIdIncidencia(),
-                    i.getEstado(),
-                    i.getResultado_cierre(),
-                    i.getFechaCierre(),
-                    i.getFechaEntrada(),
-                    i.getTipoIncidencia(),
-                    i.getIdUsuario(),
-                    i.getIdTecnico(),
-                    i.getDescripcionIncidencia(),
-                    i.getDescripcionSolucion()
-                };
-                m.addRow(o);
-            }
-        } catch (Exception e) {
-            System.out.println("Error al mostrar tabla incidencia");
-        }
-    }
+//    private void refrescarTablaIncidencias() {
+//        DefaultTableModel m = (DefaultTableModel) this.jTableGestor.getModel();
+//        m.setNumRows(0);
+//
+//        Incidencia i = null;
+//        try {
+//            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) gestorDAO.getAllIncidencias();
+//            for (int j = 0; j < ai.size(); j++) {
+//                i = ai.get(j);
+//                Object[] o = {
+//                    i.getIdIncidencia(),
+//                    i.getEstado(),
+//                    i.getResultado_cierre(),
+//                    i.getFechaCierre(),
+//                    i.getFechaEntrada(),
+//                    i.getTipoIncidencia(),
+//                    i.getIdUsuario(),
+//                    i.getIdTecnico(),
+//                    i.getDescripcionIncidencia(),
+//                    i.getDescripcionSolucion()
+//                };
+//                m.addRow(o);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Error al mostrar tabla incidencia");
+//        }
+//    }
 
     private void refrescarTablaTecnicosDisp() {
         DefaultTableModel m = (DefaultTableModel) this.jTable1.getModel();
@@ -412,6 +402,7 @@ public class VistaGestor extends javax.swing.JFrame {
             ArrayList<Incidencia> ai = (ArrayList<Incidencia>) gestorDAO.getIncidenciasByEspera();
             for (int j = 0; j < ai.size(); j++) {
                 i = ai.get(j);
+                System.out.println(i);
                 Object[] o = {
                     i.getIdIncidencia(),
                     i.getEstado(),
@@ -437,7 +428,6 @@ public class VistaGestor extends javax.swing.JFrame {
     private javax.swing.JTextField JTextIdIncidencia1;
     private javax.swing.JButton jButtonAsignarTecnico;
     private javax.swing.JButton jButtonListarIndicendiaEspera;
-    private javax.swing.JButton jButtonListarIndicendias;
     private javax.swing.JButton jButtonListarTipoIncidencias;
     private javax.swing.JButton jButtonPonerEspera;
     private javax.swing.JButton jButtonSalir;

@@ -23,7 +23,6 @@ public class VistaTecnico extends javax.swing.JFrame {
     private UsuarioDAOimpl usuarioDAO = new UsuarioDAOimpl();
 
     private ArrayList<String> al;
-    
 
     private int idTecnico;
 
@@ -34,6 +33,8 @@ public class VistaTecnico extends javax.swing.JFrame {
      */
     public VistaTecnico(int idUsuario) {
         initComponents();
+        this.setLocationRelativeTo(null);
+
         this.idUsuario = idUsuario;
         try {
             al = usuarioDAO.getTiposIncidencias();
@@ -274,7 +275,7 @@ public class VistaTecnico extends javax.swing.JFrame {
             ArrayList<Incidencia> al = tecnicoDAO.getIncidenciasBetweenFechas(Integer.parseInt(this.jDias.getText().toString()));
             refrescarTablaBeetwen(al);
         } catch (Exception ex) {
-            System.out.println("Error al hacer consulta de fechas: "+ex.getMessage());
+            System.out.println("Error al hacer consulta de fechas: " + ex.getMessage());
         }
     }//GEN-LAST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
 
@@ -310,10 +311,11 @@ public class VistaTecnico extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
     }
-    private void refrescarTablaBeetwen(ArrayList<Incidencia> ai){
+
+    private void refrescarTablaBeetwen(ArrayList<Incidencia> ai) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
 
@@ -339,6 +341,7 @@ public class VistaTecnico extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia");
         }
     }
+
     private void refrescarTablaPorTipo(String tipo) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
