@@ -40,9 +40,9 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {
             pstm.setInt(1, idIncidencia);
             int r = pstm.executeUpdate();
-            if (r > 0) {
-                System.out.println("Registros afectados: " + r);
-            }
+//            if (r > 0) {
+//                System.out.println("Registros afectados: " + r);
+//            }
         } catch (SQLException e) {
             throw e;
         }
@@ -61,9 +61,9 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
             pstm.setInt(1, idTecnico);
             pstm.setInt(2, idIncidencia);
             int r = pstm.executeUpdate();
-            if (r > 0) {
-                System.out.println("Registros afectados: " + r);
-            }
+//            if (r > 0) {
+//                System.out.println("Registros afectados: " + r);
+//            }
         } catch (SQLException e) {
             throw e;
         }
@@ -78,9 +78,9 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {
             pstm.setInt(1, incidencia.getIdIncidencia());
             int r = pstm.executeUpdate();
-            if (r > 0) {
-                System.out.println("Registros afectados: " + r);
-            }
+//            if (r > 0) {
+//                System.out.println("Registros afectados: " + r);
+//            }
         } catch (SQLException e) {
             throw e;
         }
