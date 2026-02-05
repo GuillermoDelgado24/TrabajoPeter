@@ -34,6 +34,7 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
         this.idUsuario = idUsuario;
         this.padre = (VistaUsuario) parent;
         initComponents();
+        this.setSize(1130, 410);
         this.setLocationRelativeTo(null);
 
         try {

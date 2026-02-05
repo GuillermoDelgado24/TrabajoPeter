@@ -59,9 +59,9 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {
             pstm.setInt(1, idIncidencia);
             r = pstm.executeUpdate();
-            if (r > 0) {
-                System.out.println("Registros afectados: " + r);
-            }
+//            if (r > 0) {
+//                System.out.println("Registros afectados: " + r);
+//            }
         } catch (SQLException e) {
             throw e;
         }
@@ -83,9 +83,9 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
             pstm.setString(2, incidencia.getDescripcionSolucion());
             pstm.setInt(3, incidencia.getIdIncidencia());
             r = pstm.executeUpdate();
-            if (r > 0) {
-                System.out.println("Registros afectados: " + r);
-            }
+//            if (r > 0) {
+//                System.out.println("Registros afectados: " + r);
+//            }
         } catch (SQLException e) {
             throw e;
         }
@@ -99,7 +99,7 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
             pstm.setString(1, tipoIncidencia);
 
             int insertados = pstm.executeUpdate();
-            System.out.println("Tipos_Incidencias insertados con éxito[" + insertados + "]");
+//            System.out.println("Tipos_Incidencias insertados con éxito[" + insertados + "]");
         } catch (Exception e) {
             throw e;
         }

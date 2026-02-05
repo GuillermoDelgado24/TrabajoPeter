@@ -16,25 +16,25 @@ import src.com.tic.pojo.Incidencia;
  * @author alumno
  */
 public class VistaTecnico extends javax.swing.JFrame {
-
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaTecnico.class.getName());
     int idIncidencia;
     private int idUsuario;
     private UsuarioDAOimpl usuarioDAO = new UsuarioDAOimpl();
-
+    
     private ArrayList<String> al;
-
+    
     int idTecnico;
-
+    
     TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
 
     /**
      * Creates new form VistaTecnico
      */
-    public VistaTecnico(int idUsuario) {
+    public VistaTecnico(int idUsuario, String usuario) {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        this.jLabel3.setText("Hola, " + usuario + ". Otro día más en el curro");
         this.idUsuario = idUsuario;
         try {
             al = usuarioDAO.getTiposIncidencias();
@@ -79,7 +79,7 @@ public class VistaTecnico extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Otro dia mas en el curro");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
 
         jTableTecnico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,7 +197,7 @@ public class VistaTecnico extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(379, 379, 379)
                         .addComponent(jLabel2)))
-                .addGap(1271, 1271, 1271))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,7 +228,7 @@ public class VistaTecnico extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonVerIndicenciasTiempoConcreto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDias, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                         .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,11 +314,11 @@ public class VistaTecnico extends javax.swing.JFrame {
 
         /* Create and display the form */
     }
-
+    
     public void refrescarTablaBeetwen(ArrayList<Incidencia> ai) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
-
+        
         try {
             Incidencia i;
             for (int j = 0; j < ai.size(); j++) {
@@ -341,11 +341,11 @@ public class VistaTecnico extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia");
         }
     }
-
+    
     public void refrescarTablaPorTipo(String tipo) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
-
+        
         Incidencia i = null;
         try {
             ArrayList<Incidencia> ai = (ArrayList<Incidencia>) tecnicoDAO.getIncidenciasByTipo(tipo);
@@ -369,17 +369,17 @@ public class VistaTecnico extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia");
         }
     }
-
+    
     public void refrescarComboBoxTipo(ArrayList<String> al) {
         for (String string : al) {
             this.jComboBoxTipoIncidencia.addItem(string);
         }
     }
-
+    
     public void refrescarTabla(int IdTecnico) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
-
+        
         Incidencia i = null;
         try {
             ArrayList<Incidencia> ai = (ArrayList<Incidencia>) tecnicoDAO.getIncidenciasAsignadas(IdTecnico);

@@ -18,15 +18,16 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaUsuario.class.getName());
     private int idUsuario;
+    String nombreUsuario;
     public int idIncidencia;
 
     /**
      * Creates new form VistaUsuario
      */
-    public VistaUsuario(int idUsuario) {
+    public VistaUsuario(int idUsuario, String nombreUsuario) {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        this.jLabel3.setText("Buenas, "+ nombreUsuario + " ¿Que necesitas?");
         this.idUsuario = idUsuario;
         refrescarTabla();
     }
@@ -220,6 +221,7 @@ public class VistaUsuario extends javax.swing.JFrame {
         try {
             System.out.println(idIncidencia);
             udi.solicitarReapertura(idIncidencia);
+            refrescarTabla();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

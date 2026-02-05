@@ -26,10 +26,10 @@ public class VistaGestor extends javax.swing.JFrame {
     /**
      * Creates new form VistaGestor
      */
-    public VistaGestor(int idUsuario) {
+    public VistaGestor(int idUsuario, String usuario) {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        this.jLabel3.setText("¡¡¡Hola, " + usuario + ". A atender se ha dicho!!!");
         this.idUsuario = idUsuario;
         refrescarTablaIncidenciasEspera();
         refrescarTablaTecnicosDisp();
@@ -366,7 +366,6 @@ public class VistaGestor extends javax.swing.JFrame {
 //            System.out.println("Error al mostrar tabla incidencia");
 //        }
 //    }
-
     private void refrescarTablaTecnicosDisp() {
         DefaultTableModel m = (DefaultTableModel) this.jTable1.getModel();
         m.setNumRows(0);

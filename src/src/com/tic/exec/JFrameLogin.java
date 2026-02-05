@@ -106,14 +106,14 @@ public class JFrameLogin extends javax.swing.JFrame {
             } else {
                 if (this.jComboBox1.getSelectedItem().toString().equals("Usuario")) {
                     //Metodo para ver si hay un Usuario con esa Id
-                    VistaUsuario vistaUs = new VistaUsuario(idUsuario);
+                    VistaUsuario vistaUs = new VistaUsuario(idUsuario, usuario);
                     vistaUs.setVisible(true);
                     dispose();
 
                 } else if (this.jComboBox1.getSelectedItem().toString().equals("Gestor")) {
                     //Metodo para ver si hay un Gestor con esa Id
                     if (limpl.esGestor(idUsuario)) {
-                        VistaGestor vistaGes = new VistaGestor(idUsuario);
+                        VistaGestor vistaGes = new VistaGestor(idUsuario, usuario);
                         vistaGes.setVisible(true);
                         dispose();
                     } else {
@@ -125,7 +125,7 @@ public class JFrameLogin extends javax.swing.JFrame {
                 } else if (this.jComboBox1.getSelectedItem().toString().equals("Técnico")) {
                     //Metodo para ver si hay un Tecnico con esa Id
                     if (limpl.esTecnico(idUsuario)) {
-                        VistaTecnico vistaTec = new VistaTecnico(idUsuario);
+                        VistaTecnico vistaTec = new VistaTecnico(idUsuario, usuario);
                         vistaTec.setVisible(true);
                         dispose();
                     } else {
