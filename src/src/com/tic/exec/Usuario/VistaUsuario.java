@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.UsuarioDAOimpl;
+import src.com.tic.exec.JFrameLogin;
 import src.com.tic.pojo.Incidencia;
 
 /*
@@ -47,22 +48,41 @@ public class VistaUsuario extends javax.swing.JFrame {
         jTableUsuario = new javax.swing.JTable();
         jButtonCrearIndicencia = new javax.swing.JButton();
         jButtonListarIncidenciaId = new javax.swing.JButton();
-        jTextIncidenciaId = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButtonReapertura = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
         jButtonListarIndicencias = new javax.swing.JButton();
+        jButtonCerrarSesion = new javax.swing.JButton();
+        jSpinnerListarIncidenciaId = new javax.swing.JSpinner();
+        jSpinnerSolicitarReaperturaid = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setForeground(java.awt.Color.white);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Buenas, ¿Que necesitas?");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(299, 299, 299)
+                .addComponent(jLabel3)
+                .addContainerGap(265, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addContainerGap())
+        );
 
         jTableUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,17 +132,9 @@ public class VistaUsuario extends javax.swing.JFrame {
             }
         });
 
-        jTextIncidenciaId.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jTextIncidenciaId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextIncidenciaIdActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("ID");
 
         jButtonReapertura.setText("Solicitar reapertura");
-        jButtonReapertura.setEnabled(false);
         jButtonReapertura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReaperturaActionPerformed(evt);
@@ -144,6 +156,15 @@ public class VistaUsuario extends javax.swing.JFrame {
             }
         });
 
+        jButtonCerrarSesion.setText("Cerrar Sesion");
+        jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("ID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,47 +172,62 @@ public class VistaUsuario extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonListarIndicencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonReapertura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonListarIncidenciaId, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
-                    .addComponent(jButtonCrearIndicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextIncidenciaId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSpinnerSolicitarReaperturaid, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel2)
+                                .addGap(7, 7, 7)
+                                .addComponent(jButtonReapertura, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSpinnerListarIncidenciaId, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel1)
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonListarIndicencias)
+                                    .addComponent(jButtonListarIncidenciaId)
+                                    .addComponent(jButtonCrearIndicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel1)))
-                .addGap(14, 14, 14))
+                        .addComponent(jButtonSalir)
+                        .addGap(6, 6, 6)
+                        .addComponent(jButtonCerrarSesion))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jButtonCrearIndicencia)
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSpinnerListarIncidenciaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jButtonCrearIndicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonListarIncidenciaId, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextIncidenciaId, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonListarIndicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jButtonReapertura, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 32, Short.MAX_VALUE))
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel1))
+                            .addComponent(jButtonListarIncidenciaId))
+                        .addGap(6, 6, 6)
+                        .addComponent(jButtonListarIndicencias)
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSpinnerSolicitarReaperturaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel2))
+                            .addComponent(jButtonReapertura))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonSalir)
+                    .addComponent(jButtonCerrarSesion))
+                .addContainerGap())
         );
 
         pack();
@@ -205,22 +241,17 @@ public class VistaUsuario extends javax.swing.JFrame {
     private void jButtonListarIncidenciaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarIncidenciaIdActionPerformed
         // TODO add your handling code here:
         try {
-            int id = Integer.parseInt(this.jTextIncidenciaId.getText());
-            refrescarTablaPorID(id);
+            refrescarTablaPorID((int) this.jSpinnerListarIncidenciaId.getValue());
         } catch (Exception e) {
             System.out.println("Ingrese un numero entero en el campo ID");
         }
 
     }//GEN-LAST:event_jButtonListarIncidenciaIdActionPerformed
 
-    private void jTextIncidenciaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIncidenciaIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextIncidenciaIdActionPerformed
-
     private void jButtonReaperturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReaperturaActionPerformed
         try {
-            System.out.println(idIncidencia);
-            udi.solicitarReapertura(idIncidencia);
+            
+            udi.solicitarReapertura((int) this.jSpinnerSolicitarReaperturaid.getValue());
             refrescarTabla();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -242,14 +273,20 @@ public class VistaUsuario extends javax.swing.JFrame {
         idIncidencia = (int) this.jTableUsuario.getValueAt(fila, 0);
         try {
             estado = this.jTableUsuario.getValueAt(fila, 1).toString();
+            this.jSpinnerListarIncidenciaId.setValue(idIncidencia);
+            if (estado.equals("cerrada")) {
+                this.jSpinnerSolicitarReaperturaid.setValue(idIncidencia);
+            }
         } catch (Exception e) {
         }
-        if (estado.equals("cerrada")) {
-            this.jButtonReapertura.setEnabled(true);
-        } else {
-            this.jButtonReapertura.setEnabled(false);
-        }
+        
     }//GEN-LAST:event_jTableUsuarioMouseClicked
+
+    private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
+        JFrameLogin login = new JFrameLogin();
+                    login.setVisible(true);
+                    dispose();
+    }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,17 +314,20 @@ public class VistaUsuario extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonCrearIndicencia;
     private javax.swing.JButton jButtonListarIncidenciaId;
     private javax.swing.JButton jButtonListarIndicencias;
     private javax.swing.JButton jButtonReapertura;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinnerListarIncidenciaId;
+    private javax.swing.JSpinner jSpinnerSolicitarReaperturaid;
     private javax.swing.JTable jTableUsuario;
-    private javax.swing.JTextField jTextIncidenciaId;
     // End of variables declaration//GEN-END:variables
 
     protected UsuarioDAOimpl udi = new UsuarioDAOimpl();

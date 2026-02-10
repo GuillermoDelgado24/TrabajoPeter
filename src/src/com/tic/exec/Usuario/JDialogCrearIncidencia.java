@@ -188,6 +188,7 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
         try {
             Incidencia in = new Incidencia(this.jComboBoxTipoIncidencia.getSelectedItem().toString(), this.jTextArea1.getText(), this.idUsuario);
             usuarioDAO.crearIncidencia(in, map.get(this.jComboBoxEspacio.getSelectedItem().toString()));
+            dispose();
         } catch (Exception ex) {
             System.out.println("Error al crear la incidencia" + ex.getMessage());
         }

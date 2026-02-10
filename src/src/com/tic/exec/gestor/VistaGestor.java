@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.GestorDAOimpl;
 import src.com.tic.dao.TecnicoDAOimpl;
+import src.com.tic.exec.JFrameLogin;
 import src.com.tic.pojo.Incidencia;
 import src.com.tic.pojo.Usuario;
 
@@ -33,6 +34,7 @@ public class VistaGestor extends javax.swing.JFrame {
         this.idUsuario = idUsuario;
         refrescarTablaIncidenciasEspera();
         refrescarTablaTecnicosDisp();
+        
     }
 
     /**
@@ -51,26 +53,41 @@ public class VistaGestor extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButtonAsignarTecnico = new javax.swing.JButton();
-        JTextIdIncidencia = new javax.swing.JTextField();
-        jTextIdTecnico = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButtonPonerEspera = new javax.swing.JButton();
-        JTextIdIncidencia1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButtonListarIndicendiaEspera = new javax.swing.JButton();
         jButtonListarTipoIncidencias = new javax.swing.JButton();
-        jButtonSalir = new javax.swing.JButton();
+        jSpinnerIdTecnicoAsignar = new javax.swing.JSpinner();
+        jSpinnerIdIncidenciaAsignar = new javax.swing.JSpinner();
+        jSpinner3 = new javax.swing.JSpinner();
+        jButtonListarTodas = new javax.swing.JButton();
+        jButtonSalir1 = new javax.swing.JButton();
+        jButtonCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("¡¡¡A atender se ha dicho!!!");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(520, 520, 520)
+                .addComponent(jLabel3))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel3))
+        );
 
         jTableGestor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,41 +142,20 @@ public class VistaGestor extends javax.swing.JFrame {
             }
         });
 
-        JTextIdIncidencia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        JTextIdIncidencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextIdIncidenciaActionPerformed(evt);
-            }
-        });
-
-        jTextIdTecnico.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextIdTecnico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextIdTecnicoActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("ID Incidencia");
 
         jLabel2.setText("ID Tecnico");
 
-        jButtonPonerEspera.setText("Dar de alta");
+        jButtonPonerEspera.setText("Poner en Espera");
         jButtonPonerEspera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPonerEsperaActionPerformed(evt);
             }
         });
 
-        JTextIdIncidencia1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        JTextIdIncidencia1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextIdIncidencia1ActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("ID Indicencia");
 
-        jButtonListarIndicendiaEspera.setText("Listar Incidencia en Espera / No asignadas");
+        jButtonListarIndicendiaEspera.setText("Listar Incidencia en Espera");
         jButtonListarIndicendiaEspera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonListarIndicendiaEsperaActionPerformed(evt);
@@ -174,10 +170,19 @@ public class VistaGestor extends javax.swing.JFrame {
             }
         });
 
-        jButtonSalir.setText("Salir");
-        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+        jButtonListarTodas.setText("Listar todas");
+
+        jButtonSalir1.setText("Salir");
+        jButtonSalir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalirActionPerformed(evt);
+                jButtonSalir1ActionPerformed(evt);
+            }
+        });
+
+        jButtonCerrarSesion.setText("Cerrar Sesion");
+        jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarSesionActionPerformed(evt);
             }
         });
 
@@ -187,72 +192,77 @@ public class VistaGestor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(JTextIdIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextIdTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(JTextIdIncidencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel4)))
-                .addContainerGap(1100, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jButtonAsignarTecnico)
-                        .addGap(45, 45, 45)
-                        .addComponent(jButtonPonerEspera)
-                        .addGap(66, 66, 66)
-                        .addComponent(jButtonListarIndicendiaEspera)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonListarTipoIncidencias))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(13, 13, 13)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jSpinnerIdIncidenciaAsignar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jSpinnerIdTecnicoAsignar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(50, 50, 50)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(92, 92, 92)
+                                        .addComponent(jButtonListarIndicendiaEspera)
+                                        .addGap(37, 37, 37)
+                                        .addComponent(jButtonListarTodas))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(113, 113, 113)
+                                        .addComponent(jButtonAsignarTecnico)
+                                        .addGap(185, 185, 185)
+                                        .addComponent(jButtonPonerEspera)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButtonCerrarSesion)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonSalir1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addComponent(jButtonListarTipoIncidencias, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1)
+                                .addGap(12, 12, 12)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JTextIdIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextIdTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(JTextIdIncidencia1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAsignarTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPonerEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonListarIndicendiaEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonListarTipoIncidencias, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13))
+                    .addComponent(jLabel1)
+                    .addComponent(jSpinnerIdIncidenciaAsignar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jSpinnerIdTecnicoAsignar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonListarIndicendiaEspera)
+                    .addComponent(jButtonListarTodas)
+                    .addComponent(jButtonListarTipoIncidencias))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonAsignarTecnico)
+                        .addComponent(jButtonPonerEspera))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonSalir1)
+                        .addComponent(jButtonCerrarSesion)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,7 +270,7 @@ public class VistaGestor extends javax.swing.JFrame {
 
     private void jButtonPonerEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPonerEsperaActionPerformed
         try {
-            gestorDAO.ponerEnEspera(this.idIncidencia);
+            gestorDAO.ponerEnEspera((int)this.jSpinner3.getValue());
         } catch (Exception ex) {
             System.out.println("Error al poner en espera: " + ex.getMessage());
         }
@@ -277,13 +287,9 @@ public class VistaGestor extends javax.swing.JFrame {
         dTipoIncidenciaTecnico.setVisible(true);
     }//GEN-LAST:event_jButtonListarTipoIncidenciasActionPerformed
 
-    private void jTextIdTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIdTecnicoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextIdTecnicoActionPerformed
-
     private void jButtonAsignarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarTecnicoActionPerformed
         try {
-            gestorDAO.asignarTecnico(this.idTecnico, this.idIncidencia);
+            gestorDAO.asignarTecnico((int)this.jSpinnerIdTecnicoAsignar.getValue(), (int)this.jSpinnerIdIncidenciaAsignar.getValue());
         } catch (Exception ex) {
             System.out.println("Error al asignar técnico:" + ex.getMessage());
         }
@@ -294,26 +300,25 @@ public class VistaGestor extends javax.swing.JFrame {
     private void jTableGestorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGestorMouseClicked
         int fila = this.jTableGestor.rowAtPoint(evt.getPoint());
         this.idIncidencia = (int) this.jTableGestor.getValueAt(fila, 0);
-        this.JTextIdIncidencia.setText(Integer.toString((int) this.jTableGestor.getValueAt(fila, 0)));
+        this.jSpinnerIdIncidenciaAsignar.setValue(this.jTableGestor.getValueAt(fila, 0));
+        this.jSpinner3.setValue(this.jTableGestor.getValueAt(fila,0));
     }//GEN-LAST:event_jTableGestorMouseClicked
-
-    private void JTextIdIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextIdIncidenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTextIdIncidenciaActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int fila = this.jTable1.rowAtPoint(evt.getPoint());
         this.idTecnico = (int) this.jTable1.getValueAt(fila, 0);
-        this.jTextIdTecnico.setText(Integer.toString((int) this.jTable1.getValueAt(fila, 0)));
+        this.jSpinnerIdTecnicoAsignar.setValue(this.jTable1.getValueAt(fila, 0));
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void JTextIdIncidencia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextIdIncidencia1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTextIdIncidencia1ActionPerformed
-
-    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+    private void jButtonSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalir1ActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButtonSalirActionPerformed
+    }//GEN-LAST:event_jButtonSalir1ActionPerformed
+
+    private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
+        JFrameLogin login = new JFrameLogin();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,13 +427,13 @@ public class VistaGestor extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField JTextIdIncidencia;
-    private javax.swing.JTextField JTextIdIncidencia1;
     private javax.swing.JButton jButtonAsignarTecnico;
+    private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonListarIndicendiaEspera;
     private javax.swing.JButton jButtonListarTipoIncidencias;
+    private javax.swing.JButton jButtonListarTodas;
     private javax.swing.JButton jButtonPonerEspera;
-    private javax.swing.JButton jButtonSalir;
+    private javax.swing.JButton jButtonSalir1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -436,8 +441,10 @@ public class VistaGestor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner3;
+    private javax.swing.JSpinner jSpinnerIdIncidenciaAsignar;
+    private javax.swing.JSpinner jSpinnerIdTecnicoAsignar;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableGestor;
-    private javax.swing.JTextField jTextIdTecnico;
     // End of variables declaration//GEN-END:variables
 }

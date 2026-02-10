@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.dao.UsuarioDAOimpl;
+import src.com.tic.exec.JFrameLogin;
 import src.com.tic.pojo.Incidencia;
 
 /**
@@ -66,20 +67,38 @@ public class VistaTecnico extends javax.swing.JFrame {
         jButtonVerIndicenciasConcretas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButtonVerIndicenciasTiempoConcreto = new javax.swing.JButton();
-        jDias = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButtonSalir = new javax.swing.JButton();
         jComboBoxTipoIncidencia = new javax.swing.JComboBox<>();
+        jButtonSalir1 = new javax.swing.JButton();
+        jButtonCerrarSesion = new javax.swing.JButton();
+        jSpinnerDias = new javax.swing.JSpinner();
+        jSpinnerAtenderId = new javax.swing.JSpinner();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Otro dia mas en el curro");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(277, 277, 277))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jTableTecnico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +144,7 @@ public class VistaTecnico extends javax.swing.JFrame {
             }
         });
 
-        jButtonVerIndicencias.setText("Ver indicencias");
+        jButtonVerIndicencias.setText("Listar indicencias asignadas");
         jButtonVerIndicencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVerIndicenciasActionPerformed(evt);
@@ -141,34 +160,36 @@ public class VistaTecnico extends javax.swing.JFrame {
 
         jLabel1.setText("Tipo Indicencia");
 
-        jButtonVerIndicenciasTiempoConcreto.setText("Listar incidencia cerradas de hace...");
+        jButtonVerIndicenciasTiempoConcreto.setText("Listar incidencia cerradas en un tiempo");
         jButtonVerIndicenciasTiempoConcreto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVerIndicenciasTiempoConcretoActionPerformed(evt);
             }
         });
 
-        jDias.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jDias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDiasActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Dias");
-
-        jButtonSalir.setText("Salir");
-        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalirActionPerformed(evt);
-            }
-        });
 
         jComboBoxTipoIncidencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoIncidenciaActionPerformed(evt);
             }
         });
+
+        jButtonSalir1.setText("Salir");
+        jButtonSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalir1ActionPerformed(evt);
+            }
+        });
+
+        jButtonCerrarSesion.setText("Cerrar Sesion");
+        jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("ID");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,71 +198,72 @@ public class VistaTecnico extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonAtenderIndicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonCerrarIndicencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonAgregarTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonVerIndicencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonVerIndicenciasConcretas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonVerIndicenciasTiempoConcreto))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDias, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButtonSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(379, 379, 379)
-                        .addComponent(jLabel2)))
-                .addGap(10, 10, 10))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonCerrarIndicencia)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSpinnerAtenderId, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAtenderIndicencia))
+                            .addComponent(jButtonAgregarTipo)
+                            .addComponent(jButtonVerIndicencias)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonSalir1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCerrarSesion)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonVerIndicenciasTiempoConcreto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSpinnerDias, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonVerIndicenciasConcretas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonAtenderIndicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCerrarIndicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAgregarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonVerIndicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButtonVerIndicenciasConcretas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonVerIndicenciasTiempoConcreto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDias, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                        .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonCerrarSesion)
+                            .addComponent(jButtonVerIndicenciasConcretas)
+                            .addComponent(jComboBoxTipoIncidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jButtonSalir1)
+                            .addComponent(jButtonVerIndicenciasTiempoConcreto)
+                            .addComponent(jSpinnerDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonAtenderIndicencia)
+                            .addComponent(jSpinnerAtenderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCerrarIndicencia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAgregarTipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonVerIndicencias)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDiasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDiasActionPerformed
 
     private void jButtonCerrarIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarIndicenciaActionPerformed
         jDialogCerrarIncidencia dCerrarIncidencia = new jDialogCerrarIncidencia(this, false);
@@ -255,7 +277,8 @@ public class VistaTecnico extends javax.swing.JFrame {
 
     private void jButtonAtenderIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtenderIndicenciaActionPerformed
         try {
-            tecnicoDAO.atenderIncidencia(idIncidencia);
+            tecnicoDAO.atenderIncidencia((int)this.jSpinnerAtenderId.getValue());
+            refrescarTabla(idTecnico);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -264,6 +287,7 @@ public class VistaTecnico extends javax.swing.JFrame {
     private void jTableTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTecnicoMouseClicked
         int fila = this.jTableTecnico.rowAtPoint(evt.getPoint());
         idIncidencia = (int) this.jTableTecnico.getValueAt(fila, 0);
+        this.jSpinnerAtenderId.setValue(idIncidencia);
     }//GEN-LAST:event_jTableTecnicoMouseClicked
 
     private void jButtonVerIndicenciasConcretasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasConcretasActionPerformed
@@ -272,7 +296,7 @@ public class VistaTecnico extends javax.swing.JFrame {
 
     private void jButtonVerIndicenciasTiempoConcretoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
         try {
-            ArrayList<Incidencia> al = tecnicoDAO.getIncidenciasBetweenFechas(Integer.parseInt(this.jDias.getText().toString()));
+            ArrayList<Incidencia> al = tecnicoDAO.getIncidenciasBetweenFechas((int)(this.jSpinnerDias.getValue()));
             refrescarTablaBeetwen(al);
         } catch (Exception ex) {
             System.out.println("Error al hacer consulta de fechas: " + ex.getMessage());
@@ -283,13 +307,19 @@ public class VistaTecnico extends javax.swing.JFrame {
         refrescarTabla(this.idTecnico);
     }//GEN-LAST:event_jButtonVerIndicenciasActionPerformed
 
-    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jButtonSalirActionPerformed
-
     private void jComboBoxTipoIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoIncidenciaActionPerformed
 
     }//GEN-LAST:event_jComboBoxTipoIncidenciaActionPerformed
+
+    private void jButtonSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalir1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButtonSalir1ActionPerformed
+
+    private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
+        JFrameLogin login = new JFrameLogin();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,17 +439,20 @@ public class VistaTecnico extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAgregarTipo;
     private javax.swing.JButton jButtonAtenderIndicencia;
     private javax.swing.JButton jButtonCerrarIndicencia;
-    private javax.swing.JButton jButtonSalir;
+    private javax.swing.JButton jButtonCerrarSesion;
+    private javax.swing.JButton jButtonSalir1;
     private javax.swing.JButton jButtonVerIndicencias;
     private javax.swing.JButton jButtonVerIndicenciasConcretas;
     private javax.swing.JButton jButtonVerIndicenciasTiempoConcreto;
     private javax.swing.JComboBox<String> jComboBoxTipoIncidencia;
-    private javax.swing.JTextField jDias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinnerAtenderId;
+    private javax.swing.JSpinner jSpinnerDias;
     private javax.swing.JTable jTableTecnico;
     // End of variables declaration//GEN-END:variables
 }
