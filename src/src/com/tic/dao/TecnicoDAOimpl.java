@@ -178,6 +178,44 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
         }
         return al;
     }
+    
+    @Override
+    public ArrayList<Incidencia> getIncidencias() throws Exception {
+        ArrayList<Incidencia> al = new ArrayList<>();
+        int idIncidencia;
+        String estado;
+        String resultado_cierre;
+        Date fechaCierre;
+        Date fechaEntrada;
+        String descripcionIncidencia;
+        String descripcionSolucion;
+        int idUsuario;
+        int idTecnico;
+        String tipoIncidencia;
+
+        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias;";
+        try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(SQL)) {
+            try (ResultSet resul = pstm.executeQuery();) {
+                while (resul.next()) {
+                    idIncidencia = resul.getInt("ID_Incidencia");
+                    estado = resul.getString("estado");
+                    resultado_cierre = resul.getString("resultado_cierre");
+                    fechaCierre = resul.getDate("f_cierre");
+                    fechaEntrada = resul.getDate("f_entrada");
+                    tipoIncidencia = resul.getString("tipo_incidencia");
+                    descripcionIncidencia = resul.getString("descripcion_incidencia");
+                    descripcionSolucion = resul.getString("descripcion_solucion");
+                    idUsuario = resul.getInt("ID_Usuario");
+                    idTecnico = resul.getInt("ID_Tecnico");
+
+                    al.add(new Incidencia(idIncidencia, estado, resultado_cierre, fechaCierre, fechaEntrada, tipoIncidencia, descripcionIncidencia, descripcionSolucion, idUsuario, idTecnico));
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return al;
+    }
 
     @Override
     public ArrayList<Incidencia> getIncidenciasBetweenFechas(int Dias) throws Exception {
