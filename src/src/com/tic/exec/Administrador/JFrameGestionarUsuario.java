@@ -32,7 +32,7 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableUsuario = new javax.swing.JTable();
-        jButtonListarCompleto = new javax.swing.JButton();
+        jButtonListarVolver = new javax.swing.JButton();
         jButtonListarTipo = new javax.swing.JButton();
         jComboBoxTipo = new javax.swing.JComboBox<>();
         jSpinnerID = new javax.swing.JSpinner();
@@ -49,6 +49,7 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButtonActualizar = new javax.swing.JButton();
         jButtonRegistrar = new javax.swing.JButton();
+        jButtonListarCompleto1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,9 +85,9 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 510, 300));
 
-        jButtonListarCompleto.setText("Listado competo");
-        jButtonListarCompleto.addActionListener(this::jButtonListarCompletoActionPerformed);
-        getContentPane().add(jButtonListarCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 150, 40));
+        jButtonListarVolver.setText("Volver");
+        jButtonListarVolver.addActionListener(this::jButtonListarVolverActionPerformed);
+        getContentPane().add(jButtonListarVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 150, 40));
 
         jButtonListarTipo.setText("Listado por tipo:");
         getContentPane().add(jButtonListarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 140, 40));
@@ -189,12 +190,16 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 370, 310));
 
+        jButtonListarCompleto1.setText("Listado competo");
+        jButtonListarCompleto1.addActionListener(this::jButtonListarCompleto1ActionPerformed);
+        getContentPane().add(jButtonListarCompleto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 150, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonListarCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarCompletoActionPerformed
+    private void jButtonListarVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarVolverActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonListarCompletoActionPerformed
+    }//GEN-LAST:event_jButtonListarVolverActionPerformed
 
     private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
         // TODO add your handling code here:
@@ -203,6 +208,10 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
     private void jComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoActionPerformed
+
+    private void jButtonListarCompleto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarCompleto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonListarCompleto1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,8 +241,9 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonEliminar;
-    private javax.swing.JButton jButtonListarCompleto;
+    private javax.swing.JButton jButtonListarCompleto1;
     private javax.swing.JButton jButtonListarTipo;
+    private javax.swing.JButton jButtonListarVolver;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabel1;

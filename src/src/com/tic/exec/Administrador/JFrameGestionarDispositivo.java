@@ -51,6 +51,7 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
         jButtonRegistrarNuevo = new javax.swing.JButton();
         jSpinnerIDEspacio = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
+        jButtonListarVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -194,6 +195,10 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
         jLabel7.setText("ID Espacio:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, -1));
 
+        jButtonListarVolver.setText("Volver");
+        jButtonListarVolver.addActionListener(this::jButtonListarVolverActionPerformed);
+        getContentPane().add(jButtonListarVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 150, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -216,6 +221,10 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
     private void jButtonEliminarDispositivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarDispositivoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEliminarDispositivoActionPerformed
+
+    private void jButtonListarVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarVolverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonListarVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,6 +256,7 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEliminarDispositivo;
     private javax.swing.JButton jButtonListadoCompleto;
     private javax.swing.JButton jButtonListarTipo;
+    private javax.swing.JButton jButtonListarVolver;
     private javax.swing.JButton jButtonRegistrarNuevo;
     private javax.swing.JComboBox<String> jComboBoxListadoTipo;
     private javax.swing.JLabel jLabel1;

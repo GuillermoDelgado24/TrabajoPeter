@@ -41,6 +41,7 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButtonActualizarEspacio = new javax.swing.JButton();
         jButtonRegistrarNuevo = new javax.swing.JButton();
+        jButtonListarVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,6 +111,10 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 380, 250));
 
+        jButtonListarVolver.setText("Volver");
+        jButtonListarVolver.addActionListener(this::jButtonListarVolverActionPerformed);
+        getContentPane().add(jButtonListarVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 150, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -124,6 +129,10 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
     private void jButtonEliminarEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarEspacioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEliminarEspacioActionPerformed
+
+    private void jButtonListarVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarVolverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonListarVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +163,7 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonActualizarEspacio;
     private javax.swing.JButton jButtonEliminarEspacio;
     private javax.swing.JButton jButtonListadoCompleto;
+    private javax.swing.JButton jButtonListarVolver;
     private javax.swing.JButton jButtonRegistrarNuevo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
