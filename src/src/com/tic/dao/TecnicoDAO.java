@@ -34,5 +34,7 @@ public interface TecnicoDAO {
 
     //Ver incidencias cerradas en un periodo de tiempo 
     public ArrayList<Incidencia> getIncidenciasBetweenFechas(int Dias) throws Exception;
+    
+    public ArrayList<Incidencia> getIncidencias() throws Exception; 
 
 }

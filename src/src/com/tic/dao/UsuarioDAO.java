@@ -5,6 +5,7 @@
 package src.com.tic.dao;
 
 import java.util.ArrayList;
+import src.com.tic.pojo.Dispositivo;
 import src.com.tic.pojo.Incidencia;
 
 /**
@@ -20,5 +21,7 @@ public interface UsuarioDAO {
     public void crearIncidencia(Incidencia incidencia, int idEspacio) throws Exception;
 
     public boolean solicitarReapertura(int idIncidencia) throws Exception;
+    
+    public ArrayList<Dispositivo> getDispositivos() throws Exception;
 
 }

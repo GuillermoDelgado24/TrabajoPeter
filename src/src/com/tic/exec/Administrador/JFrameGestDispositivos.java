@@ -4,6 +4,12 @@
  */
 package src.com.tic.exec.Administrador;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import src.com.tic.dao.UsuarioDAOimpl;
+import src.com.tic.pojo.Dispositivo;
+import src.com.tic.pojo.Incidencia;
+
 /**
  *
  * @author alumno
@@ -11,12 +17,13 @@ package src.com.tic.exec.Administrador;
 public class JFrameGestDispositivos extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameGestDispositivos.class.getName());
-
+    UsuarioDAOimpl usu = new UsuarioDAOimpl();
     /**
      * Creates new form JFrameGestDispositivos
      */
     public JFrameGestDispositivos(java.awt.Frame parent, boolean modal) {
         initComponents();
+        refrescarTabla();
     }
 
     /**
@@ -89,6 +96,11 @@ public class JFrameGestDispositivos extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableDispositivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableDispositivosMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(jTableDispositivos);
@@ -240,6 +252,18 @@ public class JFrameGestDispositivos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonListarActionPerformed
 
+    private void jTableDispositivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDispositivosMouseClicked
+        int fila = this.jTableDispositivos.rowAtPoint(evt.getPoint());
+        this.jSpinnerIdDisp.setValue((int) this.jTableDispositivos.getValueAt(fila, 0));
+        this.jSpinner1.setValue((int) this.jTableDispositivos.getValueAt(fila, 1));
+        this.jTextFieldTipo.setText((String) this.jTableDispositivos.getValueAt(fila, 2));
+        this.jTextFieldDesc.setText((String) this.jTableDispositivos.getValueAt(fila, 3));
+        this.jTextFieldMarca.setText((String) this.jTableDispositivos.getValueAt(fila, 4));
+        this.jTextFieldModelo.setText((String) this.jTableDispositivos.getValueAt(fila, 5));
+        
+        
+    }//GEN-LAST:event_jTableDispositivosMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -267,7 +291,28 @@ public class JFrameGestDispositivos extends javax.swing.JFrame {
     
     
     public void refrescarTabla (){
-        
+        DefaultTableModel m = (DefaultTableModel) this.jTableDispositivos.getModel();
+        m.setNumRows(0);
+
+        Dispositivo i = null;
+        try {
+            ArrayList<Dispositivo> ai = (ArrayList<Dispositivo>) usu.getDispositivos();
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                Object[] o = {
+                    i.getIdDispositivo(),
+                    i.getIdEspacio(),
+                    i.getTipo(),
+                    i.getDescripcion(),
+                    i.getMarca(),
+                    i.getModelo()
+                };
+                m.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+            e.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
