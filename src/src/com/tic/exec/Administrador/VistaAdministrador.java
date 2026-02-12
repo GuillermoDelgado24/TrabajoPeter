@@ -37,7 +37,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonGestionarDispositivos = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -82,10 +82,10 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 60));
 
-        jButton1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jButton1.setText("GESTIONAR DISPOSITIVOS");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 610, -1, -1));
+        jButtonGestionarDispositivos.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jButtonGestionarDispositivos.setText("GESTIONAR DISPOSITIVOS");
+        jButtonGestionarDispositivos.addActionListener(this::jButtonGestionarDispositivosActionPerformed);
+        getContentPane().add(jButtonGestionarDispositivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 610, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButton3.setText("ASIGNAR TECNICO");
@@ -239,9 +239,10 @@ public class VistaAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonGestionarDispositivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestionarDispositivosActionPerformed
+        JFrameGestDispositivos gestDispositivos = new JFrameGestDispositivos(this ,true);
+        gestDispositivos.setVisible(true);
+    }//GEN-LAST:event_jButtonGestionarDispositivosActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -300,7 +301,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -311,6 +311,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButtonGestionarDispositivos;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;

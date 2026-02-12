@@ -32,6 +32,10 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                                      <Component id="jButtonAsignarTecnico" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                       <Component id="jLabel1" min="-2" pref="74" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -40,22 +44,11 @@
                                       <Component id="jSpinnerIdTecnicoAsignar" min="-2" pref="80" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" pref="89" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jSpinner3" min="-2" pref="80" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="jButtonListarIndicendiaEspera" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
                                       <Component id="jButtonListarTodas" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                                      <Component id="jButtonAsignarTecnico" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
-                                      <Component id="jButtonPonerEspera" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="308" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="32767" attributes="0"/>
@@ -96,18 +89,12 @@
                   <Component id="jSpinnerIdIncidenciaAsignar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jSpinnerIdTecnicoAsignar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSpinner3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonListarIndicendiaEspera" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonListarTodas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonListarTipoIncidencias" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonAsignarTecnico" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonPonerEspera" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jButtonAsignarTecnico" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jButtonSalir1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonCerrarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -129,17 +116,19 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="520" pref="520" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="421" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -326,27 +315,6 @@
         <Property name="text" type="java.lang.String" value="ID Tecnico"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonPonerEspera">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Poner en Espera"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPonerEsperaActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ID Indicencia"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonListarIndicendiaEspera">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Listar Incidencia en Espera"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListarIndicendiaEsperaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="jButtonListarTipoIncidencias">
       <Properties>
         <Property name="text" type="java.lang.String" value="Listar por tipo de Incidencia y por ID Tecnico"/>
@@ -359,8 +327,6 @@
     <Component class="javax.swing.JSpinner" name="jSpinnerIdTecnicoAsignar">
     </Component>
     <Component class="javax.swing.JSpinner" name="jSpinnerIdIncidenciaAsignar">
-    </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner3">
     </Component>
     <Component class="javax.swing.JButton" name="jButtonListarTodas">
       <Properties>
