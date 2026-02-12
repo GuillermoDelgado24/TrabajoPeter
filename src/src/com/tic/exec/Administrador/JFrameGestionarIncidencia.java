@@ -115,7 +115,7 @@ public class JFrameGestionarIncidencia extends javax.swing.JFrame {
 
         jButtonEliminar.setBackground(new java.awt.Color(204, 0, 0));
         jButtonEliminar.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jButtonEliminar.setText("Eliminar Usuario");
+        jButtonEliminar.setText("Eliminar");
         jPanel2.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 160, 50));
         jPanel2.add(jTextFieldFEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 248, 150, 40));
         jPanel2.add(jTextFieldFCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 178, 150, 40));
@@ -141,7 +141,9 @@ public class JFrameGestionarIncidencia extends javax.swing.JFrame {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 8, -1, -1));
 
         jButtonActualizar.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jButtonActualizar.setText("Actualizar Usuario");
+        jButtonActualizar.setText("Actualizar ");
+        jButtonActualizar.setActionCommand("Actualizar ");
+        jButtonActualizar.addActionListener(this::jButtonActualizarActionPerformed);
         jPanel2.add(jButtonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 160, 50));
 
         jButtonRegistrar.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
@@ -197,6 +199,10 @@ public class JFrameGestionarIncidencia extends javax.swing.JFrame {
     private void jButtonListarCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarCompletoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonListarCompletoActionPerformed
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     /**
      * @param args the command line arguments
