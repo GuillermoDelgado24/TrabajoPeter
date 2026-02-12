@@ -20,7 +20,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
      */
     public VistaAdministrador(int idUsuario) {
         initComponents();
-        this.setSize(1200, 800);
         this.setLocationRelativeTo(null);
         this.idUsuario = idUsuario;
     }
@@ -57,7 +56,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabel3.setText("Administrador");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 60));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 60));
 
         jButton1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButton1.setText("GESTIONAR DISPOSITIVOS");
