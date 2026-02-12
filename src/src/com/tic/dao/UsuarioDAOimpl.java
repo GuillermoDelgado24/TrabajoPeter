@@ -143,7 +143,7 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
     public boolean solicitarReapertura(int idIncidencia) throws SQLException {
         int r = 0;
         String SQL = "UPDATE Incidencias "
-                + "SET estado = NULL, "
+                + "SET estado = 'alta', "
                 + "resultado_cierre = NULL,"
                 + "ID_Tecnico = NULL "
                 + "WHERE ID_Incidencia = ?;";
