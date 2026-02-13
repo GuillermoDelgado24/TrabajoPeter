@@ -122,6 +122,7 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
 
         jButtonActualizar.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButtonActualizar.setText("Actualizar Usuario");
+        jButtonActualizar.addActionListener(this::jButtonActualizarActionPerformed);
 
         jButtonRegistrar.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButtonRegistrar.setText("Registrar Nuevo");
@@ -212,6 +213,11 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
     private void jButtonListarCompleto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarCompleto1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonListarCompleto1ActionPerformed
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     /**
      * @param args the command line arguments
