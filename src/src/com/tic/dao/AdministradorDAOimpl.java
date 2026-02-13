@@ -33,23 +33,71 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
     }
     Connection con = null;
 
-    public static void crearUsuario(Usuario usuario) throws Exception {
+    public static int crearUsuario(Usuario usuario) throws Exception {
+        int r = -1;
         String SQL = "INSERT INTO Usuarios (nombre_usuario, nombre_apellidos, correo_electronico, telefono, contrasena) VALUES (?,?,?,?,SHA2(?,256));";
-        try {
-            // Escribe el archivo con el nombre del identificador + .credencial
-            try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {
-                pstm.setString(1, usuario.getNombreDeUsuario());
-                pstm.setString(2, usuario.getNombreYApellidos());
-                pstm.setString(3, usuario.getCorreo());
-                pstm.setString(4, usuario.getNumeroTelefono());
-                pstm.setString(5, usuario.getContrasena());
-                int r = pstm.executeUpdate();
-                System.out.println("Entradas insertadas: " + r);
+        // Escribe el archivo con el nombre del identificador + .credencial
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
+            pstm.setString(1, usuario.getNombreDeUsuario());
+            pstm.setString(2, usuario.getNombreYApellidos());
+            pstm.setString(3, usuario.getCorreo());
+            pstm.setString(4, usuario.getNumeroTelefono());
+            pstm.setString(5, usuario.getContrasena());
+            pstm.executeUpdate();
+            try (ResultSet rs = pstm.getGeneratedKeys()) {
+                if (rs.next()) {
+                    r = rs.getInt(1);
+                }
             }
 
         } catch (Exception e) {
             throw e;
         }
+        return r;
+    }
+
+    public void hacerTecnico(int idUsuario) throws Exception {
+        String SQL = "INSERT INTO Tecnicos (ID_Usuario) VALUES (?);";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {
+            pstm.setInt(1, idUsuario);
+            int r = pstm.executeUpdate();
+            if (r > 0) {
+                System.out.println("Modificaciones: " + r);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    public void hacerGestor(int idUsuario) throws Exception {
+        String SQL = "INSERT INTO Gestores (ID_Usuario, es_administrador) VALUES (?, ?);";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {
+            pstm.setInt(1, idUsuario);
+            pstm.setBoolean(2, false);
+            int r = pstm.executeUpdate();
+            if (r > 0) {
+                System.out.println("Modificaciones: " + r);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    public void hacerAdmin(int idUsuario) throws Exception {
+        String SQL = "INSERT INTO Gestores (ID_Usuario, es_administrador) VALUES (?, ?);";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL);) {
+            pstm.setInt(1, idUsuario);
+            pstm.setBoolean(2, true);
+            int r = pstm.executeUpdate();
+            if (r > 0) {
+                System.out.println("Modificaciones: " + r);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 
     @Override
@@ -212,7 +260,7 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
 
     @Override
     public void insertUsuarios(Usuario usu) throws Exception {
-        
+
     }
 
     @Override
@@ -270,11 +318,6 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
-        con.close();
-    }
-
-    @Override
     public ArrayList<Incidencia> getAllIncidencias() throws Exception {
         ArrayList<Incidencia> incidencias = new ArrayList();
         String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE estado <> 'cerrada';";
@@ -290,4 +333,12 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
         return incidencias;
     }
 
+    public void volverTecnico(int idUsuario) {
+
+    }
+
+    @Override
+    public void close() throws Exception {
+        con.close();
+    }
 }
