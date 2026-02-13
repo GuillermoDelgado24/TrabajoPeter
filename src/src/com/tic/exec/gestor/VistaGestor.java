@@ -36,6 +36,14 @@ public class VistaGestor extends javax.swing.JFrame {
         refrescarTablaTecnicosDisp();
         
     }
+    
+    public VistaGestor(){
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.jLabel3.setText("¡¡¡Hola, Administrador. A atender se ha dicho!!!");
+        refrescarTablaIncidenciasEspera();
+        refrescarTablaTecnicosDisp();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

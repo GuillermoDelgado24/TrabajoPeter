@@ -14,13 +14,24 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import src.com.tic.utils.Configuration;
 import java.sql.*;
+import java.util.ArrayList;
+import src.com.tic.pojo.Incidencia;
 
 /**
  *
  * @author alumno
  */
-public class LoginDAOimpl {
-
+public class LoginDAOimpl implements AutoCloseable {
+    static {
+        try {
+            Class.forName(Configuration.DRIVER);
+        } catch (ClassNotFoundException cn) {
+            cn.printStackTrace();
+            System.exit(1);
+        }
+    }
+    
+    Connection con = null;
     private static final String ENCODING_TYPE = "UTF-8";
 
     public int compararContraseña(String hash, String nombreUsuario) throws SQLException, NoSuchAlgorithmException, IOException {
@@ -114,8 +125,9 @@ public class LoginDAOimpl {
         return false;
     }
 
-    private static void mostrarResumenHexadecimal(byte[] resumen) {
-        String resumenHexadecimal = String.format("%064x", new BigInteger(1, resumen));
-        System.out.println(resumenHexadecimal);
+    @Override
+    public void close() throws Exception {
+        con.close();
     }
+
 }

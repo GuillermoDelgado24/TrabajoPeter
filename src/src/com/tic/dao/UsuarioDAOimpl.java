@@ -90,23 +90,7 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
         return dispositivos;
     }
         
-        public ArrayList<Dispositivo> getDispositivos() throws Exception {
-        ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
-       
-        String sql = "SELECT ID_Dispositivo, ID_Espacio, tipo, descripcion, marca, modelo FROM Dispositivos WHERE ID_Espacio = ?";
-
-        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
-            try (ResultSet resul = pstm.executeQuery();) {
-                while (resul.next()) {
-                    dispositivos.add(new Dispositivo(resul.getInt("ID_Dispositivo"), resul.getInt("ID_Espacio"), resul.getString("descripcion"), resul.getString("tipo"), resul.getString("marca"), resul.getString("modelo")));
-
-                }
-            }
-        } catch (Exception e) {
-            throw e;
-        }
-        return dispositivos;
-    }
+        
 
 //    public Incidencia insertarEnIncidencia(LinkedList<Object> variable) {
 //        LinkedList<Object> resultado = new LinkedList<Object>();
