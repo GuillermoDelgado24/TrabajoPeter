@@ -22,6 +22,16 @@ import src.com.tic.utils.Configuration;
  */
 public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
 
+    static {
+        try {
+            Class.forName(Configuration.DRIVER);
+        } catch (ClassNotFoundException cn) {
+            cn.printStackTrace();
+            System.exit(1);
+        }
+    }
+    Connection con = null;
+
     public static void crearUsuario(Usuario usuario) throws Exception {
         String SQL = "INSERT INTO Usuarios (nombre_usuario, nombre_apellidos, correo_electronico, telefono, contrasena) VALUES (?,?,?,?,SHA2(?,256));";
         try {
@@ -146,42 +156,121 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
     public void insertEspacios(Espacio esp) throws Exception {
         String sql = "insert into Espacios(Descripcion) values (?);";
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
-        pstm.setString(1, esp.getDescripcion());
-        pstm.executeUpdate();
-        }catch(Exception e){
+            pstm.setString(1, esp.getDescripcion());
+            pstm.executeUpdate();
+        } catch (Exception e) {
             throw e;
         }
     }
 
     @Override
     public ArrayList<Usuario> getUsuarios() throws Exception {
-        return null;
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        String sql = "select ID_Usuario, nombre_usuario, nombre_apellidos, correo_electronico, telefono from Usuarios;";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
+            try (ResultSet resul = pstm.executeQuery()) {
+                while (resul.next()) {
+                    usuarios.add(new Usuario(resul.getInt("ID_Usuario"), resul.getString("nombre_usuario"), resul.getString("nombre_apellidos"), resul.getString("correo_electronico"), resul.getString("telefono"), ""));
+                }
+
+            }
+        } catch (Exception e) {
+            throw e;
+
+        }
+        return usuarios;
+
     }
 
     @Override
     public void updateUsuario(Usuario usu) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "update Usuarios set nombre_usuario = ?, nombre_apellidos = ?, correo_electronico = ?,telefono = ? where ID_Usuario = ?";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
+            pstm.setString(1, usu.getNombreDeUsuario());
+            pstm.setString(2, usu.getNombreApellidos());
+            pstm.setString(3, usu.getCorreo());
+            pstm.setString(4, usu.getNumeroTelefono());
+            pstm.setInt(5, usu.getIdUsuario());
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override
     public void deleteUsuario(int IdDUsuario) throws Exception {
-    }
-
-    @Override
-    public ArrayList<Usuario> getTipoUsuarios() throws Exception {
-        return null;
-    }
-
-    @Override
-    public void close() throws Exception {
+        String sql = "delete from Usuarios where ID_Usuario = ?";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
+            pstm.setInt(1, IdDUsuario);
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        }
 
     }
 
     @Override
     public void insertUsuarios(Usuario usu) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
-    
+    @Override
+    public ArrayList<Usuario> getTipoUsuarioBasico() throws Exception {
+        ArrayList<Usuario> usuarios = new ArrayList();
+        String sql = "select u.ID_Usuario, u.nombre_usuario,u.nombre_apellidos,u.correo_electronico,u.telefono from Usuarios as u left join Tecnicos as t on u.ID_Usuario = t.ID_Usuario left join Gestores as g on u.ID_Usuario = g.ID_Usuario where t.ID_Tecnico is null and ID_Gestor is null;";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
+            try (ResultSet resul = pstm.executeQuery()) {
+                while (resul.next()) {
+                    usuarios.add(new Usuario(resul.getInt("ID_Usuario"), resul.getString("nombre_usuario"), resul.getString("nombre_apellidos"), resul.getString("correo_electronico"), resul.getString("telefono"), ""));
+                }
+
+            }
+        } catch (Exception e) {
+            throw e;
+
+        }
+        return usuarios;
+    }
+
+    @Override
+    public ArrayList<Usuario> getTipoUsuarioTecnico() throws Exception {
+        ArrayList<Usuario> usuarios = new ArrayList();
+        String sql = "select u.ID_Usuario, u.nombre_usuario,u.nombre_apellidos,u.correo_electronico,u.telefono from Usuarios as u right join Tecnicos as t on u.ID_Usuario = t.ID_Usuario;";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
+            try (ResultSet resul = pstm.executeQuery()) {
+                while (resul.next()) {
+                    usuarios.add(new Usuario(resul.getInt("ID_Usuario"), resul.getString("nombre_usuario"), resul.getString("nombre_apellidos"), resul.getString("correo_electronico"), resul.getString("telefono"), ""));
+                }
+
+            }
+        } catch (Exception e) {
+            throw e;
+
+        }
+        return usuarios;
+    }
+
+    @Override
+    public ArrayList<Usuario> getTipoUsuarioGestor() throws Exception {
+        ArrayList<Usuario> usuarios = new ArrayList();
+        String sql = "select u.ID_Usuario, u.nombre_usuario,u.nombre_apellidos,u.correo_electronico,u.telefono from Usuarios as u right join Gestores as t on u.ID_Usuario = t.ID_Usuario;";
+        try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
+            try (ResultSet resul = pstm.executeQuery()) {
+                while (resul.next()) {
+                    usuarios.add(new Usuario(resul.getInt("ID_Usuario"), resul.getString("nombre_usuario"), resul.getString("nombre_apellidos"), resul.getString("correo_electronico"), resul.getString("telefono"), ""));
+                }
+
+            }
+        } catch (Exception e) {
+            throw e;
+
+        }
+        return usuarios;
+    }
+
+    @Override
+    public void close() throws Exception {
+        con.close();
+    }
 
 }

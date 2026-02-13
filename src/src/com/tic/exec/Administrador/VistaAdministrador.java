@@ -22,7 +22,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
     public VistaAdministrador() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.idUsuario = idUsuario;
+
     }
 
     /**
@@ -47,7 +47,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(500, 400));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -57,36 +56,67 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabel3.setText("Administrador");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 60));
-
         jButtonGestionarDispositivos.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButtonGestionarDispositivos.setText("GESTIONAR DISPOSITIVOS");
         jButtonGestionarDispositivos.addActionListener(this::jButtonGestionarDispositivosActionPerformed);
-        getContentPane().add(jButtonGestionarDispositivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 270, -1));
 
         jButtonFuncGestor.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButtonFuncGestor.setText("FUNCIONAR COMO GESTOR");
         jButtonFuncGestor.setPreferredSize(new java.awt.Dimension(264, 28));
         jButtonFuncGestor.addActionListener(this::jButtonFuncGestorActionPerformed);
-        getContentPane().add(jButtonFuncGestor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 280, -1));
 
         jButtonUsu.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButtonUsu.setText("GESTIONAR USUARIOS");
         jButtonUsu.setPreferredSize(new java.awt.Dimension(264, 28));
         jButtonUsu.addActionListener(this::jButtonUsuActionPerformed);
-        getContentPane().add(jButtonUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         jButtonGestEsp.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButtonGestEsp.setText("GESTIONAR ESPACIO");
         jButtonGestEsp.setPreferredSize(new java.awt.Dimension(264, 28));
         jButtonGestEsp.addActionListener(this::jButtonGestEspActionPerformed);
-        getContentPane().add(jButtonGestEsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         jButtonGestInc.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButtonGestInc.setText("FUNCIONAR COMO TECNICO");
         jButtonGestInc.setPreferredSize(new java.awt.Dimension(264, 28));
         jButtonGestInc.addActionListener(this::jButtonGestIncActionPerformed);
-        getContentPane().add(jButtonGestInc, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 290, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jButtonGestInc, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jButtonGestEsp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jButtonUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jButtonGestionarDispositivos, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jButtonFuncGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jButtonGestInc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jButtonGestEsp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jButtonUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jButtonGestionarDispositivos)
+                .addGap(32, 32, 32)
+                .addComponent(jButtonFuncGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

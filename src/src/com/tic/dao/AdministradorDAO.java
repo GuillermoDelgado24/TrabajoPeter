@@ -26,7 +26,10 @@ public interface AdministradorDAO {
     public ArrayList<Usuario> getUsuarios() throws Exception;
     public void updateUsuario(Usuario usu) throws Exception;
     public void deleteUsuario(int IdDUsuario) throws Exception;
-    public ArrayList<Usuario> getTipoUsuarios() throws Exception;
+    public ArrayList<Usuario> getTipoUsuarioBasico() throws Exception;
+    public ArrayList<Usuario> getTipoUsuarioTecnico() throws Exception;
+    public ArrayList<Usuario> getTipoUsuarioGestor() throws Exception;
+    
     
     
     
