@@ -99,6 +99,14 @@ public class JFrameLogin extends javax.swing.JFrame {
         jMenuAyuda.addActionListener(this::jMenuAyudaActionPerformed);
 
         jMenuItemAyuda.setText("Abrir ayuda");
+        jMenuItemAyuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMousePressed(evt);
+            }
+        });
         jMenuItemAyuda.addActionListener(this::jMenuItemAyudaActionPerformed);
         jMenuAyuda.add(jMenuItemAyuda);
 
@@ -191,6 +199,14 @@ public class JFrameLogin extends javax.swing.JFrame {
     private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed
         ponLaAyuda();
     }//GEN-LAST:event_jMenuItemAyudaActionPerformed
+
+    private void jMenuItemAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMouseClicked
+        ponLaAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaMouseClicked
+
+    private void jMenuItemAyudaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMousePressed
+        ponLaAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaMousePressed
 
     /**
      * @param args the command line arguments
