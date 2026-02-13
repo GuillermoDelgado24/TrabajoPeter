@@ -1,16 +1,17 @@
 package src.com.tic.exec.Administrador;
 
+import src.com.tic.pojo.Usuario;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author tarde
  */
 public class JFrameRegister extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameRegister.class.getName());
 
     /**
@@ -37,7 +38,6 @@ public class JFrameRegister extends javax.swing.JFrame {
         jPasswordFieldContrasena = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBoxTipoCuenta = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPasswordFieldRepetirContrasena = new javax.swing.JPasswordField();
@@ -49,6 +49,9 @@ public class JFrameRegister extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldUsuario = new javax.swing.JTextField();
+        checkbox1 = new java.awt.Checkbox();
+        checkbox2 = new java.awt.Checkbox();
+        checkbox3 = new java.awt.Checkbox();
 
         jTextField2.setText("jTextField2");
 
@@ -58,23 +61,19 @@ public class JFrameRegister extends javax.swing.JFrame {
 
         jButtonRegister.setText("Crear cuenta");
         jButtonRegister.addActionListener(this::jButtonRegisterActionPerformed);
-        getContentPane().add(jButtonRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 450, -1, 30));
+        getContentPane().add(jButtonRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 140, 40));
 
         jTextFieldNombreApellidos.addActionListener(this::jTextFieldNombreApellidosActionPerformed);
-        getContentPane().add(jTextFieldNombreApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 183, 30));
+        getContentPane().add(jTextFieldNombreApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 183, 30));
 
         jPasswordFieldContrasena.addActionListener(this::jPasswordFieldContrasenaActionPerformed);
-        getContentPane().add(jPasswordFieldContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 183, 30));
+        getContentPane().add(jPasswordFieldContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 183, 30));
 
         jLabel1.setText("Contraseña:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, -1, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, 20));
 
         jLabel2.setText("Usuario:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, 20));
-
-        jComboBoxTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Técnico", "Administrador", "Gestor" }));
-        jComboBoxTipoCuenta.addActionListener(this::jComboBoxTipoCuentaActionPerformed);
-        getContentPane().add(jComboBoxTipoCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, 20));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -87,37 +86,50 @@ public class JFrameRegister extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 60));
 
         jPasswordFieldRepetirContrasena.addActionListener(this::jPasswordFieldRepetirContrasenaActionPerformed);
-        getContentPane().add(jPasswordFieldRepetirContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 183, 30));
+        getContentPane().add(jPasswordFieldRepetirContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 183, 30));
 
         jLabel4.setText("Confirmar contraseña:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, -1, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, -1, 20));
 
         jLabel5.setText("Tipo de cuenta:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, -1, 20));
 
         jTextFieldCorreo.addActionListener(this::jTextFieldCorreoActionPerformed);
-        getContentPane().add(jTextFieldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 183, 30));
+        getContentPane().add(jTextFieldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 183, 30));
 
         jLabel6.setText("Correo electrónico:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, -1, 20));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, 20));
 
         jTextFieldTelefono.addActionListener(this::jTextFieldTelefonoActionPerformed);
-        getContentPane().add(jTextFieldTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 183, 30));
+        getContentPane().add(jTextFieldTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 183, 30));
 
         jLabel7.setText("Número de telefono:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, -1, 20));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, -1, 20));
 
         jLabel8.setText("Nombre y apellidos:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, -1, 20));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, 20));
 
         jTextFieldUsuario.addActionListener(this::jTextFieldUsuarioActionPerformed);
-        getContentPane().add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 183, 30));
+        getContentPane().add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 183, 30));
+
+        checkbox1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        checkbox1.setLabel("Es Gestor");
+        getContentPane().add(checkbox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, -1, -1));
+
+        checkbox2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        checkbox2.setLabel("Es Técnico");
+        getContentPane().add(checkbox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
+
+        checkbox3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        checkbox3.setLabel("Es administrador");
+        getContentPane().add(checkbox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
-        // TODO add your handling code here:
+
+        //crearCuenta(usuario);
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
     private void jPasswordFieldContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldContrasenaActionPerformed
@@ -139,10 +151,6 @@ public class JFrameRegister extends javax.swing.JFrame {
     private void jTextFieldTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTelefonoActionPerformed
-
-    private void jComboBoxTipoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoCuentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxTipoCuentaActionPerformed
 
     private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
         // TODO add your handling code here:
@@ -174,8 +182,10 @@ public class JFrameRegister extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Checkbox checkbox1;
+    private java.awt.Checkbox checkbox2;
+    private java.awt.Checkbox checkbox3;
     private javax.swing.JButton jButtonRegister;
-    private javax.swing.JComboBox<String> jComboBoxTipoCuenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
