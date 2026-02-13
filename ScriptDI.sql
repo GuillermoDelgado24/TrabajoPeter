@@ -56,12 +56,12 @@ descripcion_incidencia VARCHAR(500) NOT NULL,
 descripcion_solucion VARCHAR(500) DEFAULT NULL,
 CONSTRAINT fk_incidencia_usuario
 FOREIGN KEY (ID_Usuario)
-REFERENCES Usuarios(ID_Usuario),
-ON delete set null on update cascade
+REFERENCES Usuarios(ID_Usuario)
+ON delete set null,
 CONSTRAINT fk_incidencia_tecnico
 FOREIGN KEY (ID_Tecnico)
-REFERENCES Tecnicos(ID_Tecnico),
-on delete set null on update cascade
+REFERENCES Tecnicos(ID_Tecnico)
+on delete set null,
 CONSTRAINT fk_tipo_incidencia
 FOREIGN KEY (tipo_incidencia)
 REFERENCES Tipos_Incidencias(tipo_incidencia)

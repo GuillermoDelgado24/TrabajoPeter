@@ -308,7 +308,7 @@ public class VistaTecnico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVerIndicenciasActionPerformed
 
     private void jComboBoxTipoIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoIncidenciaActionPerformed
-
+        
     }//GEN-LAST:event_jComboBoxTipoIncidenciaActionPerformed
 
     private void jButtonSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalir1ActionPerformed

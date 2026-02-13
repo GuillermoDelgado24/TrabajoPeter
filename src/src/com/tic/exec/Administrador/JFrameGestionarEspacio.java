@@ -5,6 +5,7 @@
 package src.com.tic.exec.Administrador;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.AdministradorDAOimpl;
 import src.com.tic.pojo.Dispositivo;
@@ -15,9 +16,10 @@ import src.com.tic.pojo.Espacio;
  * @author yuta
  */
 public class JFrameGestionarEspacio extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameGestionarEspacio.class.getName());
     AdministradorDAOimpl adminDAO = new AdministradorDAOimpl();
+
     /**
      * Creates new form JFrameGestionarUsuario
      */
@@ -157,7 +159,10 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
 
     private void jButtonActualizarEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarEspacioActionPerformed
         try {
-            adminDAO.updateEspacio(new Espacio((int)this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText()));
+            if (this.jTextFieldDescripcion.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Rellena los campos vacios", "CAMPO VACIO", JOptionPane.ERROR_MESSAGE);
+            }
+            adminDAO.updateEspacio(new Espacio((int) this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText()));
             refrescarTabla();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -167,8 +172,12 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
 
     private void jButtonEliminarEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarEspacioActionPerformed
         try {
-            adminDAO.deleteEspacio((int) this.jSpinnerIDEspacio.getValue());
-            refrescarTabla();
+            if ((int) this.jSpinnerIDEspacio.getValue() == 0) {
+                JOptionPane.showMessageDialog(null, "Selecciona un id", "ID INVALIDO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                adminDAO.deleteEspacio((int) this.jSpinnerIDEspacio.getValue());
+                refrescarTabla();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -184,14 +193,18 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
     private void jTableEspacioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEspacioMouseClicked
         int fila = this.jTableEspacio.rowAtPoint(evt.getPoint());
         this.jSpinnerIDEspacio.setValue((int) this.jTableEspacio.getValueAt(fila, 0));
-        this.jTextFieldDescripcion.setText((String)this.jTableEspacio.getValueAt(fila, 1));
-        
+        this.jTextFieldDescripcion.setText((String) this.jTableEspacio.getValueAt(fila, 1));
+
     }//GEN-LAST:event_jTableEspacioMouseClicked
 
     private void jButtonRegistrarNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarNuevoActionPerformed
         try {
-            adminDAO.insertEspacios(new Espacio((int)this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText()));
-            refrescarTabla();
+            if (this.jTextFieldDescripcion.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Rellena los campos vacios", "CAMPO VACIO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                adminDAO.insertEspacios(new Espacio((int) this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText()));
+                refrescarTabla();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -221,7 +234,7 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(() -> new JFrameGestionarEspacio().setVisible(true));
     }
-    
+
     public void refrescarTabla() {
         DefaultTableModel m = (DefaultTableModel) this.jTableEspacio.getModel();
         m.setNumRows(0);
