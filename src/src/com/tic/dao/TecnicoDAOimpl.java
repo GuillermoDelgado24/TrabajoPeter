@@ -231,7 +231,7 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
         int idUsuario;
         int idTecnico;
 
-        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE TIMESTAMPDIFF(DAY,f_cierre,CURDATE()) <= ?";
+        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE TIMESTAMPDIFF(DAY,f_cierre,CURDATE()) <= ? AND estado = 'cerrada'";
         try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(SQL)) {
             pstm.setInt(1, Dias);
             try (ResultSet resul = pstm.executeQuery();) {

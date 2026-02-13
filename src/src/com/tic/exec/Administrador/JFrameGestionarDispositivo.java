@@ -5,6 +5,7 @@
 package src.com.tic.exec.Administrador;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.AdministradorDAOimpl;
 import src.com.tic.exec.JFrameLogin;
@@ -259,9 +260,14 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
 
     private void jButtonActualizarDispositivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarDispositivoActionPerformed
         try {
-            adminDAO.updateDispositivos(new Dispositivo((int) this.jSpinnerIDDispositivo.getValue(), (int) this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText(), this.jTextFieldTipo.getText(), this.jTextFieldMarca.getText(), this.jTextFieldModelo.getText()));
-            refrescarTabla();
-        } catch (Exception ex) {
+            if (this.jTextFieldMarca.getText().equals("") || this.jTextFieldDescripcion.getText().equals("")
+                    || this.jTextFieldModelo.getText().equals("") || this.jTextFieldTipo.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Rellena los campos vacios", "CAMPO VACIO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                adminDAO.updateDispositivos(new Dispositivo((int) this.jSpinnerIDDispositivo.getValue(), (int) this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText(), this.jTextFieldTipo.getText(), this.jTextFieldMarca.getText(), this.jTextFieldModelo.getText()));
+                refrescarTabla();
+            }
+            }catch (Exception ex) {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jButtonActualizarDispositivoActionPerformed
@@ -293,8 +299,13 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
 
     private void jButtonRegistrarNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarNuevoActionPerformed
         try {
-            adminDAO.insertDispositivos(new Dispositivo((int) this.jSpinnerIDDispositivo.getValue(), (int) this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText(), this.jTextFieldTipo.getText(), this.jTextFieldMarca.getText(), this.jTextFieldModelo.getText()));
-            refrescarTabla();
+            if (this.jTextFieldMarca.getText().equals("") || this.jTextFieldDescripcion.getText().equals("")
+                    || this.jTextFieldModelo.getText().equals("") || this.jTextFieldTipo.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Rellena los campos vacios", "CAMPO VACIO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                adminDAO.insertDispositivos(new Dispositivo((int) this.jSpinnerIDDispositivo.getValue(), (int) this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText(), this.jTextFieldTipo.getText(), this.jTextFieldMarca.getText(), this.jTextFieldModelo.getText()));
+                refrescarTabla();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -4,6 +4,7 @@
  */
 package src.com.tic.exec.Tecnico;
 
+import javax.swing.JOptionPane;
 import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.exec.Usuario.VistaUsuario;
 
@@ -12,9 +13,10 @@ import src.com.tic.exec.Usuario.VistaUsuario;
  * @author alumno
  */
 public class jDialogAgregarTipoIncidencia extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(jDialogAgregarTipoIncidencia.class.getName());
     TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
+
     /**
      * Creates new form jDialogAgregarTipoIncidencia
      */
@@ -47,7 +49,7 @@ public class jDialogAgregarTipoIncidencia extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Agregar tipo Incidencia");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel1.setText("Agregar tipo incidencia");
 
@@ -96,8 +98,13 @@ public class jDialogAgregarTipoIncidencia extends javax.swing.JDialog {
 
     private void jButtonAgregarTipoIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarTipoIncidenciaActionPerformed
         try {
-            tecnicoDAO.agregarTipoIncidencia(this.jTextFieldAgregarTipo.getText());
+            if (this.jTextFieldAgregarTipo.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Rellena los campos vacios", "CAMPO VACIO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                tecnicoDAO.agregarTipoIncidencia(this.jTextFieldAgregarTipo.getText());
+            }
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Tipo de incidencia ya existente", "ERROR DUPLICADO", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jButtonAgregarTipoIncidenciaActionPerformed

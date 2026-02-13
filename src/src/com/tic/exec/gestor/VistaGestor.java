@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.GestorDAOimpl;
 import src.com.tic.dao.TecnicoDAOimpl;
@@ -284,7 +285,11 @@ public class VistaGestor extends javax.swing.JFrame {
 
     private void jButtonAsignarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarTecnicoActionPerformed
         try {
-            gestorDAO.asignarTecnico((int) this.jSpinnerIdTecnicoAsignar.getValue(), (int) this.jSpinnerIdIncidenciaAsignar.getValue());
+            if ((int) this.jSpinnerIdIncidenciaAsignar.getValue() == 0 || (int) this.jSpinnerIdTecnicoAsignar.getValue() == 0) {
+                JOptionPane.showMessageDialog(null, "ID Incidencia o ID Tecnico no valido", "ID INVALIDO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                gestorDAO.asignarTecnico((int) this.jSpinnerIdTecnicoAsignar.getValue(), (int) this.jSpinnerIdIncidenciaAsignar.getValue());
+            }
         } catch (Exception ex) {
             System.out.println("Error al asignar técnico:" + ex.getMessage());
         }

@@ -178,6 +178,9 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
     private void jButtonGestIncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestIncActionPerformed
 
+        VistaTecnicoAdmin vistaTecnico = new VistaTecnicoAdmin();
+        vistaTecnico.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonGestIncActionPerformed
 
     private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed

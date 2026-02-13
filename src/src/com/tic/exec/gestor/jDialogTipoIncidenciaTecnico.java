@@ -173,12 +173,11 @@ public class jDialogTipoIncidenciaTecnico extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-        if (!jTextFieldIDTecnico.getText().matches("[0-9]")) {
-            JOptionPane.showMessageDialog(null, "Debe introducir un ID de técnico y un Espacio.", "INTRODUZCA LOS PARÁMETROS", JOptionPane.ERROR_MESSAGE);
+        if (!jTextFieldIDTecnico.getText().matches("[1-9]")) {
+            JOptionPane.showMessageDialog(null, "Debe introducir un ID de técnico válido y un Espacio.", "INTRODUZCA LOS PARÁMETROS", JOptionPane.ERROR_MESSAGE);
 
         } else {
             refrescarTablaIdTecnicoyTipo(Integer.parseInt(jTextFieldIDTecnico.getText()), jComboBoxTipoIncidencia.getSelectedItem().toString());
-
         }
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 

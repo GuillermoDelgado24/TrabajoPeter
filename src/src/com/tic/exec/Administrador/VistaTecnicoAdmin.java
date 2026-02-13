@@ -8,6 +8,7 @@ import src.com.tic.exec.Tecnico.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import javax.swing.table.DefaultTableModel;
+import src.com.tic.dao.AdministradorDAOimpl;
 import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.dao.UsuarioDAOimpl;
 import src.com.tic.exec.JFrameLogin;
@@ -20,14 +21,11 @@ import src.com.tic.pojo.Incidencia;
 public class VistaTecnicoAdmin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaTecnicoAdmin.class.getName());
-
-    private UsuarioDAOimpl usuarioDAO = new UsuarioDAOimpl();
-    
-    private ArrayList<String> al;
-    
-    int idTecnico;
-    
     TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
+    AdministradorDAOimpl adminDAO = new AdministradorDAOimpl();
+    
+    
+    
 
     /**
      * Creates new form VistaTecnico
@@ -36,11 +34,6 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.jLabel3.setText("Otro día más en el curro");
-        try {
-            al = usuarioDAO.getTiposIncidencias();
-        } catch (Exception ex) {
-            System.out.println("Error de búsqueda: " + ex.getMessage());
-        }
         refrescarTabla();
     }
 
@@ -62,6 +55,7 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSpinnerDias = new javax.swing.JSpinner();
         jButtonListar = new javax.swing.JButton();
+        jButtonListarVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +128,13 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
             }
         });
 
+        jButtonListarVolver.setText("Volver");
+        jButtonListarVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListarVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,6 +143,7 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonVerIndicenciasTiempoConcreto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -149,11 +151,11 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addGap(82, 82, 82)
-                        .addComponent(jButtonListar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCerrarIndicencia)))
+                        .addComponent(jButtonListar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonCerrarIndicencia)
+                    .addComponent(jButtonListarVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -170,7 +172,9 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
                         .addComponent(jButtonVerIndicenciasTiempoConcreto)
                         .addComponent(jSpinnerDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
-                    .addComponent(jButtonListar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonListar)
+                        .addComponent(jButtonListarVolver)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -178,7 +182,7 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCerrarIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarIndicenciaActionPerformed
-        jDialogCerrarIncidencia dCerrarIncidencia = new jDialogCerrarIncidencia(this, false);
+        jDialogCerrarIncidenciaAdmin dCerrarIncidencia = new jDialogCerrarIncidenciaAdmin(this, false);
         dCerrarIncidencia.setVisible(true);
     }//GEN-LAST:event_jButtonCerrarIndicenciaActionPerformed
 
@@ -198,6 +202,12 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
     private void jButtonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarActionPerformed
         refrescarTabla();
     }//GEN-LAST:event_jButtonListarActionPerformed
+
+    private void jButtonListarVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarVolverActionPerformed
+        VistaAdministrador atras = new VistaAdministrador();
+        atras.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonListarVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,37 +256,11 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
                 m.addRow(o);
             }
         } catch (Exception e) {
-            System.out.println("Error al mostrar tabla incidencia");
+            e.printStackTrace();
         }
     }
     
-    public void refrescarTablaPorTipo(String tipo) {
-        DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
-        m.setNumRows(0);
-        
-        Incidencia i = null;
-        try {
-            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) tecnicoDAO.getIncidenciasByTipo(tipo);
-            for (int j = 0; j < ai.size(); j++) {
-                i = ai.get(j);
-                Object[] o = {
-                    i.getIdIncidencia(),
-                    i.getEstado(),
-                    i.getResultado_cierre(),
-                    i.getFechaCierre(),
-                    i.getFechaEntrada(),
-                    i.getTipoIncidencia(),
-                    i.getIdUsuario(),
-                    i.getIdTecnico(),
-                    i.getDescripcionIncidencia(),
-                    i.getDescripcionSolucion()
-                };
-                m.addRow(o);
-            }
-        } catch (Exception e) {
-            System.out.println("Error al mostrar tabla incidencia");
-        }
-    }
+   
      
     public void refrescarTabla() {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
@@ -284,7 +268,7 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
         
         Incidencia i = null;
         try {
-            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) tecnicoDAO.getIncidencias();
+            ArrayList<Incidencia> ai = (ArrayList<Incidencia>) adminDAO.getAllIncidencias();
             for (int j = 0; j < ai.size(); j++) {
                 i = ai.get(j);
                 Object[] o = {
@@ -302,7 +286,7 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
                 m.addRow(o);
             }
         } catch (Exception e) {
-            System.out.println("Error al mostrar tabla incidencia");
+            e.printStackTrace();
         }
     }
 
@@ -310,6 +294,7 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrarIndicencia;
     private javax.swing.JButton jButtonListar;
+    private javax.swing.JButton jButtonListarVolver;
     private javax.swing.JButton jButtonVerIndicenciasTiempoConcreto;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

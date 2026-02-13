@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import src.com.tic.pojo.Dispositivo;
 import src.com.tic.pojo.Espacio;
 import src.com.tic.pojo.Usuario;
+import src.com.tic.pojo.Incidencia;
 
 /**
  *
@@ -29,6 +30,7 @@ public interface AdministradorDAO {
     public ArrayList<Usuario> getTipoUsuarioBasico() throws Exception;
     public ArrayList<Usuario> getTipoUsuarioTecnico() throws Exception;
     public ArrayList<Usuario> getTipoUsuarioGestor() throws Exception;
+    public ArrayList<Incidencia> getAllIncidencias() throws Exception;
     
     
     

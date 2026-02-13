@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import src.com.tic.pojo.Dispositivo;
 import src.com.tic.pojo.Espacio;
+import src.com.tic.pojo.Incidencia;
 import src.com.tic.pojo.Usuario;
 import src.com.tic.utils.Configuration;
 
@@ -271,6 +272,22 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
     @Override
     public void close() throws Exception {
         con.close();
+    }
+
+    @Override
+    public ArrayList<Incidencia> getAllIncidencias() throws Exception {
+        ArrayList<Incidencia> incidencias = new ArrayList();
+        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE estado <> 'cerrada';";
+        try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(SQL)) {
+            try (ResultSet resul = pstm.executeQuery();) {
+                while (resul.next()) {
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return incidencias;
     }
 
 }
