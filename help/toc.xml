@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE toc PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 2.0//EN" "http://java.sun.com/products/javahelp/toc_2_0.dtd">
+<toc version="2.0">
+    <tocitem text="Manual de InterfazTic" target="manual">
+        <tocitem text="Acceso al Sistema" target="login"/>
+        <tocitem text="Vistas de Usuario">
+            <tocitem text="Interfaz de Usuario" target="usuario"/>
+            <tocitem text="Interfaz de Gestor" target="gestor"/>
+            <tocitem text="Interfaz de Técnico" target="tecnico"/>
+        </tocitem>
+    </tocitem>
+</toc>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE index PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Index Version 2.0//EN" "http://java.sun.com/products/javahelp/index_2_0.dtd">
+<index version="2.0">
+    <indexitem text="Añadir incidencia" target="usuario"/>
+    <indexitem text="Asignar técnicos" target="gestor"/>
+    <indexitem text="Base de datos" target="instalacion"/>
+    <indexitem text="Cerrar incidencia" target="tecnico"/>
+    <indexitem text="Dispositivos, gestión" target="tablas"/>
+    <indexitem text="Espacios, gestión" target="tablas"/>
+    <indexitem text="Login" target="login"/>
+    <indexitem text="MySQL" target="instalacion"/>
+    <indexitem text="Reapertura" target="usuario"/>
+    <indexitem text="Usuarios, gestión" target="tablas"/>
+</index>

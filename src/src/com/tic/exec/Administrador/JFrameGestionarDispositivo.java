@@ -95,6 +95,7 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
         getContentPane().add(jButtonListarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 140, 40));
 
         jComboBoxListadoTipo.addActionListener(this::jComboBoxListadoTipoActionPerformed);
+        jComboBoxListadoTipo.setVisible(false);
         getContentPane().add(jComboBoxListadoTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 140, 40));
         getContentPane().add(jSpinnerIDDispositivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 100, 30));
 

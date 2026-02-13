@@ -1,6 +1,10 @@
 package src.com.tic.exec;
 
+import java.io.File;
+import java.net.URL;
 import java.util.Arrays;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JOptionPane;
 import src.com.tic.dao.LoginDAOimpl;
 import src.com.tic.exec.Administrador.VistaAdministrador;
@@ -48,6 +52,9 @@ public class JFrameLogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuAyuda = new javax.swing.JMenu();
+        jMenuItemAyuda = new javax.swing.JMenuItem();
 
         jTextField2.setText("jTextField2");
 
@@ -87,6 +94,17 @@ public class JFrameLogin extends javax.swing.JFrame {
 
         jLabel4.setText("Contraseña:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, 20));
+
+        jMenuAyuda.setText("Ayuda");
+        jMenuAyuda.addActionListener(this::jMenuAyudaActionPerformed);
+
+        jMenuItemAyuda.setText("Abrir ayuda");
+        jMenuItemAyuda.addActionListener(this::jMenuItemAyudaActionPerformed);
+        jMenuAyuda.add(jMenuItemAyuda);
+
+        jMenuBar1.add(jMenuAyuda);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,6 +184,14 @@ public class JFrameLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jMenuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAyudaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuAyudaActionPerformed
+
+    private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed
+        ponLaAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -192,6 +218,23 @@ public class JFrameLogin extends javax.swing.JFrame {
     }
     private LoginDAOimpl limpl = new LoginDAOimpl();
 
+    private void ponLaAyuda() {
+        try {
+            //Carga el fichero de ayuda
+            File fichero = new File("help" + File.separator + "helpset.hs");
+            URL hsURL = fichero.toURI().toURL();
+
+            //Crea el HelpSet y el HelpBroker
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+            HelpBroker hb = helpset.createHelpBroker();
+
+            hb.enableHelpOnButton(jMenuItemAyuda, "login", helpset);
+            hb.enableHelpKey(getRootPane(), "login", helpset);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error al cargar la ayuda: " + e.getMessage());
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -199,6 +242,9 @@ public class JFrameLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenuAyuda;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAyuda;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordFieldContrasena;
     private javax.swing.JTextField jTextField2;

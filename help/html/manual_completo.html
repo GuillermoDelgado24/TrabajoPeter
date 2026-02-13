@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Manual de usuario e instalación - InterfazTic</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; margin: 20px; }
+        h1 { color: #0078D7; }
+        h2 { color: #333; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        h3 { color: #555; }
+        pre { background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd; overflow-x: auto; }
+        .note { background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>Manual de usuario e instalación</h1>
+    <p><strong>InterfazTic</strong></p>
+    <p><em>Derechos reservados a: ©Guillermo Delgado, Luis Takáhiro Fernández, Aitor Domínguez, 2026</em></p>
+
+    <h2>Prólogo</h2>
+    <p>El objetivo de este manual es ilustrar la utilidad de la aplicación InterfazTic y explicar sus funcionalidades. Consiste en un manual de usuario y un manual de instalación. El manual de usuario se divide en las diferentes vistas a las que tendrá acceso el usuario desde la aplicación. El manual de instalación explica el proceso de hacer backup de la base de datos de la aplicación y de la ejecución del zip/Jar de la misma.</p>
+
+    <hr>
+
+    <h2>Guía de la aplicación</h2>
+    <h3>Vistas</h3>
+    <p>El botón "cerrar sesión" nos llevará a la vista Login. El botón "salir", cerrará la aplicación.</p>
+
+    <h3>Login</h3>
+    <p><img src="images/login_principal.png" alt="Pantalla de Login"></p>
+    <h4>Descripción general</h4>
+    <p>Nos permite acceder a la aplicación con uno de los tipos de acceso que tenga el usuario. El rol por el que accederá el usuario se seleccionará desde el menú de selección / combobox.</p>
+    <p>Si el usuario falla el inicio de sesión por credenciales incorrectas, se mostrará el siguiente error:</p>
+    <p><img src="images/error_credenciales.png" alt="Error de credenciales"></p>
+    <p>Si el usuario es administrador pero no técnico, este no podrá acceder como técnico y se mostrará este error:</p>
+    <p><img src="images/error_rol.png" alt="Error de rol incorrecto"></p>
+
+    <hr>
+
+    <h2>VistaUsuario</h2>
+    <p><img src="images/vista_usuario.png" alt="Vista del Usuario"></p>
+    <h4>Descripción general</h4>
+    <p>El usuario tiene la capacidad de añadir una incidencia, listar las que haya creado, consultar por incidencias concretas creadas por él y solicitar su reapertura.</p>
+
+    <ul>
+        <li><strong>Crear incidencia:</strong> <img src="images/icono_mas.png" alt="Icono +"> Abre una segunda pantalla: Consiste en crear una incidencia con su respectivo tipo de incidencia, el espacio asociado a la incidencia y los dispositivos pertenecientes a ese espacio. Los dispositivos no son editables desde aquí, ya están creados por adelantado. Si se quiere crear un nuevo dispositivo, lo hará el administrador. También se le asignará una descripción a la incidencia donde se informará del incidente ocurrido indicando el campo ID_Dispositivo o el campo descripción y marca cuando se quiera referenciar (Preferentemente el campo ID).</li>
+        <li><strong>Listar incidencia por ID:</strong> <img src="images/icono_lupa.png" alt="Icono Lupa"> Lista la incidencia con el id concreto en la tabla de incidencias. El campo id se auto-modificará al seleccionar una entrada de la tabla.</li>
+        <li><strong>Listar incidencias:</strong> <img src="images/icono_lista.png" alt="Icono Lista"> Lista todas las incidencias creadas por el usuario. Si la lista se encuentra vacía, quiere decir que el usuario no tiene incidencias creadas.</li>
+        <li><strong>Solicitar reapertura:</strong> <img src="images/icono_enviar.png" alt="Icono Enviar"> Solicita la reapertura de la incidencia, dejando su estado en ‘alta’. El gestor quedará consciente del cambio y podrá asignar la incidencia, si hay técnicos disponibles, a uno. El campo id se auto-modificará al seleccionar una entrada de la tabla.</li>
+    </ul>
+
+    <hr>
+
+    <h2>VistaGestor</h2>
+    <p><img src="images/vista_gestor.png" alt="Vista del Gestor"></p>
+    <h4>Descripción general</h4>
+    <p>Permite asignar un técnico a una incidencia. En caso de que no se pueda asignar, la incidencia se quedará en alta, que es equivalente a ‘en espera’. Genera listados de incidencias en espera (alta) y por técnico junto con tipo de incidencia.</p>
+
+    <ul>
+        <li><strong>Asignar técnico:</strong> <img src="images/icono_tecnico.png" alt="Icono Técnico"> Asigna un técnico a una incidencia. Si un determinado técnico deja de aparecer en la interfaz, quiere decir que ya no se encuentra disponible.</li>
+        <li><strong>Listar incidencias en espera:</strong> <img src="images/icono_reloj.png" alt="Icono Espera"> Muestra las incidencias que se encuentran en el estado ‘alta’, que es equivalente a ‘en espera’. La función principal del botón es actualizar la tabla con respecto a la base de datos.</li>
+        <li><strong>Listar por tipo de Incidencia y por ID:</strong> <img src="images/icono_filtro.png" alt="Icono Filtro"> Abre una segunda pantalla: Permite filtrar por incidencias siguiendo dos parámetros: el id del técnico que la atiende y el tipo de incidencia de este.</li>
+    </ul>
+
+    <hr>
+
+    <h2>VistaTécnico</h2>
+    <p><img src="images/vista_tecnico.png" alt="Vista del Técnico"></p>
+    <h4>Descripción general</h4>
+    <p>Resuelve incidencias cerrándolas exitosamente o cerrándola en un estado parcial de éxito. Permite agregar tipos de incidencias nuevos, visualizar incidencias asignadas y listar incidencias globales de un tipo concreto. También puede visualizar incidencias cerradas en un periodo de tiempo anterior (días).</p>
+
+    <ul>
+        <li><strong>Listar incidencias cerradas en un tiempo:</strong> <img src="images/icono_historial.png" alt="Icono Historial"> Muestra las incidencias cerradas en un periodo de x días atrás desde la fecha actual. Se insertan los días en el campo de su derecha.</li>
+        <li><strong>Listar tipo de incidencia:</strong> <img src="images/icono_cuadricula.png" alt="Icono Cuadrícula"> Lista las incidencias del tipo seleccionado en el campo de su derecha.</li>
+        <li><strong>Atender incidencia:</strong> <img src="images/icono_herramientas.png" alt="Icono Herramientas"> Cambia el estado de la incidencia de ‘asignada’ a ‘en curso’.</li>
+        <li><strong>Cerrar incidencia:</strong> <img src="images/icono_check.png" alt="Icono Check"> Abre una segunda pantalla: Cierra la incidencia id con el estado de cierre indicado. En la solución se detallará qué pasos o medidas se han tomado para mitigar o arreglar completamente el problema.</li>
+        <li><strong>Agregar tipo de incidencia:</strong> <img src="images/icono_agregar_tipo.png" alt="Icono Agregar Tipo"> Abre una segunda pantalla: Permite agregar tipos de incidencia nuevos para ser usados por el usuario.</li>
+        <li><strong>Listar incidencias asignadas:</strong> <img src="images/icono_lista_asignadas.png" alt="Icono Lista Asignadas"> Lista las incidencias asignadas. Sirve para reiniciar la tabla de vuelta a su estado normal después de utilizar listar incidencias cerradas en un tiempo. También sirve para actualizar la tabla actual al estado de la base de datos.</li>
+    </ul>
+
+    <hr>
+
+    <h2>VistaAdministrador</h2>
+    <p><img src="images/vista_admin.png" alt="Vista Administrador"></p>
+    <h4>Descripción general</h4>
+    <p>En este ventana de administrador podemos gestionar incidencias, espacios, usuario y dispositivos, teniendo un listado con filtros de estos, pudiendo crear, actualizar y eliminar elementos de cada tabla en la base de datos respectivamente.</p>
+
+    <ul>
+        <li><strong>Gestionar incidencia:</strong> Nos envía a VistaTecnico pero con privilegios de administrador.</li>
+        <li><strong>Gestionar espacio:</strong> Nos envía al jFrame GestionarEspacio.</li>
+        <li><strong>Gestionar usuarios:</strong> Nos envía al jFrame GestionarUsuario.</li>
+        <li><strong>Gestionar dispositivos:</strong> Nos envía al jFrame GestionarDispositivos.</li>
+        <li><strong>Funcionar como gestor:</strong> Nos envía a VistaGestor donde podremos actuar con privilegios elevados.</li>
+    </ul>
+
+    <h3>Gestionar Espacio</h3>
+    <p><img src="images/gestionar_espacio.png" alt="Gestionar Espacio"></p>
+    <p>Aqui observamos una tabla con un listado de los espacios de la base de datos, pudiendo seleccionar un espacio y editarlo, eliminarlo o crear uno nuevo.</p>
+    <ul>
+        <li><strong>Listado completo:</strong> Actualiza la tabla y muestra el listado completo de los espacios existentes en esta.</li>
+        <li><strong>Actualizar espacio:</strong> Cambia los campos previamente seleccionados de la tabla a unos nuevos editables en la sección que permite editar dichos campos.</li>
+        <li><strong>Registrar nuevo:</strong> Desde el formulario podemos crear un nuevo espacio desde cero, introduciendo aquí una descripción.</li>
+    </ul>
+
+    <h3>Gestionar Dispositivos</h3>
+    <p><img src="images/gestionar_dispositivos.png" alt="Gestionar Dispositivos"></p>
+    <p>Permite al administrador gestionar los dispositivos: Declarar nuevos dispositivos, Modificar/Actualizar uno ya existente y Eliminarlo. También podemos listar todos los dispositivos o los que sean de un tipo concreto.</p>
+    <ul>
+        <li><strong>Listado por tipo:</strong> Coge el tipo de dispositivo indicado en el formulario de operaciones (Recuadro que se encuentra en la zona inferior derecha de la interfaz) y busca las que sean de este.</li>
+    </ul>
+
+    <h3>Gestionar Usuario</h3>
+    <p><img src="images/gestionar_usuario.png" alt="Gestionar Usuario"></p>
+    <p>Permite al administrador gestionar los usuarios: Declarar nuevos usuarios, Modificar/Actualizar uno ya existente y Eliminarlo. También podemos listar todos los usuarios o los que sean de un tipo concreto. Tipo en el contexto de usuario se refiere a su perfil: (Administrador, Gestor, Técnico, Usuario básico).</p>
+    <ul>
+        <li><strong>Listado por tipo:</strong> Coge el tipo de usuario indicado en el campo de su derecha y busca los que sean de este.</li>
+        <li><strong>Volver:</strong> Vuelve a vista administrador.</li>
+    </ul>
+
+    <hr>
+
+    <h2>Manual de instalación</h2>
+    <p>Descargar el .jar y ejecutarlo con doble click.</p>
+
+    <h3>Instrucciones montaje base de datos</h3>
+    <p>Exportar base de datos:</p>
+    <pre><code>mysqldump -u root -p InterfazTic > InterfazTic.sql
+o
+mysqldump -u root -p \
+--single-transaction \
+--routines \
+--triggers \
+--events \
+InterfazTic > InterfazTic.sql</code></pre>
+
+    <p>Importar base de datos: Desde dentro de mysql:</p>
+    <pre><code>source Descargas/ScriptDI.sql</code></pre>
+
+    <h3>Creación de Usuario Privilegiado e Inserts</h3>
+    <pre><code>
+-- Crear el usuario
+CREATE USER 'interfaz'@'%' IDENTIFIED BY 'interfaz123';
+
+-- Dar privilegios globales
+GRANT ALL PRIVILEGES ON *.* TO 'interfaz'@'%' WITH GRANT OPTION;
+
+-- Aplicar cambios
+FLUSH PRIVILEGES;
+    </code></pre>
+    <p><em>(Nota: El manual incluye también los Scripts de inserción iniciales para las tablas Espacios, Usuarios, Tecnicos, Gestores, Tipos_Incidencias, Incidencias y Dispositivos)</em></p>
+
+    <hr>
+
+    <h2>Sección FAQ y Glosario</h2>
+    <ul>
+        <li>‘Alta’ es lo mismo que en ‘espera’.</li>
+        <li>El límite de incidencias asignadas por técnico es de 5.</li>
+        <li>¡Dile tus dudas al administrador!</li>
+        <li>¡Coméntale tus dudas de vocabulario técnico al administrador!</li>
+    </ul>
+
+</body>
+</html>
