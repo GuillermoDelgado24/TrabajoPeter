@@ -78,7 +78,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         jLabel2.setText("Usuario:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Gestor", "Técnico" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Gestor", "Técnico", "Administrador" }));
         jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, 30));
 
