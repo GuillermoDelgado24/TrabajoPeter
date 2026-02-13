@@ -1,6 +1,7 @@
 package src.com.tic.exec.Administrador;
 
 import javax.swing.ImageIcon;
+import src.com.tic.exec.gestor.VistaGestor;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,7 +19,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public VistaAdministrador(int idUsuario) {
+    public VistaAdministrador() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idUsuario = idUsuario;
@@ -37,10 +38,10 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButtonGestionarDispositivos = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jButtonFuncGestor = new javax.swing.JButton();
+        jButtonUsu = new javax.swing.JButton();
+        jButtonGestEsp = new javax.swing.JButton();
+        jButtonGestInc = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
@@ -63,53 +64,60 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButtonGestionarDispositivos.addActionListener(this::jButtonGestionarDispositivosActionPerformed);
         getContentPane().add(jButtonGestionarDispositivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 270, -1));
 
-        jButton3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jButton3.setText("FUNCIONAR COMO GESTOR");
-        jButton3.setPreferredSize(new java.awt.Dimension(264, 28));
-        jButton3.addActionListener(this::jButton3ActionPerformed);
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 280, -1));
+        jButtonFuncGestor.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jButtonFuncGestor.setText("FUNCIONAR COMO GESTOR");
+        jButtonFuncGestor.setPreferredSize(new java.awt.Dimension(264, 28));
+        jButtonFuncGestor.addActionListener(this::jButtonFuncGestorActionPerformed);
+        getContentPane().add(jButtonFuncGestor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 280, -1));
 
-        jButton4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jButton4.setText("GESTIONAR USUARIOS");
-        jButton4.setPreferredSize(new java.awt.Dimension(264, 28));
-        jButton4.addActionListener(this::jButton4ActionPerformed);
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        jButtonUsu.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jButtonUsu.setText("GESTIONAR USUARIOS");
+        jButtonUsu.setPreferredSize(new java.awt.Dimension(264, 28));
+        jButtonUsu.addActionListener(this::jButtonUsuActionPerformed);
+        getContentPane().add(jButtonUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-        jButton5.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jButton5.setText("GESTIONAR ESPACIO");
-        jButton5.setPreferredSize(new java.awt.Dimension(264, 28));
-        jButton5.addActionListener(this::jButton5ActionPerformed);
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+        jButtonGestEsp.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jButtonGestEsp.setText("GESTIONAR ESPACIO");
+        jButtonGestEsp.setPreferredSize(new java.awt.Dimension(264, 28));
+        jButtonGestEsp.addActionListener(this::jButtonGestEspActionPerformed);
+        getContentPane().add(jButtonGestEsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
-        jButton6.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jButton6.setText("GESTIONAR INCIDENCIA");
-        jButton6.setPreferredSize(new java.awt.Dimension(264, 28));
-        jButton6.addActionListener(this::jButton6ActionPerformed);
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jButtonGestInc.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jButtonGestInc.setText("FUNCIONAR COMO TECNICO");
+        jButtonGestInc.setPreferredSize(new java.awt.Dimension(264, 28));
+        jButtonGestInc.addActionListener(this::jButtonGestIncActionPerformed);
+        getContentPane().add(jButtonGestInc, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 290, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGestionarDispositivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestionarDispositivosActionPerformed
-        JFrameGestDispositivos gestDispositivos = new JFrameGestDispositivos(this ,true);
+        JFrameGestionarDispositivo gestDispositivos = new JFrameGestionarDispositivo();
         gestDispositivos.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonGestionarDispositivosActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButtonFuncGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFuncGestorActionPerformed
+        VistaGestor gestDisp = new VistaGestor();
+        gestDisp.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonFuncGestorActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jButtonUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsuActionPerformed
+        JFrameGestionarUsuario gestUsu = new JFrameGestionarUsuario();
+        gestUsu.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonUsuActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void jButtonGestEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestEspActionPerformed
+        JFrameGestionarEspacio gestEsp = new JFrameGestionarEspacio();
+        gestEsp.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonGestEspActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void jButtonGestIncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestIncActionPerformed
+        
+    }//GEN-LAST:event_jButtonGestIncActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,14 +141,16 @@ public class VistaAdministrador extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+                java.awt.EventQueue.invokeLater(() -> new VistaAdministrador().setVisible(true));
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonFuncGestor;
+    private javax.swing.JButton jButtonGestEsp;
+    private javax.swing.JButton jButtonGestInc;
     private javax.swing.JButton jButtonGestionarDispositivos;
+    private javax.swing.JButton jButtonUsu;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;

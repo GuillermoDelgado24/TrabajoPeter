@@ -154,7 +154,7 @@ public class JFrameLogin extends javax.swing.JFrame {
                 } else if (this.jComboBox1.getSelectedItem().toString().equals("Administrador")) {
                     //Metodo para ver si hay un Admin con esa Id
                     if (limpl.esAdministrador(idUsuario)) {
-                        VistaAdministrador vistaAdm = new VistaAdministrador(idUsuario);
+                        VistaAdministrador vistaAdm = new VistaAdministrador();
                         vistaAdm.setVisible(true);
                         dispose();
                     } else {

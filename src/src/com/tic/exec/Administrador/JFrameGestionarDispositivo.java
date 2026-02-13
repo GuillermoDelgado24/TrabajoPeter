@@ -4,19 +4,27 @@
  */
 package src.com.tic.exec.Administrador;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import src.com.tic.dao.AdministradorDAOimpl;
+import src.com.tic.exec.JFrameLogin;
+import src.com.tic.pojo.Dispositivo;
+
 /**
  *
  * @author yuta
  */
 public class JFrameGestionarDispositivo extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameGestionarDispositivo.class.getName());
+    AdministradorDAOimpl adminDAO = new AdministradorDAOimpl();
 
     /**
      * Creates new form JFrameGestionarUsuario
      */
     public JFrameGestionarDispositivo() {
         initComponents();
+        refrescarTabla();
     }
 
     /**
@@ -34,7 +42,6 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
         jTableDispositivo = new javax.swing.JTable();
         jButtonListadoCompleto = new javax.swing.JButton();
         jButtonListarTipo = new javax.swing.JButton();
-        jComboBoxListadoTipo = new javax.swing.JComboBox<>();
         jSpinnerIDDispositivo = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -54,7 +61,6 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
         jButtonListarVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setToolTipText("");
@@ -64,8 +70,6 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Gestionar Dispositivo");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 70));
 
         jTableDispositivo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,25 +87,21 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableDispositivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableDispositivoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableDispositivo);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 510, 300));
 
         jButtonListadoCompleto.setText("Listado competo");
         jButtonListadoCompleto.addActionListener(this::jButtonListadoCompletoActionPerformed);
-        getContentPane().add(jButtonListadoCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 150, 40));
 
         jButtonListarTipo.setText("Listado por tipo:");
-        getContentPane().add(jButtonListarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 140, 40));
-
-        jComboBoxListadoTipo.addActionListener(this::jComboBoxListadoTipoActionPerformed);
-        jComboBoxListadoTipo.setVisible(false);
-        getContentPane().add(jComboBoxListadoTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 140, 40));
-        getContentPane().add(jSpinnerIDDispositivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 100, 30));
+        jButtonListarTipo.addActionListener(this::jButtonListarTipoActionPerformed);
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setText("ID Dispositivo:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, -1, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -130,6 +130,7 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
 
         jButtonRegistrarNuevo.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButtonRegistrarNuevo.setText("Registrar Nuevo");
+        jButtonRegistrarNuevo.addActionListener(this::jButtonRegistrarNuevoActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,95 +138,171 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel2)
                     .addComponent(jTextFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(jButtonEliminarDispositivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonRegistrarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonActualizarDispositivo))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonRegistrarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonActualizarDispositivo)
+                    .addComponent(jButtonEliminarDispositivo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(4, 4, 4)
-                        .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonActualizarDispositivo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButtonRegistrarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jButtonActualizarDispositivo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonEliminarDispositivo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
-                        .addGap(4, 4, 4)
-                        .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel5))
-                    .addComponent(jButtonRegistrarNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addComponent(jTextFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addGap(19, 19, 19)
+                        .addComponent(jTextFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addGap(4, 4, 4)
-                        .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jButtonEliminarDispositivo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 380, 310));
-        getContentPane().add(jSpinnerIDEspacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 100, 30));
 
         jLabel7.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel7.setText("ID Espacio:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, -1));
 
         jButtonListarVolver.setText("Volver");
         jButtonListarVolver.addActionListener(this::jButtonListarVolverActionPerformed);
-        getContentPane().add(jButtonListarVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 150, 40));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonListadoCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButtonListarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButtonListarVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1)
+                        .addGap(52, 52, 52)
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jSpinnerIDDispositivo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(jSpinnerIDEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButtonListarTipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonListarVolver, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonListadoCompleto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel7))
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSpinnerIDDispositivo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerIDEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonListadoCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListadoCompletoActionPerformed
-        // TODO add your handling code here:
+        refrescarTabla();
     }//GEN-LAST:event_jButtonListadoCompletoActionPerformed
 
     private void jTextFieldTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTipoActionPerformed
 
-    private void jComboBoxListadoTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListadoTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxListadoTipoActionPerformed
-
     private void jButtonActualizarDispositivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarDispositivoActionPerformed
-        // TODO add your handling code here:
+        try {
+            adminDAO.updateDispositivos(new Dispositivo((int) this.jSpinnerIDDispositivo.getValue(), (int) this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText(), this.jTextFieldTipo.getText(), this.jTextFieldMarca.getText(), this.jTextFieldModelo.getText()));
+            refrescarTabla();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jButtonActualizarDispositivoActionPerformed
 
     private void jButtonEliminarDispositivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarDispositivoActionPerformed
-        // TODO add your handling code here:
+        try {
+            adminDAO.deleteDispositivos((int) this.jSpinnerIDDispositivo.getValue());
+            refrescarTabla();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jButtonEliminarDispositivoActionPerformed
 
     private void jButtonListarVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarVolverActionPerformed
-        // TODO add your handling code here:
+        VistaAdministrador atras = new VistaAdministrador();
+        atras.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonListarVolverActionPerformed
+
+    private void jTableDispositivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDispositivoMouseClicked
+        int fila = this.jTableDispositivo.rowAtPoint(evt.getPoint());
+        this.jSpinnerIDDispositivo.setValue((int) this.jTableDispositivo.getValueAt(fila, 0));
+        this.jSpinnerIDEspacio.setValue((int) this.jTableDispositivo.getValueAt(fila, 1));
+        this.jTextFieldTipo.setText((String) this.jTableDispositivo.getValueAt(fila, 2));
+        this.jTextFieldDescripcion.setText((String) this.jTableDispositivo.getValueAt(fila, 3));
+        this.jTextFieldMarca.setText((String) this.jTableDispositivo.getValueAt(fila, 4));
+        this.jTextFieldModelo.setText((String) this.jTableDispositivo.getValueAt(fila, 5));
+    }//GEN-LAST:event_jTableDispositivoMouseClicked
+
+    private void jButtonRegistrarNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarNuevoActionPerformed
+        try {
+            adminDAO.insertDispositivos(new Dispositivo((int) this.jSpinnerIDDispositivo.getValue(), (int) this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText(), this.jTextFieldTipo.getText(), this.jTextFieldMarca.getText(), this.jTextFieldModelo.getText()));
+            refrescarTabla();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonRegistrarNuevoActionPerformed
+
+    private void jButtonListarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarTipoActionPerformed
+        refrescarTablaTipo(this.jTextFieldTipo.getText());
+    }//GEN-LAST:event_jButtonListarTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,9 +324,61 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new JFrameGestionarDispositivo().setVisible(true));
+
+    }
+
+    public void refrescarTabla() {
+        DefaultTableModel m = (DefaultTableModel) this.jTableDispositivo.getModel();
+        m.setNumRows(0);
+
+        Dispositivo i = null;
+        try {
+            ArrayList<Dispositivo> ai = (ArrayList<Dispositivo>) adminDAO.getDispositivos();
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                Object[] o = {
+                    i.getIdDispositivo(),
+                    i.getIdEspacio(),
+                    i.getTipo(),
+                    i.getDescripcion(),
+                    i.getMarca(),
+                    i.getModelo()
+                };
+                m.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+            e.printStackTrace();
+        }
+    }
+
+    public void refrescarTablaTipo(String tipo) {
+        DefaultTableModel m = (DefaultTableModel) this.jTableDispositivo.getModel();
+        m.setNumRows(0);
+
+        Dispositivo i = null;
+        try {
+            ArrayList<Dispositivo> ai = (ArrayList<Dispositivo>) adminDAO.getDispositivos();
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                if (i.getTipo().equals(tipo)) {
+                    Object[] o = {
+                        i.getIdDispositivo(),
+                        i.getIdEspacio(),
+                        i.getTipo(),
+                        i.getDescripcion(),
+                        i.getMarca(),
+                        i.getModelo()
+                    };
+                    m.addRow(o);
+                }
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+            e.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -259,7 +388,6 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
     private javax.swing.JButton jButtonListarTipo;
     private javax.swing.JButton jButtonListarVolver;
     private javax.swing.JButton jButtonRegistrarNuevo;
-    private javax.swing.JComboBox<String> jComboBoxListadoTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

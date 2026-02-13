@@ -22,6 +22,6 @@ public interface UsuarioDAO {
 
     public boolean solicitarReapertura(int idIncidencia) throws Exception;
     
-    public ArrayList<Dispositivo> getDispositivos() throws Exception;
 
+    
 }

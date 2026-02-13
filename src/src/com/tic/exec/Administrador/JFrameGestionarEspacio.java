@@ -4,6 +4,12 @@
  */
 package src.com.tic.exec.Administrador;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import src.com.tic.dao.AdministradorDAOimpl;
+import src.com.tic.pojo.Dispositivo;
+import src.com.tic.pojo.Espacio;
+
 /**
  *
  * @author yuta
@@ -11,12 +17,13 @@ package src.com.tic.exec.Administrador;
 public class JFrameGestionarEspacio extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameGestionarEspacio.class.getName());
-
+    AdministradorDAOimpl adminDAO = new AdministradorDAOimpl();
     /**
      * Creates new form JFrameGestionarUsuario
      */
     public JFrameGestionarEspacio() {
         initComponents();
+        refrescarTabla();
     }
 
     /**
@@ -32,7 +39,6 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEspacio = new javax.swing.JTable();
-        jButtonListadoCompleto = new javax.swing.JButton();
         jSpinnerIDEspacio = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -44,7 +50,6 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
         jButtonListarVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setToolTipText("");
@@ -54,8 +59,6 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Gestionar Espacio");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 70));
 
         jTableEspacio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,18 +76,15 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableEspacio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableEspacioMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableEspacio);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 510, 300));
-
-        jButtonListadoCompleto.setText("Listado competo");
-        jButtonListadoCompleto.addActionListener(this::jButtonListadoCompletoActionPerformed);
-        getContentPane().add(jButtonListadoCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 150, 40));
-        getContentPane().add(jSpinnerIDEspacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 100, 30));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setText("ID:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, -1, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,8 +93,8 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
         jButtonEliminarEspacio.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButtonEliminarEspacio.setText("Eliminar Espacio");
         jButtonEliminarEspacio.addActionListener(this::jButtonEliminarEspacioActionPerformed);
-        jPanel2.add(jButtonEliminarEspacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 174, 50));
-        jPanel2.add(jTextFieldDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 150, 40));
+        jPanel2.add(jButtonEliminarEspacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 174, 50));
+        jPanel2.add(jTextFieldDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 340, 30));
 
         jLabel4.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel4.setText("Descripción:");
@@ -103,36 +103,100 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
         jButtonActualizarEspacio.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButtonActualizarEspacio.setText("Actualizar Espacio");
         jButtonActualizarEspacio.addActionListener(this::jButtonActualizarEspacioActionPerformed);
-        jPanel2.add(jButtonActualizarEspacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, 50));
+        jPanel2.add(jButtonActualizarEspacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 50));
 
         jButtonRegistrarNuevo.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButtonRegistrarNuevo.setText("Registrar Nuevo");
-        jPanel2.add(jButtonRegistrarNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 174, 50));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 380, 250));
+        jButtonRegistrarNuevo.addActionListener(this::jButtonRegistrarNuevoActionPerformed);
+        jPanel2.add(jButtonRegistrarNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 174, 50));
 
         jButtonListarVolver.setText("Volver");
         jButtonListarVolver.addActionListener(this::jButtonListarVolverActionPerformed);
-        getContentPane().add(jButtonListarVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 150, 40));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonListarVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel1)
+                                .addGap(14, 14, 14)
+                                .addComponent(jSpinnerIDEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jSpinnerIDEspacio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonListarVolver)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonListadoCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListadoCompletoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonListadoCompletoActionPerformed
-
     private void jButtonActualizarEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarEspacioActionPerformed
-        // TODO add your handling code here:
+        try {
+            adminDAO.updateEspacio(new Espacio((int)this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText()));
+            refrescarTabla();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //Aqui necesitamos un control de errores para que primero llene todos los campos obligatoriamente
     }//GEN-LAST:event_jButtonActualizarEspacioActionPerformed
 
     private void jButtonEliminarEspacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarEspacioActionPerformed
-        // TODO add your handling code here:
+        try {
+            adminDAO.deleteEspacio((int) this.jSpinnerIDEspacio.getValue());
+            refrescarTabla();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //Aqui necesitamos que la ID exista
     }//GEN-LAST:event_jButtonEliminarEspacioActionPerformed
 
     private void jButtonListarVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarVolverActionPerformed
-        // TODO add your handling code here:
+        VistaAdministrador atras = new VistaAdministrador();
+        atras.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonListarVolverActionPerformed
+
+    private void jTableEspacioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEspacioMouseClicked
+        int fila = this.jTableEspacio.rowAtPoint(evt.getPoint());
+        this.jSpinnerIDEspacio.setValue((int) this.jTableEspacio.getValueAt(fila, 0));
+        this.jTextFieldDescripcion.setText((String)this.jTableEspacio.getValueAt(fila, 1));
+        
+    }//GEN-LAST:event_jTableEspacioMouseClicked
+
+    private void jButtonRegistrarNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarNuevoActionPerformed
+        try {
+            adminDAO.insertEspacios(new Espacio((int)this.jSpinnerIDEspacio.getValue(), this.jTextFieldDescripcion.getText()));
+            refrescarTabla();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //Obligatorio que rellene los campos
+    }//GEN-LAST:event_jButtonRegistrarNuevoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,14 +219,33 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new JFrameGestionarEspacio().setVisible(true));
+    }
+    
+    public void refrescarTabla() {
+        DefaultTableModel m = (DefaultTableModel) this.jTableEspacio.getModel();
+        m.setNumRows(0);
+
+        Espacio i = null;
+        try {
+            ArrayList<Espacio> ai = (ArrayList<Espacio>) adminDAO.getEspacios();
+            for (int j = 0; j < ai.size(); j++) {
+                i = ai.get(j);
+                Object[] o = {
+                    i.getIdEspacio(),
+                    i.getDescripcion()
+                };
+                m.addRow(o);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar tabla incidencia");
+            e.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizarEspacio;
     private javax.swing.JButton jButtonEliminarEspacio;
-    private javax.swing.JButton jButtonListadoCompleto;
     private javax.swing.JButton jButtonListarVolver;
     private javax.swing.JButton jButtonRegistrarNuevo;
     private javax.swing.JLabel jLabel1;
