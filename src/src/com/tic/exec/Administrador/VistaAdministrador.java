@@ -1,5 +1,9 @@
 package src.com.tic.exec.Administrador;
 
+import java.io.File;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.ImageIcon;
 import src.com.tic.exec.gestor.VistaGestor;
 
@@ -7,21 +11,24 @@ import src.com.tic.exec.gestor.VistaGestor;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author tarde
  */
 public class VistaAdministrador extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaAdministrador.class.getName());
+    private HelpBroker hb;
+
     private int idUsuario;
+
     /**
      * Creates new form NewJFrame
      */
     public VistaAdministrador() {
         initComponents();
         this.setLocationRelativeTo(null);
+        inicializarAyuda();
 
     }
 
@@ -42,6 +49,9 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButtonUsu = new javax.swing.JButton();
         jButtonGestEsp = new javax.swing.JButton();
         jButtonGestInc = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemAyuda = new javax.swing.JMenuItem();
 
         jTextField2.setText("jTextField2");
 
@@ -80,6 +90,27 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButtonGestInc.setPreferredSize(new java.awt.Dimension(264, 28));
         jButtonGestInc.addActionListener(this::jButtonGestIncActionPerformed);
 
+        jMenu1.setText("Ayuda");
+
+        jMenuItemAyuda.setText("Abrir ayuda");
+        jMenuItemAyuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMousePressed(evt);
+            }
+        });
+        jMenuItemAyuda.addActionListener(this::jMenuItemAyudaActionPerformed);
+        jMenu1.add(jMenuItemAyuda);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,7 +146,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
                 .addComponent(jButtonGestionarDispositivos)
                 .addGap(32, 32, 32)
                 .addComponent(jButtonFuncGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -146,8 +177,23 @@ public class VistaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGestEspActionPerformed
 
     private void jButtonGestIncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestIncActionPerformed
-        
+
     }//GEN-LAST:event_jButtonGestIncActionPerformed
+
+    private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemAyudaActionPerformed
+
+    private void jMenuItemAyudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMouseEntered
+        ponLaAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaMouseEntered
+
+    private void jMenuItemAyudaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMousePressed
+        ponLaAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaMousePressed
+
+    private void jMenuItemAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMouseClicked
+        ponLaAyuda();    }//GEN-LAST:event_jMenuItemAyudaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -171,10 +217,27 @@ public class VistaAdministrador extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-                java.awt.EventQueue.invokeLater(() -> new VistaAdministrador().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new VistaAdministrador().setVisible(true));
 
     }
 
+    private void ponLaAyuda() {
+        hb.enableHelpOnButton(jMenuItemAyuda, "manual", null);
+        hb.enableHelpKey(getRootPane(), "manual", null);
+    }
+
+    private void inicializarAyuda() {
+        try {
+            File fichero = new File("help" + File.separator + "helpset.hs");
+            URL hsURL = fichero.toURI().toURL();
+
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+            hb = helpset.createHelpBroker();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonFuncGestor;
     private javax.swing.JButton jButtonGestEsp;
@@ -182,6 +245,9 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGestionarDispositivos;
     private javax.swing.JButton jButtonUsu;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAyuda;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

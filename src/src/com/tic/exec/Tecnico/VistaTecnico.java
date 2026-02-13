@@ -4,8 +4,12 @@
  */
 package src.com.tic.exec.Tecnico;
 
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.dao.UsuarioDAOimpl;
@@ -17,16 +21,17 @@ import src.com.tic.pojo.Incidencia;
  * @author alumno
  */
 public class VistaTecnico extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaTecnico.class.getName());
+    private HelpBroker hb;
     int idIncidencia;
     private int idUsuario;
     private UsuarioDAOimpl usuarioDAO = new UsuarioDAOimpl();
-    
+
     private ArrayList<String> al;
-    
+
     int idTecnico;
-    
+
     TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
 
     /**
@@ -37,6 +42,7 @@ public class VistaTecnico extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.jLabel3.setText("Hola, " + usuario + ". Otro día más en el curro");
         this.idUsuario = idUsuario;
+        inicializarAyuda();
         try {
             al = usuarioDAO.getTiposIncidencias();
             refrescarComboBoxTipo(al);
@@ -74,6 +80,9 @@ public class VistaTecnico extends javax.swing.JFrame {
         jSpinnerDias = new javax.swing.JSpinner();
         jSpinnerAtenderId = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemAyuda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -191,6 +200,28 @@ public class VistaTecnico extends javax.swing.JFrame {
 
         jLabel4.setText("ID");
 
+        jMenu1.setText("Ayuda");
+
+        jMenuItemAyuda.setText("Abrir ayuda");
+        jMenuItemAyuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMousePressed(evt);
+            }
+        });
+        jMenuItemAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAyudaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemAyuda);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -277,7 +308,7 @@ public class VistaTecnico extends javax.swing.JFrame {
 
     private void jButtonAtenderIndicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtenderIndicenciaActionPerformed
         try {
-            tecnicoDAO.atenderIncidencia((int)this.jSpinnerAtenderId.getValue());
+            tecnicoDAO.atenderIncidencia((int) this.jSpinnerAtenderId.getValue());
             refrescarTabla(idTecnico);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -296,7 +327,7 @@ public class VistaTecnico extends javax.swing.JFrame {
 
     private void jButtonVerIndicenciasTiempoConcretoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
         try {
-            ArrayList<Incidencia> al = tecnicoDAO.getIncidenciasBetweenFechas((int)(this.jSpinnerDias.getValue()));
+            ArrayList<Incidencia> al = tecnicoDAO.getIncidenciasBetweenFechas((int) (this.jSpinnerDias.getValue()));
             refrescarTablaBeetwen(al);
         } catch (Exception ex) {
             System.out.println("Error al hacer consulta de fechas: " + ex.getMessage());
@@ -321,6 +352,16 @@ public class VistaTecnico extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
+    private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed
+        ponLaAyuda();    }//GEN-LAST:event_jMenuItemAyudaActionPerformed
+
+    private void jMenuItemAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMouseClicked
+        ponLaAyuda();    }//GEN-LAST:event_jMenuItemAyudaMouseClicked
+
+    private void jMenuItemAyudaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMousePressed
+        ponLaAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -344,11 +385,11 @@ public class VistaTecnico extends javax.swing.JFrame {
 
         /* Create and display the form */
     }
-    
+
     public void refrescarTablaBeetwen(ArrayList<Incidencia> ai) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
-        
+
         try {
             Incidencia i;
             for (int j = 0; j < ai.size(); j++) {
@@ -371,11 +412,11 @@ public class VistaTecnico extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia");
         }
     }
-    
+
     public void refrescarTablaPorTipo(String tipo) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
-        
+
         Incidencia i = null;
         try {
             ArrayList<Incidencia> ai = (ArrayList<Incidencia>) tecnicoDAO.getIncidenciasByTipo(tipo);
@@ -399,17 +440,17 @@ public class VistaTecnico extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia");
         }
     }
-    
+
     public void refrescarComboBoxTipo(ArrayList<String> al) {
         for (String string : al) {
             this.jComboBoxTipoIncidencia.addItem(string);
         }
     }
-    
+
     public void refrescarTabla(int IdTecnico) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
-        
+
         Incidencia i = null;
         try {
             ArrayList<Incidencia> ai = (ArrayList<Incidencia>) tecnicoDAO.getIncidenciasAsignadas(IdTecnico);
@@ -434,6 +475,23 @@ public class VistaTecnico extends javax.swing.JFrame {
         }
     }
 
+    private void ponLaAyuda() {
+        hb.enableHelpOnButton(jMenuItemAyuda, "tecnico", null);
+        hb.enableHelpKey(getRootPane(), "tecnico", null);
+    }
+
+    private void inicializarAyuda() {
+        try {
+            File fichero = new File("help" + File.separator + "helpset.hs");
+            URL hsURL = fichero.toURI().toURL();
+
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+            hb = helpset.createHelpBroker();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregarTipo;
@@ -449,6 +507,9 @@ public class VistaTecnico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAyuda;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinnerAtenderId;

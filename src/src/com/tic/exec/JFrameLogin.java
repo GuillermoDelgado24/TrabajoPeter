@@ -23,6 +23,7 @@ import src.com.tic.exec.gestor.VistaGestor;
 public class JFrameLogin extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFrameLogin.class.getName());
+    private HelpBroker hb;
 
     /**
      * Creates new form NewJFrame
@@ -31,6 +32,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         initComponents();
         this.setSize(500, 400);
         this.setLocationRelativeTo(null);
+        inicializarAyuda();
     }
 
     /**
@@ -235,22 +237,23 @@ public class JFrameLogin extends javax.swing.JFrame {
     private LoginDAOimpl limpl = new LoginDAOimpl();
 
     private void ponLaAyuda() {
+        hb.enableHelpOnButton(jMenuItemAyuda, "login", null);
+        hb.enableHelpKey(getRootPane(), "login", null);
+    }
+
+    private void inicializarAyuda() {
         try {
-            //Carga el fichero de ayuda
             File fichero = new File("help" + File.separator + "helpset.hs");
             URL hsURL = fichero.toURI().toURL();
 
-            //Crea el HelpSet y el HelpBroker
             HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
-            HelpBroker hb = helpset.createHelpBroker();
+            hb = helpset.createHelpBroker();
 
-            hb.enableHelpOnButton(jMenuItemAyuda, "login", helpset);
-            hb.enableHelpKey(getRootPane(), "login", helpset);
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Error al cargar la ayuda: " + e.getMessage());
         }
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JComboBox<String> jComboBox1;

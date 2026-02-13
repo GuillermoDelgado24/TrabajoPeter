@@ -4,7 +4,11 @@
  */
 package src.com.tic.exec.gestor;
 
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.GestorDAOimpl;
 import src.com.tic.dao.TecnicoDAOimpl;
@@ -20,6 +24,7 @@ public class VistaGestor extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaGestor.class.getName());
     GestorDAOimpl gestorDAO = new GestorDAOimpl();
+    private HelpBroker hb;
     private int idUsuario;
     private int idTecnico;
     private int idIncidencia;
@@ -34,15 +39,17 @@ public class VistaGestor extends javax.swing.JFrame {
         this.idUsuario = idUsuario;
         refrescarTablaIncidenciasEspera();
         refrescarTablaTecnicosDisp();
-        
+        inicializarAyuda();
+
     }
-    
-    public VistaGestor(){
+
+    public VistaGestor() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.jLabel3.setText("¡¡¡Hola, Administrador. A atender se ha dicho!!!");
         refrescarTablaIncidenciasEspera();
         refrescarTablaTecnicosDisp();
+        inicializarAyuda();
     }
 
     /**
@@ -69,6 +76,9 @@ public class VistaGestor extends javax.swing.JFrame {
         jButtonListarTodas = new javax.swing.JButton();
         jButtonSalir1 = new javax.swing.JButton();
         jButtonCerrarSesion = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemAyuda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,6 +186,28 @@ public class VistaGestor extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("Ayuda");
+
+        jMenuItemAyuda.setText("Abrir ayuda");
+        jMenuItemAyuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMousePressed(evt);
+            }
+        });
+        jMenuItemAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAyudaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemAyuda);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,13 +237,12 @@ public class VistaGestor extends javax.swing.JFrame {
                                 .addGap(308, 308, 308)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButtonCerrarSesion)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButtonSalir1))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(29, 29, 29)
-                                        .addComponent(jButtonListarTipoIncidencias, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))))
+                                        .addComponent(jButtonListarTipoIncidencias, javax.swing.GroupLayout.PREFERRED_SIZE, 323, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1)
                                 .addGap(12, 12, 12)
@@ -253,7 +284,7 @@ public class VistaGestor extends javax.swing.JFrame {
 
     private void jButtonAsignarTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarTecnicoActionPerformed
         try {
-            gestorDAO.asignarTecnico((int)this.jSpinnerIdTecnicoAsignar.getValue(), (int)this.jSpinnerIdIncidenciaAsignar.getValue());
+            gestorDAO.asignarTecnico((int) this.jSpinnerIdTecnicoAsignar.getValue(), (int) this.jSpinnerIdIncidenciaAsignar.getValue());
         } catch (Exception ex) {
             System.out.println("Error al asignar técnico:" + ex.getMessage());
         }
@@ -282,6 +313,18 @@ public class VistaGestor extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
+
+    private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed
+        ponLaAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaActionPerformed
+
+    private void jMenuItemAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMouseClicked
+        ponLaAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaMouseClicked
+
+    private void jMenuItemAyudaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMousePressed
+        ponLaAyuda();
+    }//GEN-LAST:event_jMenuItemAyudaMousePressed
 
     /**
      * @param args the command line arguments
@@ -388,6 +431,24 @@ public class VistaGestor extends javax.swing.JFrame {
         }
     }
 
+    private void ponLaAyuda() {
+        hb.enableHelpOnButton(jMenuItemAyuda, "gestor", null);
+        hb.enableHelpKey(getRootPane(), "gestor", null);
+    }
+
+    private void inicializarAyuda() {
+        try {
+            File fichero = new File("help" + File.separator + "helpset.hs");
+            URL hsURL = fichero.toURI().toURL();
+
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+            hb = helpset.createHelpBroker();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAsignarTecnico;
@@ -398,6 +459,9 @@ public class VistaGestor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAyuda;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

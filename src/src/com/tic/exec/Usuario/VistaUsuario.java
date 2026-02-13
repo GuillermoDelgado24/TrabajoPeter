@@ -1,7 +1,11 @@
 package src.com.tic.exec.Usuario;
 
+import java.io.File;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.UsuarioDAOimpl;
 import src.com.tic.exec.JFrameLogin;
@@ -18,6 +22,7 @@ import src.com.tic.pojo.Incidencia;
 public class VistaUsuario extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaUsuario.class.getName());
+    private HelpBroker hb;
     private int idUsuario;
     String nombreUsuario;
     public int idIncidencia;
@@ -28,9 +33,10 @@ public class VistaUsuario extends javax.swing.JFrame {
     public VistaUsuario(int idUsuario, String nombreUsuario) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.jLabel3.setText("Buenas, "+ nombreUsuario + " ¿Que necesitas?");
+        this.jLabel3.setText("Buenas, " + nombreUsuario + " ¿Que necesitas?");
         this.idUsuario = idUsuario;
         refrescarTabla();
+        inicializarAyuda();
     }
 
     /**
@@ -56,6 +62,9 @@ public class VistaUsuario extends javax.swing.JFrame {
         jSpinnerListarIncidenciaId = new javax.swing.JSpinner();
         jSpinnerSolicitarReaperturaid = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemAyuda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(java.awt.Color.white);
@@ -74,7 +83,7 @@ public class VistaUsuario extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(299, 299, 299)
                 .addComponent(jLabel3)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,6 +174,28 @@ public class VistaUsuario extends javax.swing.JFrame {
 
         jLabel2.setText("ID");
 
+        jMenu1.setText("Ayuda");
+
+        jMenuItemAyuda.setText("Abrir ayuda");
+        jMenuItemAyuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItemAyudaMousePressed(evt);
+            }
+        });
+        jMenuItemAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAyudaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemAyuda);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -250,7 +281,7 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     private void jButtonReaperturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReaperturaActionPerformed
         try {
-            
+
             udi.solicitarReapertura((int) this.jSpinnerSolicitarReaperturaid.getValue());
             refrescarTabla();
         } catch (SQLException ex) {
@@ -279,14 +310,23 @@ public class VistaUsuario extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-        
+
     }//GEN-LAST:event_jTableUsuarioMouseClicked
 
     private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
         JFrameLogin login = new JFrameLogin();
-                    login.setVisible(true);
-                    dispose();
+        login.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
+
+    private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed
+        ponLaAyuda();    }//GEN-LAST:event_jMenuItemAyudaActionPerformed
+
+    private void jMenuItemAyudaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMousePressed
+        ponLaAyuda();    }//GEN-LAST:event_jMenuItemAyudaMousePressed
+
+    private void jMenuItemAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMouseClicked
+        ponLaAyuda();    }//GEN-LAST:event_jMenuItemAyudaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -323,6 +363,9 @@ public class VistaUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAyuda;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinnerListarIncidenciaId;
@@ -387,4 +430,23 @@ public class VistaUsuario extends javax.swing.JFrame {
             System.out.println("Error al cargar la tabla por id" + ex.getMessage());
         }
     }
+
+    private void ponLaAyuda() {
+        hb.enableHelpOnButton(jMenuItemAyuda, "usuario", null);
+        hb.enableHelpKey(getRootPane(), "usuario", null);
+    }
+
+    private void inicializarAyuda() {
+        try {
+            File fichero = new File("help" + File.separator + "helpset.hs");
+            URL hsURL = fichero.toURI().toURL();
+
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+            hb = helpset.createHelpBroker();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
