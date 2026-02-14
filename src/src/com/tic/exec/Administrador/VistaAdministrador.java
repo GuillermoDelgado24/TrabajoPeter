@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
+import src.com.tic.exec.JFrameLogin;
 import src.com.tic.exec.gestor.VistaGestor;
 
 /*
@@ -50,6 +51,8 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButtonGestInc = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemAyuda = new javax.swing.JMenuItem();
 
@@ -93,6 +96,14 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButton1.setText("REGISTRAR USUARIO");
         jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        jMenu2.setText("Salir");
+
+        jMenuItem1.setText("Cerrar sesión");
+        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
 
         jMenu1.setText("Ayuda");
 
@@ -210,8 +221,14 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JFrameRegister vistaRegistrar = new JFrameRegister();
         vistaRegistrar.setVisible(true);
-        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        JFrameLogin login = new JFrameLogin();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,7 +282,9 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jButtonUsu;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemAyuda;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;

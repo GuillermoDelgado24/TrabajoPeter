@@ -141,17 +141,24 @@ public class JFrameRegister extends javax.swing.JFrame {
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
         if (Arrays.equals(this.jPasswordFieldContrasena.getPassword(), this.jPasswordFieldRepetirContrasena.getPassword())) {
             try {
-                Usuario usuario = new Usuario(this.jTextFieldNombreApellidos.getText(), this.jTextFieldUsuario.getText(), this.jTextFieldCorreo.getText(), this.jTextFieldTelefono.getText(), new String(this.jPasswordFieldContrasena.getPassword()));
-                int idUsuario = this.aimpl.crearUsuario(usuario);
-                if (esTecnico) {
-                    this.aimpl.hacerTecnico(idUsuario);
+                if (this.jTextFieldNombreApellidos.getText().equals("") || this.jTextFieldUsuario.getText().equals("")
+                        || this.jTextFieldCorreo.getText().equals("") || this.jTextFieldTelefono.getText().equals("")
+                        || this.jPasswordFieldContrasena.getPassword().equals("") || this.jPasswordFieldRepetirContrasena.getPassword().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Rellene todos los campos", "CAMPO VACIO", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Usuario usuario = new Usuario(this.jTextFieldNombreApellidos.getText(), this.jTextFieldUsuario.getText(), this.jTextFieldCorreo.getText(), this.jTextFieldTelefono.getText(), new String(this.jPasswordFieldContrasena.getPassword()));
+                    int idUsuario = this.aimpl.crearUsuario(usuario);
+                    if (esTecnico) {
+                        this.aimpl.hacerTecnico(idUsuario);
+                    }
+                    if (esAdmin) {
+                        this.aimpl.hacerAdmin(idUsuario);
+                    } else if (esGestor) {
+                        this.aimpl.hacerGestor(idUsuario);
+                    }
+                    JOptionPane.showMessageDialog(null, "Se ha introducido el usuario " + usuario.getNombreDeUsuario() + " con éxito", "USUARIO INTRODUCIDO CON ÉXITO", JOptionPane.OK_OPTION);
+                    dispose();
                 }
-                if (esAdmin) {
-                    this.aimpl.hacerAdmin(idUsuario);
-                } else if (esGestor) {
-                    this.aimpl.hacerGestor(idUsuario);
-                }
-                JOptionPane.showMessageDialog(null, "Se ha introducido el usuario " + usuario.getNombreDeUsuario() + " con éxito", "USUARIO INTRODUCIDO CON ÉXITO", JOptionPane.OK_OPTION);
             } catch (Exception ex) {
                 System.out.println("Error de sql: " + ex.getMessage());
             }

@@ -5,6 +5,7 @@
 package src.com.tic.exec.Administrador;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.AdministradorDAOimpl;
 import src.com.tic.pojo.Incidencia;
@@ -285,9 +286,9 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
     private void jComboBoxTipoUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoUsuActionPerformed
         if (this.jComboBoxTipoUsu.getSelectedItem().toString().equals("Usuario Basico")) {
             refrescarTablaUsuario();
-        }else if (this.jComboBoxTipoUsu.getSelectedItem().toString().equals("Tecnico")) {
+        } else if (this.jComboBoxTipoUsu.getSelectedItem().toString().equals("Tecnico")) {
             refrescarTablaTecnico();
-        }else if (this.jComboBoxTipoUsu.getSelectedItem().toString().equals("Gestor")) {
+        } else if (this.jComboBoxTipoUsu.getSelectedItem().toString().equals("Gestor")) {
             refrescarTablaGestor();
         }
     }//GEN-LAST:event_jComboBoxTipoUsuActionPerformed
@@ -299,8 +300,13 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         try {
-            adminDAO.updateUsuario(new Usuario((int)this.jSpinnerID.getValue(),this.jTextFieldNombre.getText(),this.jTextFieldApellidos.getText(),this.jTextFieldCorreo.getText(),this.jTextFieldTelefono.getText(),""));
-            refrescarTabla();
+            if (this.jTextFieldNombre.getText().equals("") || this.jTextFieldApellidos.getText().equals("")
+                    || this.jTextFieldCorreo.getText().equals("") || this.jTextFieldTelefono.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Rellena los campos vacios", "CAMPO VACIO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                adminDAO.updateUsuario(new Usuario((int) this.jSpinnerID.getValue(), this.jTextFieldNombre.getText(), this.jTextFieldApellidos.getText(), this.jTextFieldCorreo.getText(), this.jTextFieldTelefono.getText(), ""));
+                refrescarTabla();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -308,7 +314,7 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         try {
-            adminDAO.deleteUsuario((int)this.jSpinnerID.getValue());
+            adminDAO.deleteUsuario((int) this.jSpinnerID.getValue());
             refrescarTabla();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -386,6 +392,7 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia" + e.getMessage());
         }
     }
+
     private void refrescarTablaTecnico() {
         DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
         m.setNumRows(0);
@@ -408,6 +415,7 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia" + e.getMessage());
         }
     }
+
     private void refrescarTablaGestor() {
         DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
         m.setNumRows(0);
@@ -430,6 +438,7 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
             System.out.println("Error al mostrar tabla incidencia" + e.getMessage());
         }
     }
+
     private void refrescarTablaUsuario() {
         DefaultTableModel m = (DefaultTableModel) this.jTableUsuario.getModel();
         m.setNumRows(0);
