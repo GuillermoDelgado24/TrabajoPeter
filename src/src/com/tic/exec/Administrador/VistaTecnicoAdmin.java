@@ -19,14 +19,16 @@ import src.com.tic.pojo.Incidencia;
  * @author alumno
  */
 public class VistaTecnicoAdmin extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaTecnicoAdmin.class.getName());
     TecnicoDAOimpl tecnicoDAO = new TecnicoDAOimpl();
     AdministradorDAOimpl adminDAO = new AdministradorDAOimpl();
+    String fecha_apertura;
+    int idUsuario;
+    int idTecnico;
+    String tipo;
     
     
-    
-
     /**
      * Creates new form VistaTecnico
      */
@@ -56,6 +58,18 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
         jSpinnerDias = new javax.swing.JSpinner();
         jButtonListar = new javax.swing.JButton();
         jButtonListarVolver = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldFecha = new javax.swing.JTextField();
+        jSpinnerUsuario = new javax.swing.JSpinner();
+        jSpinnerTecnico = new javax.swing.JSpinner();
+        jTextFieldTipo = new javax.swing.JTextField();
+        jButtonFiltros = new javax.swing.JButton();
+        jButtonLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,6 +149,85 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Consulta multifiltro:");
+
+        jLabel4.setText("Fecha creación (yyyy-[m]m-[d]d):");
+
+        jLabel5.setText("Usuario (ID):");
+
+        jLabel6.setText("Técnico (ID):");
+
+        jLabel7.setText("Tipo:");
+
+        jButtonFiltros.setText("Aplicar filtros");
+        jButtonFiltros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFiltrosActionPerformed(evt);
+            }
+        });
+
+        jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/limpiar_micro.png"))); // NOI18N
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButtonFiltros)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonLimpiar))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jSpinnerUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jSpinnerTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)))
+                        .addComponent(jTextFieldFecha)
+                        .addComponent(jTextFieldTipo)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(8, 8, 8)
+                .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonFiltros)
+                    .addComponent(jButtonLimpiar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,7 +236,6 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonVerIndicenciasTiempoConcreto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -151,22 +243,29 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addGap(82, 82, 82)
-                        .addComponent(jButtonListar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonCerrarIndicencia)
-                    .addComponent(jButtonListarVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButtonListar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonListarVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonCerrarIndicencia)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCerrarIndicencia)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonCerrarIndicencia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonVerIndicenciasTiempoConcreto)
@@ -175,7 +274,7 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonListar)
                         .addComponent(jButtonListarVolver)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -187,12 +286,16 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCerrarIndicenciaActionPerformed
 
     private void jTableTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTecnicoMouseClicked
-
+        int fila = this.jTableTecnico.rowAtPoint(evt.getPoint());
+        this.jTextFieldFecha.setText(((java.sql.Date)this.jTableTecnico.getValueAt(fila, 4)).toString());
+        this.jSpinnerUsuario.setValue((int)this.jTableTecnico.getValueAt(fila, 6));
+        this.jSpinnerTecnico.setValue((int)this.jTableTecnico.getValueAt(fila, 7));
+        this.jTextFieldTipo.setText((String)this.jTableTecnico.getValueAt(fila, 5));
     }//GEN-LAST:event_jTableTecnicoMouseClicked
 
     private void jButtonVerIndicenciasTiempoConcretoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
         try {
-            ArrayList<Incidencia> al = tecnicoDAO.getIncidenciasBetweenFechas((int)(this.jSpinnerDias.getValue()));
+            ArrayList<Incidencia> al = tecnicoDAO.getIncidenciasBetweenFechas((int) (this.jSpinnerDias.getValue()));
             refrescarTablaBeetwen(al);
         } catch (Exception ex) {
             System.out.println("Error al hacer consulta de fechas: " + ex.getMessage());
@@ -208,6 +311,23 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
         atras.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButtonListarVolverActionPerformed
+
+    private void jButtonFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrosActionPerformed
+        try {
+            ArrayList<Incidencia> al = adminDAO.consultaCompuesta(this.jTextFieldFecha.getText(), (int) this.jSpinnerUsuario.getValue(), (int) this.jSpinnerTecnico.getValue(), this.jTextFieldTipo.getText());
+            refrescarTablaBeetwen(al);
+        } catch (Exception ex) {
+            System.out.println("Error al hacer la consulta: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonFiltrosActionPerformed
+
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        // TODO add your handling code here:
+        this.jTextFieldFecha.setText("");
+        this.jSpinnerUsuario.setValue(0);
+        this.jSpinnerTecnico.setValue(0);
+        this.jTextFieldTipo.setText("");
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,11 +352,11 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
 
         /* Create and display the form */
     }
-    
+
     public void refrescarTablaBeetwen(ArrayList<Incidencia> ai) {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
-        
+
         try {
             Incidencia i;
             for (int j = 0; j < ai.size(); j++) {
@@ -259,13 +379,11 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
-   
-     
+
     public void refrescarTabla() {
         DefaultTableModel m = (DefaultTableModel) this.jTableTecnico.getModel();
         m.setNumRows(0);
-        
+
         Incidencia i = null;
         try {
             ArrayList<Incidencia> ai = (ArrayList<Incidencia>) adminDAO.getAllIncidencias();
@@ -289,18 +407,53 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    /*
+    public static void main(String[] args) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (Exception e) {
+            System.out.println("Error de driver");
+            System.exit(1);
+        }
+        Scanner sc = new Scanner(System.in);
+        String matricula, marca, modelo, respuesta;
+        do {
+            System.out.println("Introduzca los filtros:");
+            System.out.println("Matrícula: ");
+            matricula = sc.nextLine();
+            System.out.println("Marca: ");
+            marca = sc.nextLine();
+            System.out.println("Modelo: ");
+            modelo = sc.nextLine();
+            filtros(matricula, marca, modelo);
+            System.out.println("¿Otra búsqueda? (S/N)");
+            respuesta = sc.nextLine();
+        } while (!respuesta.equalsIgnoreCase("S"));
+    }*/
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCerrarIndicencia;
+    private javax.swing.JButton jButtonFiltros;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonListar;
     private javax.swing.JButton jButtonListarVolver;
     private javax.swing.JButton jButtonVerIndicenciasTiempoConcreto;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinnerDias;
+    private javax.swing.JSpinner jSpinnerTecnico;
+    private javax.swing.JSpinner jSpinnerUsuario;
     private javax.swing.JTable jTableTecnico;
+    private javax.swing.JTextField jTextFieldFecha;
+    private javax.swing.JTextField jTextFieldTipo;
     // End of variables declaration//GEN-END:variables
 }

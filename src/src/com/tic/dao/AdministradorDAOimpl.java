@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import src.com.tic.pojo.Dispositivo;
@@ -327,6 +328,58 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
                     incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
                 }
             }
+        } catch (Exception e) {
+            throw e;
+        }
+        return incidencias;
+    }
+
+    public ArrayList<Incidencia> consultaCompuesta(String fecha, int idUsuario, int idTecnico, String tipo) throws Exception {
+        ArrayList<Incidencia> incidencias = new ArrayList();
+        String sql;
+        int c = 0;
+        sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE 1 = 1";
+        if (fecha != null && !fecha.equals("")) {
+            sql = sql + " AND f_entrada = ? ";
+        }
+        if (idUsuario != 0) {
+            sql = sql + " AND ID_Usuario = ? ";
+        }
+        if (idTecnico != 0) {
+            sql = sql + " AND ID_Tecnico = ? ";
+        }
+
+        if (tipo != null && !tipo.equals("")) {
+            sql = sql + " AND tipo_incidencia = ? ";
+        }
+        sql+=";";
+
+        try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(sql)) {
+            if (fecha != null && !fecha.equals("")) {
+                c++;
+                pstm.setDate(c, java.sql.Date.valueOf(fecha));
+            }
+            if (idUsuario != 0) {
+                c++;
+                pstm.setInt(c, idUsuario);
+            }
+            if (idTecnico != 0) {
+                c++;
+                pstm.setInt(c, idTecnico);
+
+            }
+
+            if (tipo != null && !tipo.equals("")) {
+                c++;
+                pstm.setString(c, tipo);
+            }
+            
+            try (ResultSet resul = pstm.executeQuery();) {
+                while (resul.next()) {
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                }
+            }
+
         } catch (Exception e) {
             throw e;
         }
