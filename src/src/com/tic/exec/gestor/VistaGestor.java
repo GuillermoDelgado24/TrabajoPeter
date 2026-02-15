@@ -172,6 +172,11 @@ public class VistaGestor extends javax.swing.JFrame {
         });
 
         jButtonListarTodas.setText("Listar todas");
+        jButtonListarTodas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListarTodasActionPerformed(evt);
+            }
+        });
 
         jButtonSalir1.setText("Salir");
         jButtonSalir1.addActionListener(new java.awt.event.ActionListener() {
@@ -233,9 +238,9 @@ public class VistaGestor extends javax.swing.JFrame {
                                         .addComponent(jSpinnerIdTecnicoAsignar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(8, 8, 8)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(218, 218, 218)
+                                        .addGap(18, 18, 18)
                                         .addComponent(jButtonListarTodas)))
-                                .addGap(308, 308, 308)
+                                .addGap(508, 508, 508)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButtonCerrarSesion)
@@ -330,6 +335,10 @@ public class VistaGestor extends javax.swing.JFrame {
     private void jMenuItemAyudaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMousePressed
         ponLaAyuda();
     }//GEN-LAST:event_jMenuItemAyudaMousePressed
+
+    private void jButtonListarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarTodasActionPerformed
+        refrescarTablaIncidenciasEspera();
+    }//GEN-LAST:event_jButtonListarTodasActionPerformed
 
     /**
      * @param args the command line arguments

@@ -49,7 +49,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButtonUsu = new javax.swing.JButton();
         jButtonGestEsp = new javax.swing.JButton();
         jButtonGestInc = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonRegistrar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -93,9 +93,9 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButtonGestInc.setPreferredSize(new java.awt.Dimension(264, 28));
         jButtonGestInc.addActionListener(this::jButtonGestIncActionPerformed);
 
-        jButton1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jButton1.setText("REGISTRAR USUARIO");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jButtonRegistrar.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jButtonRegistrar.setText("REGISTRAR USUARIO");
+        jButtonRegistrar.addActionListener(this::jButtonRegistrarActionPerformed);
 
         jMenu2.setText("Salir");
 
@@ -148,7 +148,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
                 .addComponent(jButtonFuncGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButtonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +165,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jButtonFuncGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(jButton1)
+                .addComponent(jButtonRegistrar)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -218,10 +218,11 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private void jMenuItemAyudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemAyudaMouseClicked
         ponLaAyuda();    }//GEN-LAST:event_jMenuItemAyudaMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         JFrameRegister vistaRegistrar = new JFrameRegister();
         vistaRegistrar.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -274,11 +275,11 @@ public class VistaAdministrador extends javax.swing.JFrame {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonFuncGestor;
     private javax.swing.JButton jButtonGestEsp;
     private javax.swing.JButton jButtonGestInc;
     private javax.swing.JButton jButtonGestionarDispositivos;
+    private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonUsu;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;

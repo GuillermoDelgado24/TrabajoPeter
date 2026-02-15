@@ -333,10 +333,6 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
         return incidencias;
     }
 
-    public void volverTecnico(int idUsuario) {
-
-    }
-
     @Override
     public void close() throws Exception {
         con.close();

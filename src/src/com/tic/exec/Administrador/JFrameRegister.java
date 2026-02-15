@@ -27,7 +27,6 @@ public class JFrameRegister extends javax.swing.JFrame {
      */
     public JFrameRegister() {
         initComponents();
-        this.setSize(600, 530);
         this.setLocationRelativeTo(null);
     }
 
@@ -60,16 +59,19 @@ public class JFrameRegister extends javax.swing.JFrame {
         checkboxGestor = new java.awt.Checkbox();
         checkboxTecnico = new java.awt.Checkbox();
         checkboxAdmin = new java.awt.Checkbox();
+        jButtonListarVolver = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(500, 400));
+        setMinimumSize(new java.awt.Dimension(550, 535));
+        setPreferredSize(new java.awt.Dimension(550, 535));
+        setSize(new java.awt.Dimension(550, 535));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonRegister.setText("Crear cuenta");
         jButtonRegister.addActionListener(this::jButtonRegisterActionPerformed);
-        getContentPane().add(jButtonRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 140, 40));
+        getContentPane().add(jButtonRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 150, 30));
 
         jTextFieldNombreApellidos.addActionListener(this::jTextFieldNombreApellidosActionPerformed);
         getContentPane().add(jTextFieldNombreApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 183, 30));
@@ -135,6 +137,10 @@ public class JFrameRegister extends javax.swing.JFrame {
         checkboxAdmin.addItemListener(this::checkboxAdminItemStateChanged);
         getContentPane().add(checkboxAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, -1));
 
+        jButtonListarVolver.setText("Volver");
+        jButtonListarVolver.addActionListener(this::jButtonListarVolverActionPerformed);
+        getContentPane().add(jButtonListarVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 120, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -146,7 +152,7 @@ public class JFrameRegister extends javax.swing.JFrame {
                         || this.jPasswordFieldContrasena.getPassword().equals("") || this.jPasswordFieldRepetirContrasena.getPassword().equals("")) {
                     JOptionPane.showMessageDialog(null, "Rellene todos los campos", "CAMPO VACIO", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    Usuario usuario = new Usuario(this.jTextFieldNombreApellidos.getText(), this.jTextFieldUsuario.getText(), this.jTextFieldCorreo.getText(), this.jTextFieldTelefono.getText(), new String(this.jPasswordFieldContrasena.getPassword()));
+                    Usuario usuario = new Usuario(this.jTextFieldUsuario.getText(), this.jTextFieldNombreApellidos.getText(), this.jTextFieldCorreo.getText(), this.jTextFieldTelefono.getText(), new String(this.jPasswordFieldContrasena.getPassword()));
                     int idUsuario = this.aimpl.crearUsuario(usuario);
                     if (esTecnico) {
                         this.aimpl.hacerTecnico(idUsuario);
@@ -157,7 +163,13 @@ public class JFrameRegister extends javax.swing.JFrame {
                         this.aimpl.hacerGestor(idUsuario);
                     }
                     JOptionPane.showMessageDialog(null, "Se ha introducido el usuario " + usuario.getNombreDeUsuario() + " con éxito", "USUARIO INTRODUCIDO CON ÉXITO", JOptionPane.OK_OPTION);
-                    dispose();
+                    this.jTextFieldUsuario.setText("");
+                    this.jTextFieldCorreo.setText("");
+                    this.jTextFieldTelefono.setText("");
+                    this.jTextFieldNombreApellidos.setText("");
+                    this.jPasswordFieldContrasena.setText("");
+                    this.jPasswordFieldRepetirContrasena.setText("");
+
                 }
             } catch (Exception ex) {
                 System.out.println("Error de sql: " + ex.getMessage());
@@ -218,6 +230,12 @@ public class JFrameRegister extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkboxAdminItemStateChanged
 
+    private void jButtonListarVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarVolverActionPerformed
+        VistaAdministrador atras = new VistaAdministrador();
+        atras.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonListarVolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +265,7 @@ public class JFrameRegister extends javax.swing.JFrame {
     private java.awt.Checkbox checkboxAdmin;
     private java.awt.Checkbox checkboxGestor;
     private java.awt.Checkbox checkboxTecnico;
+    private javax.swing.JButton jButtonListarVolver;
     private javax.swing.JButton jButtonRegister;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

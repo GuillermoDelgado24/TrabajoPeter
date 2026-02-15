@@ -4,6 +4,7 @@
  */
 package src.com.tic.exec.Tecnico;
 
+import javax.swing.JOptionPane;
 import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.pojo.Incidencia;
 
@@ -152,16 +153,25 @@ public class jDialogCerrarIncidencia extends javax.swing.JDialog {
 
     private void jButtonCerrarIndienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarIndienciaActionPerformed
         Incidencia i = new Incidencia("", "", 0);
-        i.setIdIncidencia(Integer.parseInt(this.jTextFieldIDIncidencia.getText()));
+        try {
+            i.setIdIncidencia(Integer.parseInt(this.jTextFieldIDIncidencia.getText()));
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Compruebe el ID de Incidencia. Debe ser un número.", "ERROR DE CONSULTA", JOptionPane.ERROR_MESSAGE);
+        }
         i.setDescripcionSolucion(this.jTextArea1.getText());
         i.setTipoIncidencia(this.jComboBoxEstadoCierre.getSelectedItem().toString());
-        try {
-            tecnicoDAO.cerrarIncidencia(i);
-            this.padre.refrescarTabla(this.padre.idTecnico);
-                    dispose();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (i.getDescripcionSolucion().equals("") || i.getDescripcionSolucion() == null) {
+            JOptionPane.showMessageDialog(null, "Campo 'Descripción del resultado' vacío", "CAMPO VACÍO", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                tecnicoDAO.cerrarIncidencia(i);
+                this.padre.refrescarTabla(this.padre.idTecnico);
+                dispose();
+            } catch (Exception ex) {
+                System.out.println("Error de sql: "+ex.getMessage());
+            }
         }
+
     }//GEN-LAST:event_jButtonCerrarIndienciaActionPerformed
 
     /**

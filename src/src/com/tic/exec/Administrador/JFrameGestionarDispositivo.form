@@ -32,8 +32,8 @@
                       <Component id="jButtonListadoCompleto" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="jButtonListarTipo" min="-2" pref="140" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="jButtonListarVolver" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jTextFieldTipo1" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -67,8 +67,10 @@
                       <Component id="jScrollPane2" min="-2" pref="300" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jButtonListarTipo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButtonListarVolver" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jButtonListarTipo" alignment="3" max="32767" attributes="0"/>
+                              <Component id="jTextFieldTipo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jButtonListadoCompleto" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -239,7 +241,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButtonRegistrarNuevo" min="-2" pref="174" max="-2" attributes="0"/>
                       <Component id="jButtonActualizarDispositivo" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonEliminarDispositivo" min="-2" pref="175" max="-2" attributes="0"/>
+                      <Component id="jButtonEliminarDispositivo" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Component id="jButtonListarVolver" min="-2" pref="150" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -258,6 +264,8 @@
                           <Component id="jButtonActualizarDispositivo" min="-2" pref="50" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButtonEliminarDispositivo" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="jButtonListarVolver" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jTextFieldTipo" min="-2" max="-2" attributes="0"/>
@@ -360,6 +368,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRegistrarNuevoActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="jButtonListarVolver">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Volver"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListarVolverActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JSpinner" name="jSpinnerIDEspacio">
@@ -372,12 +388,9 @@
         <Property name="text" type="java.lang.String" value="ID Espacio:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonListarVolver">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Volver"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="jTextFieldTipo1">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListarVolverActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldTipo1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
