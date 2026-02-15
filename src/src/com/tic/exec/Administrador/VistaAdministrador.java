@@ -48,8 +48,8 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButtonFuncGestor = new javax.swing.JButton();
         jButtonUsu = new javax.swing.JButton();
         jButtonGestEsp = new javax.swing.JButton();
-        jButtonGestInc = new javax.swing.JButton();
         jButtonRegistrar = new javax.swing.JButton();
+        jButtonGestInc = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -73,6 +73,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButtonGestionarDispositivos.setText("GESTIONAR DISPOSITIVOS");
         jButtonGestionarDispositivos.addActionListener(this::jButtonGestionarDispositivosActionPerformed);
 
+        jButtonFuncGestor.setBackground(new java.awt.Color(0, 102, 102));
         jButtonFuncGestor.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButtonFuncGestor.setText("FUNCIONAR COMO GESTOR");
         jButtonFuncGestor.setPreferredSize(new java.awt.Dimension(264, 28));
@@ -88,16 +89,20 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jButtonGestEsp.setPreferredSize(new java.awt.Dimension(264, 28));
         jButtonGestEsp.addActionListener(this::jButtonGestEspActionPerformed);
 
-        jButtonGestInc.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jButtonGestInc.setText("FUNCIONAR COMO TECNICO");
-        jButtonGestInc.setPreferredSize(new java.awt.Dimension(264, 28));
-        jButtonGestInc.addActionListener(this::jButtonGestIncActionPerformed);
-
+        jButtonRegistrar.setBackground(new java.awt.Color(51, 102, 0));
         jButtonRegistrar.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jButtonRegistrar.setText("REGISTRAR USUARIO");
         jButtonRegistrar.addActionListener(this::jButtonRegistrarActionPerformed);
 
-        jMenu2.setText("Salir");
+        jButtonGestInc.setBackground(new java.awt.Color(255, 153, 0));
+        jButtonGestInc.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jButtonGestInc.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonGestInc.setText("FUNCIONAR COMO TECNICO");
+        jButtonGestInc.setPreferredSize(new java.awt.Dimension(264, 28));
+        jButtonGestInc.addActionListener(this::jButtonGestIncActionPerformed);
+
+        jMenu2.setForeground(new java.awt.Color(255, 102, 102));
+        jMenu2.setText("<html><b>Salir</b></html>");
 
         jMenuItem1.setText("Cerrar sesión");
         jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
@@ -166,7 +171,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
                 .addComponent(jButtonFuncGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jButtonRegistrar)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();

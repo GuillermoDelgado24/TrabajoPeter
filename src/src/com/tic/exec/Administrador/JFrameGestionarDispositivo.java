@@ -25,6 +25,7 @@ public class JFrameGestionarDispositivo extends javax.swing.JFrame {
      */
     public JFrameGestionarDispositivo() {
         initComponents();
+        this.setLocationRelativeTo(null);
         refrescarTabla();
     }
 

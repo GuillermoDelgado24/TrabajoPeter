@@ -51,9 +51,10 @@ public class JFrameLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jButtonSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAyuda = new javax.swing.JMenu();
         jMenuItemAyuda = new javax.swing.JMenuItem();
@@ -84,6 +85,14 @@ public class JFrameLogin extends javax.swing.JFrame {
         jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, 30));
 
+        jLabel4.setText("Contraseña:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, 20));
+
+        jButtonSalir.setBackground(new java.awt.Color(255, 102, 102));
+        jButtonSalir.setText("Salir");
+        jButtonSalir.addActionListener(this::jButtonSalirActionPerformed);
+        getContentPane().add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -93,9 +102,6 @@ public class JFrameLogin extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 60));
-
-        jLabel4.setText("Contraseña:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, 20));
 
         jMenuAyuda.setText("Ayuda");
         jMenuAyuda.addActionListener(this::jMenuAyudaActionPerformed);
@@ -210,6 +216,10 @@ public class JFrameLogin extends javax.swing.JFrame {
         ponLaAyuda();
     }//GEN-LAST:event_jMenuItemAyudaMousePressed
 
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButtonSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -256,6 +266,7 @@ public class JFrameLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
+    private javax.swing.JButton jButtonSalir;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

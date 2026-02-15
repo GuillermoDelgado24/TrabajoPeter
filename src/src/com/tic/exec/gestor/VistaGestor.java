@@ -152,6 +152,7 @@ public class VistaGestor extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
+        jButtonAsignarTecnico.setBackground(new java.awt.Color(51, 102, 0));
         jButtonAsignarTecnico.setText("Asignar Tecnico");
         jButtonAsignarTecnico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +179,7 @@ public class VistaGestor extends javax.swing.JFrame {
             }
         });
 
+        jButtonSalir1.setBackground(new java.awt.Color(255, 102, 102));
         jButtonSalir1.setText("Salir");
         jButtonSalir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

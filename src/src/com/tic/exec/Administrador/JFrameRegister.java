@@ -49,17 +49,18 @@ public class JFrameRegister extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPasswordFieldRepetirContrasena = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jTextFieldCorreo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldTelefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldUsuario = new javax.swing.JTextField();
-        checkboxGestor = new java.awt.Checkbox();
-        checkboxTecnico = new java.awt.Checkbox();
-        checkboxAdmin = new java.awt.Checkbox();
         jButtonListarVolver = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        checkboxGestor = new java.awt.Checkbox();
+        checkboxAdmin = new java.awt.Checkbox();
+        checkboxTecnico = new java.awt.Checkbox();
 
         jTextField2.setText("jTextField2");
 
@@ -69,9 +70,10 @@ public class JFrameRegister extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(550, 535));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButtonRegister.setBackground(new java.awt.Color(51, 102, 0));
         jButtonRegister.setText("Crear cuenta");
         jButtonRegister.addActionListener(this::jButtonRegisterActionPerformed);
-        getContentPane().add(jButtonRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 150, 30));
+        getContentPane().add(jButtonRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, 150, 30));
 
         jTextFieldNombreApellidos.addActionListener(this::jTextFieldNombreApellidosActionPerformed);
         getContentPane().add(jTextFieldNombreApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 183, 30));
@@ -101,9 +103,6 @@ public class JFrameRegister extends javax.swing.JFrame {
         jLabel4.setText("Confirmar contraseña:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, 20));
 
-        jLabel5.setText("Tipo de cuenta:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, -1, 20));
-
         jTextFieldCorreo.addActionListener(this::jTextFieldCorreoActionPerformed);
         getContentPane().add(jTextFieldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 183, 30));
 
@@ -122,24 +121,36 @@ public class JFrameRegister extends javax.swing.JFrame {
         jTextFieldUsuario.addActionListener(this::jTextFieldUsuarioActionPerformed);
         getContentPane().add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 183, 30));
 
-        checkboxGestor.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        checkboxGestor.setLabel("Es Gestor");
-        checkboxGestor.addItemListener(this::checkboxGestorItemStateChanged);
-        getContentPane().add(checkboxGestor, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, -1, -1));
-
-        checkboxTecnico.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        checkboxTecnico.setLabel("Es Técnico");
-        checkboxTecnico.addItemListener(this::checkboxTecnicoItemStateChanged);
-        getContentPane().add(checkboxTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
-
-        checkboxAdmin.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        checkboxAdmin.setLabel("Es Admin");
-        checkboxAdmin.addItemListener(this::checkboxAdminItemStateChanged);
-        getContentPane().add(checkboxAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, -1));
-
         jButtonListarVolver.setText("Volver");
         jButtonListarVolver.addActionListener(this::jButtonListarVolverActionPerformed);
         getContentPane().add(jButtonListarVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 120, 30));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 17)); // NOI18N
+        jLabel5.setText("Tipo de cuenta:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, 20));
+
+        checkboxGestor.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        checkboxGestor.setForeground(new java.awt.Color(0, 153, 102));
+        checkboxGestor.setLabel("Es Gestor");
+        checkboxGestor.addItemListener(this::checkboxGestorItemStateChanged);
+        jPanel2.add(checkboxGestor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        checkboxAdmin.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        checkboxAdmin.setForeground(new java.awt.Color(204, 0, 0));
+        checkboxAdmin.setLabel("Es Admin");
+        checkboxAdmin.addItemListener(this::checkboxAdminItemStateChanged);
+        jPanel2.add(checkboxAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+
+        checkboxTecnico.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        checkboxTecnico.setForeground(new java.awt.Color(0, 102, 204));
+        checkboxTecnico.setLabel("Es Técnico");
+        checkboxTecnico.addItemListener(this::checkboxTecnicoItemStateChanged);
+        jPanel2.add(checkboxTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 180, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -208,6 +219,10 @@ public class JFrameRegister extends javax.swing.JFrame {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             this.esGestor = true;
         } else {
+            if (this.esAdmin == true) {
+                checkboxAdmin.setState(false);
+                esAdmin = false;
+            }
             this.esGestor = false;
         }
     }//GEN-LAST:event_checkboxGestorItemStateChanged
@@ -276,6 +291,7 @@ public class JFrameRegister extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordFieldContrasena;
     private javax.swing.JPasswordField jPasswordFieldRepetirContrasena;
     private javax.swing.JTextField jTextField2;

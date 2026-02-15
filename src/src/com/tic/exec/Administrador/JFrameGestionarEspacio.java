@@ -25,6 +25,7 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
      */
     public JFrameGestionarEspacio() {
         initComponents();
+        this.setLocationRelativeTo(null);
         refrescarTabla();
     }
 
