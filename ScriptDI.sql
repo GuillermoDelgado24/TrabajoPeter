@@ -47,7 +47,6 @@ CREATE TABLE Incidencias (
 ID_Incidencia INT AUTO_INCREMENT PRIMARY KEY,
 estado ENUM('alta','asignada','en curso','cerrada') DEFAULT 'alta',
 resultado_cierre ENUM('con éxito','con éxito parcial','sin_éxito') DEFAULT NULL,
-prioridad INT,
 f_cierre DATE,
 f_entrada DATE NOT NULL,
 tipo_incidencia VARCHAR(100) DEFAULT NULL,
@@ -55,6 +54,7 @@ ID_Usuario INT,
 ID_Tecnico INT DEFAULT NULL,
 descripcion_incidencia VARCHAR(500) NOT NULL,
 descripcion_solucion VARCHAR(500) DEFAULT NULL,
+prioridad INT,
 CONSTRAINT fk_incidencia_usuario
 FOREIGN KEY (ID_Usuario)
 REFERENCES Usuarios(ID_Usuario)
@@ -136,7 +136,8 @@ tipo_incidencia,
 ID_Usuario,
 ID_Tecnico,
 descripcion_incidencia,
-descripcion_solucion
+descripcion_solucion,
+prioridad
 ) VALUES
 (
 'alta',
@@ -147,7 +148,8 @@ NULL,
 4,
 NULL,
 'El ordenador no arranca correctamente',
-NULL
+NULL,
+4
 ),
 (
 'en curso',
@@ -158,7 +160,8 @@ NULL,
 5,
 1,
 'No hay conexión a Internet en el aula',
-'Revisando cableado y switch'
+'Revisando cableado y switch',
+7
 ),
 (
 'cerrada',
@@ -169,7 +172,8 @@ NULL,
 4,
 2,
 'El proyector no enciende',
-'Sustitución del cable de alimentación'
+'Sustitución del cable de alimentación',
+3
 );
 
 

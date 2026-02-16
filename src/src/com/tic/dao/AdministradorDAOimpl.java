@@ -321,11 +321,11 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
     @Override
     public ArrayList<Incidencia> getAllIncidencias() throws Exception {
         ArrayList<Incidencia> incidencias = new ArrayList();
-        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE estado <> 'cerrada';";
+        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE estado <> 'cerrada';";
         try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(SQL)) {
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
                 }
             }
         } catch (Exception e) {
@@ -338,7 +338,7 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
         ArrayList<Incidencia> incidencias = new ArrayList();
         String sql;
         int c = 0;
-        sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE 1 = 1";
+        sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE 1 = 1";
         if (fecha != null && !fecha.equals("")) {
             sql = sql + " AND f_entrada = ? ";
         }
@@ -376,7 +376,7 @@ public class AdministradorDAOimpl implements AdministradorDAO, AutoCloseable {
             
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
                 }
             }
 

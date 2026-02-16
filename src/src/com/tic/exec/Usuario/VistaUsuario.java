@@ -98,11 +98,11 @@ public class VistaUsuario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID_Incidencia", "estado", "result_cierre", "f_cierre", "f_entrada", "tipo_incidencia", "ID_Usuario", "ID_Tecnico", "Descripcion", "Solucion"
+                "ID_Incidencia", "estado", "result_cierre", "f_cierre", "f_entrada", "tipo_incidencia", "ID_Usuario", "ID_Tecnico", "Descripcion", "Solucion", "Prioridad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -395,7 +395,9 @@ public class VistaUsuario extends javax.swing.JFrame {
                     i.getIdUsuario(),
                     i.getIdTecnico(),
                     i.getDescripcionIncidencia(),
-                    i.getDescripcionSolucion()
+                    i.getDescripcionSolucion(),
+                    i.getPrioridad()
+
                 };
                 m.addRow(o);
             }
@@ -423,7 +425,9 @@ public class VistaUsuario extends javax.swing.JFrame {
                 i.getIdUsuario(),
                 i.getIdTecnico(),
                 i.getDescripcionIncidencia(),
-                i.getDescripcionSolucion()
+                i.getDescripcionSolucion(),
+                i.getPrioridad()
+
             };
 
             m.addRow(o);

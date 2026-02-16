@@ -19,18 +19,19 @@ public class Incidencia {
     private Date fechaEntrada;
     private String tipoIncidencia = null;
     private String descripcionIncidencia;
-    private String descripcionSolucion =null;
+    private String descripcionSolucion = null;
     private int idUsuario;
     private int idTecnico = -1;
     private int prioridad;
 
-    public Incidencia(String tipoIncidencia, String descripcionIncidencia, int idUsuario) {
+    public Incidencia(String tipoIncidencia, String descripcionIncidencia, int idUsuario, int prioridad) {
         this.tipoIncidencia = tipoIncidencia;
         this.descripcionIncidencia = descripcionIncidencia;
         this.idUsuario = idUsuario;
+        this.prioridad = prioridad;
     }
 
-    public Incidencia(int idIncidencia, String estado, String resultado_cierre, Date fechaCierre, Date fechaEntrada, String tipoIncidencia, String descripcionIncidencia, String descripcionSolucion, int idUsuario, int idTecnico) {
+    public Incidencia(int idIncidencia, String estado, String resultado_cierre, Date fechaCierre, Date fechaEntrada, String tipoIncidencia, String descripcionIncidencia, String descripcionSolucion, int idUsuario, int idTecnico, int prioridad) {
         this.idIncidencia = idIncidencia;
         this.estado = estado;
         this.resultado_cierre = resultado_cierre;
@@ -41,19 +42,8 @@ public class Incidencia {
         this.descripcionSolucion = descripcionSolucion;
         this.idUsuario = idUsuario;
         this.idTecnico = idTecnico;
-    }
-
-    public Incidencia(int idIncidencia, String estado, Date fechaEntrada, String descripcionIncidencia, int idUsuario, int prioridad) {
-        this.idIncidencia = idIncidencia;
-        this.estado = estado;
-        this.fechaEntrada = fechaEntrada;
-        this.descripcionIncidencia = descripcionIncidencia;
-        this.idUsuario = idUsuario;
         this.prioridad = prioridad;
     }
-    
-    
-
 
     public int getIdTecnico() {
         return idTecnico;
@@ -137,7 +127,15 @@ public class Incidencia {
 
     @Override
     public String toString() {
-        return "Incidencia{" + "idIncidencia=" + idIncidencia + ", estado=" + estado + ", resultado_cierre=" + resultado_cierre + ", fechaCierre=" + fechaCierre + ", fechaEntrada=" + fechaEntrada + ", tipoIncidencia=" + tipoIncidencia + ", descripcionIncidencia=" + descripcionIncidencia + ", descripcionSolucion=" + descripcionSolucion + ", idUsuario=" + idUsuario + ", idTecnico=" + idTecnico + '}';
+        return "Incidencia{" + "idIncidencia=" + idIncidencia + ", estado=" + estado + ", resultado_cierre=" + resultado_cierre + ", fechaCierre=" + fechaCierre + ", fechaEntrada=" + fechaEntrada + ", tipoIncidencia=" + tipoIncidencia + ", descripcionIncidencia=" + descripcionIncidencia + ", descripcionSolucion=" + descripcionSolucion + ", idUsuario=" + idUsuario + ", idTecnico=" + idTecnico + ", prioridad=" + prioridad + '}';
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
     }
 
 }

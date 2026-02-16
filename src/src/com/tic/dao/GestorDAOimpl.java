@@ -88,13 +88,11 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
 
     @Override
     public ArrayList<Incidencia> getIncidenciasByEspera() throws Exception {
-        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE estado IS NULL OR estado = 'alta';";
+        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE estado IS NULL OR estado = 'alta';";
         ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
-        Incidencia i = null;
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql); ResultSet resul = pstm.executeQuery();) {
             while (resul.next()) {
-                i = new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"));
-                incidencias.add(i);
+                incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
             }
 
         } catch (Exception e) {
@@ -105,12 +103,12 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
 
     @Override
     public ArrayList<Incidencia> getAllIncidencias() throws Exception {
-        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias;";
+        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias;";
         ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
 
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql); ResultSet resul = pstm.executeQuery();) {
             while (resul.next()) {
-                incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
             }
 
         } catch (Exception e) {
@@ -121,14 +119,14 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
 
     @Override
     public ArrayList<Incidencia> getIncidenciasByTipo(String tipoIncidencia) throws Exception {
-        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE tipo_incidencia = ?;";
+        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE tipo_incidencia = ?;";
         ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
 
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
             pstm.setString(1, tipoIncidencia);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), tipoIncidencia, resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
                 }
             }
 
@@ -140,14 +138,14 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
 
     @Override
     public ArrayList<Incidencia> getIncidenciasByTecnico(int idTecnico) throws Exception {
-        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERER ID_Tecnnico = ?;";
+        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERER ID_Tecnnico = ?;";
         ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
 
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
             pstm.setInt(1, idTecnico);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
                 }
             }
         } catch (Exception e) {
@@ -175,7 +173,7 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
     }
 
     public ArrayList<Incidencia> getIncidenciasByTipoandId(int idTecnico, String tipoIncidencia) throws Exception {
-        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE  ID_Tecnico = ? and tipo_incidencia = ?";
+        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE  ID_Tecnico = ? and tipo_incidencia = ?";
         ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
 
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
@@ -184,7 +182,7 @@ public class GestorDAOimpl implements GestorDAO, AutoCloseable {
             pstm.setString(2, tipoIncidencia);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico")));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
                 }
             }
 

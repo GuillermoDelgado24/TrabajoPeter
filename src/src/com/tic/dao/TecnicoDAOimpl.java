@@ -107,152 +107,76 @@ public class TecnicoDAOimpl implements TecnicoDAO, AutoCloseable {
 
     @Override
     public ArrayList<Incidencia> getIncidenciasAsignadas(int idTecnico) throws Exception {
-        ArrayList<Incidencia> al = new ArrayList<>();
-        int idIncidencia;
-        String estado;
-        String resultado_cierre;
-        Date fechaCierre;
-        Date fechaEntrada;
-        String tipoIncidencia;
-        String descripcionIncidencia;
-        String descripcionSolucion;
-        int idUsuario;
-        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE ID_Tecnico = ? AND (estado = 'asignada' OR estado = 'en curso')";
+        ArrayList<Incidencia> incidencias = new ArrayList<>();
+        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE ID_Tecnico = ? AND (estado = 'asignada' OR estado = 'en curso')";
         try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(SQL)) {
             pstm.setInt(1, idTecnico);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    idIncidencia = resul.getInt("ID_Incidencia");
-                    estado = resul.getString("estado");
-                    resultado_cierre = resul.getString("resultado_cierre");
-                    fechaCierre = resul.getDate("f_cierre");
-                    fechaEntrada = resul.getDate("f_entrada");
-                    tipoIncidencia = resul.getString("tipo_incidencia");
-                    descripcionIncidencia = resul.getString("descripcion_incidencia");
-                    descripcionSolucion = resul.getString("descripcion_solucion");
-                    idUsuario = resul.getInt("ID_Usuario");
-                    al.add(new Incidencia(idIncidencia, estado, resultado_cierre, fechaCierre, fechaEntrada, tipoIncidencia, descripcionIncidencia, descripcionSolucion, idUsuario, idTecnico));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
 
                 }
             }
         } catch (Exception e) {
             throw e;
         }
-        return al;
+        return incidencias;
     }
 
     @Override
     public ArrayList<Incidencia> getIncidenciasByTipo(String tipoIncidencia) throws Exception {
-        ArrayList<Incidencia> al = new ArrayList<>();
-        int idIncidencia;
-        String estado;
-        String resultado_cierre;
-        Date fechaCierre;
-        Date fechaEntrada;
-        String descripcionIncidencia;
-        String descripcionSolucion;
-        int idUsuario;
-        int idTecnico;
+        ArrayList<Incidencia> incidencias = new ArrayList<>();
 
-        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE tipo_incidencia = ?";
+
+        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE tipo_incidencia = ?";
         try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(SQL)) {
             pstm.setString(1, tipoIncidencia);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    idIncidencia = resul.getInt("ID_Incidencia");
-                    estado = resul.getString("estado");
-                    resultado_cierre = resul.getString("resultado_cierre");
-                    fechaCierre = resul.getDate("f_cierre");
-                    fechaEntrada = resul.getDate("f_entrada");
-                    tipoIncidencia = resul.getString("tipo_incidencia");
-                    descripcionIncidencia = resul.getString("descripcion_incidencia");
-                    descripcionSolucion = resul.getString("descripcion_solucion");
-                    idUsuario = resul.getInt("ID_Usuario");
-                    idTecnico = resul.getInt("ID_Tecnico");
-
-                    al.add(new Incidencia(idIncidencia, estado, resultado_cierre, fechaCierre, fechaEntrada, tipoIncidencia, descripcionIncidencia, descripcionSolucion, idUsuario, idTecnico));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
                 }
             }
         } catch (Exception e) {
             throw e;
         }
-        return al;
+        return incidencias;
     }
     
     @Override
     public ArrayList<Incidencia> getIncidencias() throws Exception {
-        ArrayList<Incidencia> al = new ArrayList<>();
-        int idIncidencia;
-        String estado;
-        String resultado_cierre;
-        Date fechaCierre;
-        Date fechaEntrada;
-        String descripcionIncidencia;
-        String descripcionSolucion;
-        int idUsuario;
-        int idTecnico;
-        String tipoIncidencia;
+        ArrayList<Incidencia> incidencias = new ArrayList<>();
 
-        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias;";
+        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias;";
         try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(SQL)) {
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    idIncidencia = resul.getInt("ID_Incidencia");
-                    estado = resul.getString("estado");
-                    resultado_cierre = resul.getString("resultado_cierre");
-                    fechaCierre = resul.getDate("f_cierre");
-                    fechaEntrada = resul.getDate("f_entrada");
-                    tipoIncidencia = resul.getString("tipo_incidencia");
-                    descripcionIncidencia = resul.getString("descripcion_incidencia");
-                    descripcionSolucion = resul.getString("descripcion_solucion");
-                    idUsuario = resul.getInt("ID_Usuario");
-                    idTecnico = resul.getInt("ID_Tecnico");
 
-                    al.add(new Incidencia(idIncidencia, estado, resultado_cierre, fechaCierre, fechaEntrada, tipoIncidencia, descripcionIncidencia, descripcionSolucion, idUsuario, idTecnico));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
                 }
             }
         } catch (Exception e) {
             throw e;
         }
-        return al;
+        return incidencias;
     }
 
     @Override
     public ArrayList<Incidencia> getIncidenciasBetweenFechas(int Dias) throws Exception {
-        ArrayList<Incidencia> al = new ArrayList<>();
-        int idIncidencia;
-        String estado;
-        String resultado_cierre;
-        Date fechaCierre;
-        Date fechaEntrada;
-        String descripcionIncidencia;
-        String descripcionSolucion;
-        String tipoIncidencia;
-        int idUsuario;
-        int idTecnico;
+        ArrayList<Incidencia> incidencias = new ArrayList<>();
 
-        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE TIMESTAMPDIFF(DAY,f_cierre,CURDATE()) <= ? AND estado = 'cerrada'";
+        String SQL = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE TIMESTAMPDIFF(DAY,f_cierre,CURDATE()) <= ? AND estado = 'cerrada'";
         try (Connection conn = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = conn.prepareStatement(SQL)) {
             pstm.setInt(1, Dias);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    idIncidencia = resul.getInt("ID_Incidencia");
-                    estado = resul.getString("estado");
-                    resultado_cierre = resul.getString("resultado_cierre");
-                    fechaCierre = resul.getDate("f_cierre");
-                    fechaEntrada = resul.getDate("f_entrada");
-                    tipoIncidencia = resul.getString("tipo_incidencia");
-                    descripcionIncidencia = resul.getString("descripcion_incidencia");
-                    descripcionSolucion = resul.getString("descripcion_solucion");
-                    idUsuario = resul.getInt("ID_Usuario");
-                    idTecnico = resul.getInt("ID_Tecnico");
-                    al.add(new Incidencia(idIncidencia, estado, resultado_cierre, fechaCierre, fechaEntrada, tipoIncidencia, descripcionIncidencia, descripcionSolucion, idUsuario, idTecnico));
+
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
                 }
             }
         } catch (Exception e) {
             throw e;
         }
-        return al;
+        return incidencias;
     }
 
     @Override

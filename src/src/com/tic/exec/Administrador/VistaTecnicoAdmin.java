@@ -27,8 +27,7 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
     int idUsuario;
     int idTecnico;
     String tipo;
-    
-    
+
     /**
      * Creates new form VistaTecnico
      */
@@ -293,10 +292,10 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
 
     private void jTableTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTecnicoMouseClicked
         int fila = this.jTableTecnico.rowAtPoint(evt.getPoint());
-        this.jTextFieldFecha.setText(((java.sql.Date)this.jTableTecnico.getValueAt(fila, 4)).toString());
-        this.jSpinnerUsuario.setValue((int)this.jTableTecnico.getValueAt(fila, 6));
-        this.jSpinnerTecnico.setValue((int)this.jTableTecnico.getValueAt(fila, 7));
-        this.jTextFieldTipo.setText((String)this.jTableTecnico.getValueAt(fila, 5));
+        this.jTextFieldFecha.setText(((java.sql.Date) this.jTableTecnico.getValueAt(fila, 4)).toString());
+        this.jSpinnerUsuario.setValue((int) this.jTableTecnico.getValueAt(fila, 6));
+        this.jSpinnerTecnico.setValue((int) this.jTableTecnico.getValueAt(fila, 7));
+        this.jTextFieldTipo.setText((String) this.jTableTecnico.getValueAt(fila, 5));
     }//GEN-LAST:event_jTableTecnicoMouseClicked
 
     private void jButtonVerIndicenciasTiempoConcretoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerIndicenciasTiempoConcretoActionPerformed
@@ -377,7 +376,8 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
                     i.getIdUsuario(),
                     i.getIdTecnico(),
                     i.getDescripcionIncidencia(),
-                    i.getDescripcionSolucion()
+                    i.getDescripcionSolucion(),
+                    i.getPrioridad()
                 };
                 m.addRow(o);
             }
@@ -405,7 +405,8 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
                     i.getIdUsuario(),
                     i.getIdTecnico(),
                     i.getDescripcionIncidencia(),
-                    i.getDescripcionSolucion()
+                    i.getDescripcionSolucion(),
+                    i.getPrioridad()
                 };
                 m.addRow(o);
             }

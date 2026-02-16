@@ -36,32 +36,13 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
     @Override
     public ArrayList<Incidencia> getIncidenciasUsuario(int idUsuario) throws Exception {
         ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
-        int idIncidencia;
-        String estado;
-        String resultado_cierre;
-        Date fechaCierre;
-        Date fechaEntrada;
-        String tipoIncidencia;
-        String descripcionIncidencia;
-        String descripcionSolucion;
-        int idTecnico;
-        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE ID_Usuario = ?";
+        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE ID_Usuario = ?";
 
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
             pstm.setInt(1, idUsuario);
             try (ResultSet resul = pstm.executeQuery();) {
                 while (resul.next()) {
-                    idIncidencia = resul.getInt("ID_Incidencia");
-                    estado = resul.getString("estado");
-                    resultado_cierre = resul.getString("resultado_cierre");
-                    fechaCierre = resul.getDate("f_cierre");
-                    fechaEntrada = resul.getDate("f_entrada");
-                    tipoIncidencia = resul.getString("tipo_incidencia");
-                    descripcionIncidencia = resul.getString("descripcion_incidencia");
-                    descripcionSolucion = resul.getString("descripcion_solucion");
-                    idTecnico = resul.getInt("ID_Tecnico");
-
-                    incidencias.add(new Incidencia(idIncidencia, estado, resultado_cierre, fechaCierre, fechaEntrada, tipoIncidencia, descripcionIncidencia, descripcionSolucion, idUsuario, idTecnico));
+                    incidencias.add(new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad")));
 
                 }
             }
@@ -108,31 +89,16 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
     @Override
     public Incidencia getIncidenciaPorId(int idIncidencia, int idUsuario) throws Exception {
         Incidencia incidencia = null;
-        String estado;
-        String resultado_cierre;
-        Date fechaCierre;
-        Date fechaEntrada;
-        String tipoIncidencia;
-        String descripcionIncidencia;
-        String descripcionSolucion;
-        int idTecnico;
-        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion FROM Incidencias WHERE ID_Incidencia = ? AND ID_Usuario = ?;";
+        String sql = "SELECT ID_Incidencia, estado, resultado_cierre, f_cierre, f_entrada, tipo_incidencia, ID_Usuario, ID_Tecnico, descripcion_incidencia, descripcion_solucion, prioridad FROM Incidencias WHERE ID_Incidencia = ? AND ID_Usuario = ?;";
 
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(sql);) {
             pstm.setInt(1, idIncidencia);
             pstm.setInt(2, idUsuario);
             try (ResultSet resul = pstm.executeQuery()) {
                 if (resul.next()) {
-                    estado = resul.getString("estado");
-                    resultado_cierre = resul.getString("resultado_cierre");
-                    fechaCierre = resul.getDate("f_cierre");
-                    fechaEntrada = resul.getDate("f_entrada");
-                    tipoIncidencia = resul.getString("tipo_incidencia");
-                    descripcionIncidencia = resul.getString("descripcion_incidencia");
-                    descripcionSolucion = resul.getString("descripcion_solucion");
-                    idUsuario = resul.getInt("ID_Usuario");
-                    idTecnico = resul.getInt("ID_Tecnico");
-                    incidencia = new Incidencia(idIncidencia, estado, resultado_cierre, fechaCierre, fechaEntrada, tipoIncidencia, descripcionIncidencia, descripcionSolucion, idUsuario, idTecnico);
+
+                    incidencia = new Incidencia(resul.getInt("ID_Incidencia"), resul.getString("estado"), resul.getString("resultado_cierre"), resul.getDate("f_cierre"), resul.getDate("f_entrada"), resul.getString("tipo_incidencia"), resul.getString("descripcion_incidencia"), resul.getString("descripcion_solucion"), resul.getInt("ID_Usuario"), resul.getInt("ID_Tecnico"), resul.getInt("prioridad"));
+
                 }
             }
         } catch (Exception e) {
@@ -192,13 +158,14 @@ public class UsuarioDAOimpl implements UsuarioDAO, AutoCloseable {
 
     @Override
     public void crearIncidencia(Incidencia incidencia, int idEspacio) throws Exception {
-        String SQL = "INSERT INTO Incidencias (f_entrada, tipo_incidencia, ID_Usuario, descripcion_incidencia) VALUES (CURDATE(), ?, ?, ?);";
+        String SQL = "INSERT INTO Incidencias (f_entrada, tipo_incidencia, ID_Usuario, descripcion_incidencia, prioridad) VALUES (CURDATE(), ?, ?, ?, ?);";
         String SQL2 = "INSERT INTO Incidencias_Espacios (ID_Espacio,ID_Incidencia) VALUES (?, ?);";
 
         try (Connection con = DriverManager.getConnection(Configuration.URL, Configuration.USER, Configuration.PASSWORD); PreparedStatement pstm = con.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS); PreparedStatement pstm2 = con.prepareStatement(SQL2)) {
             pstm.setString(1, incidencia.getTipoIncidencia());
             pstm.setInt(2, incidencia.getIdUsuario());
             pstm.setString(3, incidencia.getDescripcionIncidencia());
+            pstm.setInt(4, incidencia.getPrioridad());
 
             pstm.executeUpdate();
             try (ResultSet rs = pstm.getGeneratedKeys()) {

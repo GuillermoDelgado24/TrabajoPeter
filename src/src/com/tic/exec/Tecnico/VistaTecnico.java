@@ -340,7 +340,7 @@ public class VistaTecnico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVerIndicenciasActionPerformed
 
     private void jComboBoxTipoIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoIncidenciaActionPerformed
-        
+
     }//GEN-LAST:event_jComboBoxTipoIncidenciaActionPerformed
 
     private void jButtonSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalir1ActionPerformed
@@ -405,7 +405,9 @@ public class VistaTecnico extends javax.swing.JFrame {
                     i.getIdUsuario(),
                     i.getIdTecnico(),
                     i.getDescripcionIncidencia(),
-                    i.getDescripcionSolucion()
+                    i.getDescripcionSolucion(),
+                    i.getPrioridad()
+
                 };
                 m.addRow(o);
             }
@@ -433,7 +435,9 @@ public class VistaTecnico extends javax.swing.JFrame {
                     i.getIdUsuario(),
                     i.getIdTecnico(),
                     i.getDescripcionIncidencia(),
-                    i.getDescripcionSolucion()
+                    i.getDescripcionSolucion(),
+                    i.getPrioridad()
+
                 };
                 m.addRow(o);
             }
@@ -467,7 +471,9 @@ public class VistaTecnico extends javax.swing.JFrame {
                     i.getIdUsuario(),
                     i.getIdTecnico(),
                     i.getDescripcionIncidencia(),
-                    i.getDescripcionSolucion()
+                    i.getDescripcionSolucion(),
+                    i.getPrioridad()
+
                 };
                 m.addRow(o);
             }
