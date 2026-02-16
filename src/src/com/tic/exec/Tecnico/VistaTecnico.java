@@ -114,11 +114,11 @@ public class VistaTecnico extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID_Incidencia", "estado", "result_cierre", "f_cierre", "f_entrada", "tipo_incidencia", "ID_Usuario", "ID_Tecnico", "descripcion", "Solucion"
+                "ID_Incidencia", "estado", "result_cierre", "f_cierre", "f_entrada", "tipo_incidencia", "ID_Usuario", "ID_Tecnico", "descripcion", "Solucion", "Prioridad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

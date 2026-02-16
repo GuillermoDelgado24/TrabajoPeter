@@ -47,6 +47,7 @@ CREATE TABLE Incidencias (
 ID_Incidencia INT AUTO_INCREMENT PRIMARY KEY,
 estado ENUM('alta','asignada','en curso','cerrada') DEFAULT 'alta',
 resultado_cierre ENUM('con éxito','con éxito parcial','sin_éxito') DEFAULT NULL,
+prioridad INT,
 f_cierre DATE,
 f_entrada DATE NOT NULL,
 tipo_incidencia VARCHAR(100) DEFAULT NULL,

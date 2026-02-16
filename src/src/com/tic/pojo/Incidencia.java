@@ -22,6 +22,7 @@ public class Incidencia {
     private String descripcionSolucion =null;
     private int idUsuario;
     private int idTecnico = -1;
+    private int prioridad;
 
     public Incidencia(String tipoIncidencia, String descripcionIncidencia, int idUsuario) {
         this.tipoIncidencia = tipoIncidencia;
@@ -41,6 +42,17 @@ public class Incidencia {
         this.idUsuario = idUsuario;
         this.idTecnico = idTecnico;
     }
+
+    public Incidencia(int idIncidencia, String estado, Date fechaEntrada, String descripcionIncidencia, int idUsuario, int prioridad) {
+        this.idIncidencia = idIncidencia;
+        this.estado = estado;
+        this.fechaEntrada = fechaEntrada;
+        this.descripcionIncidencia = descripcionIncidencia;
+        this.idUsuario = idUsuario;
+        this.prioridad = prioridad;
+    }
+    
+    
 
 
     public int getIdTecnico() {

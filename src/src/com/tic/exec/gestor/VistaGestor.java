@@ -111,11 +111,11 @@ public class VistaGestor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID_Incidencia", "estado", "result_cierre", "f_cierre", "f_entrada", "tipo_incidencia", "ID_Usuario", "ID_Tecnico", "Descripcion", "Solucion"
+                "ID_Incidencia", "estado", "result_cierre", "f_cierre", "f_entrada", "tipo_incidencia", "ID_Usuario", "ID_Tecnico", "Descripcion", "Solucion", "Prioridad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -250,7 +250,7 @@ public class VistaGestor extends javax.swing.JFrame {
                                         .addComponent(jButtonSalir1))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(29, 29, 29)
-                                        .addComponent(jButtonListarTipoIncidencias, javax.swing.GroupLayout.PREFERRED_SIZE, 323, Short.MAX_VALUE))))
+                                        .addComponent(jButtonListarTipoIncidencias, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1)
                                 .addGap(12, 12, 12)
