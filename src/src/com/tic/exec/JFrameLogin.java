@@ -1,5 +1,7 @@
 package src.com.tic.exec;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
@@ -11,6 +13,7 @@ import src.com.tic.exec.Administrador.VistaAdministrador;
 import src.com.tic.exec.Tecnico.VistaTecnico;
 import src.com.tic.exec.Usuario.VistaUsuario;
 import src.com.tic.exec.gestor.VistaGestor;
+import src.com.tic.utils.Configuration;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -30,6 +33,8 @@ public class JFrameLogin extends javax.swing.JFrame {
      */
     public JFrameLogin() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         this.setSize(500, 400);
         this.setLocationRelativeTo(null);
         inicializarAyuda();

@@ -4,6 +4,8 @@
  */
 package src.com.tic.exec.Tecnico;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.dao.UsuarioDAOimpl;
 import src.com.tic.exec.JFrameLogin;
 import src.com.tic.pojo.Incidencia;
+import src.com.tic.utils.Configuration;
 
 /**
  *
@@ -39,6 +42,8 @@ public class VistaTecnico extends javax.swing.JFrame {
      */
     public VistaTecnico(int idUsuario, String usuario) {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         this.setLocationRelativeTo(null);
         this.jLabel3.setText("Hola, " + usuario + ". Otro día más en el curro");
         this.idUsuario = idUsuario;

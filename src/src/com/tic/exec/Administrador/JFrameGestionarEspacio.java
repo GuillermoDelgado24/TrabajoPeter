@@ -4,12 +4,15 @@
  */
 package src.com.tic.exec.Administrador;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.AdministradorDAOimpl;
 import src.com.tic.pojo.Dispositivo;
 import src.com.tic.pojo.Espacio;
+import src.com.tic.utils.Configuration;
 
 /**
  *
@@ -25,6 +28,8 @@ public class JFrameGestionarEspacio extends javax.swing.JFrame {
      */
     public JFrameGestionarEspacio() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         this.setLocationRelativeTo(null);
         refrescarTabla();
     }

@@ -4,12 +4,15 @@
  */
 package src.com.tic.exec.Administrador;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.AdministradorDAOimpl;
 import src.com.tic.pojo.Incidencia;
 import src.com.tic.pojo.Usuario;
+import src.com.tic.utils.Configuration;
 
 /**
  *
@@ -25,6 +28,8 @@ public class JFrameGestionarUsuario extends javax.swing.JFrame {
      */
     public JFrameGestionarUsuario() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         refrescarTabla();
     }
 

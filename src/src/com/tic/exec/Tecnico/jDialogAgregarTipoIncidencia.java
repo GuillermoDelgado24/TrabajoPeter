@@ -4,9 +4,12 @@
  */
 package src.com.tic.exec.Tecnico;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.exec.Usuario.VistaUsuario;
+import src.com.tic.utils.Configuration;
 
 /**
  *
@@ -24,6 +27,8 @@ public class jDialogAgregarTipoIncidencia extends javax.swing.JDialog {
         super(parent, modal);
         this.padre = (VistaTecnico) parent;
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
     }
 
     /**

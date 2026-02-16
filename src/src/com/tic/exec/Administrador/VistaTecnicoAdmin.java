@@ -4,6 +4,8 @@
  */
 package src.com.tic.exec.Administrador;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import src.com.tic.exec.Tecnico.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -13,6 +15,7 @@ import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.dao.UsuarioDAOimpl;
 import src.com.tic.exec.JFrameLogin;
 import src.com.tic.pojo.Incidencia;
+import src.com.tic.utils.Configuration;
 
 /**
  *
@@ -33,6 +36,8 @@ public class VistaTecnicoAdmin extends javax.swing.JFrame {
      */
     public VistaTecnicoAdmin() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         this.setLocationRelativeTo(null);
         this.jLabel3.setText("Otro día más en el curro");
         refrescarTabla();

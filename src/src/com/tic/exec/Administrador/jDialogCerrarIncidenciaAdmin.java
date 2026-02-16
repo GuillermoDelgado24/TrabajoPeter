@@ -4,10 +4,13 @@
  */
 package src.com.tic.exec.Administrador;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import src.com.tic.exec.Tecnico.*;
 import javax.swing.JOptionPane;
 import src.com.tic.dao.TecnicoDAOimpl;
 import src.com.tic.pojo.Incidencia;
+import src.com.tic.utils.Configuration;
 
 /**
  *
@@ -25,6 +28,8 @@ public class jDialogCerrarIncidenciaAdmin extends javax.swing.JDialog {
         super(parent, modal);
         this.padre = (VistaTecnicoAdmin) parent;
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         this.setLocationRelativeTo(null);
 
     }

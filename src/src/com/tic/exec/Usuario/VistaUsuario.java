@@ -1,5 +1,7 @@
 package src.com.tic.exec.Usuario;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
@@ -10,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import src.com.tic.dao.UsuarioDAOimpl;
 import src.com.tic.exec.JFrameLogin;
 import src.com.tic.pojo.Incidencia;
+import src.com.tic.utils.Configuration;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -32,6 +35,8 @@ public class VistaUsuario extends javax.swing.JFrame {
      */
     public VistaUsuario(int idUsuario, String nombreUsuario) {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         this.setLocationRelativeTo(null);
         this.jLabel3.setText("Buenas, " + nombreUsuario + " ¿Que necesitas?");
         this.idUsuario = idUsuario;

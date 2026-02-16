@@ -1,10 +1,13 @@
 package src.com.tic.exec.Administrador;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import src.com.tic.dao.AdministradorDAOimpl;
 import src.com.tic.pojo.Usuario;
+import src.com.tic.utils.Configuration;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,6 +30,8 @@ public class JFrameRegister extends javax.swing.JFrame {
      */
     public JFrameRegister() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         this.setLocationRelativeTo(null);
     }
 

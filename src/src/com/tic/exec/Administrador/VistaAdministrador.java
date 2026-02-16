@@ -1,11 +1,14 @@
 package src.com.tic.exec.Administrador;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import src.com.tic.exec.JFrameLogin;
 import src.com.tic.exec.gestor.VistaGestor;
+import src.com.tic.utils.Configuration;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,6 +30,8 @@ public class VistaAdministrador extends javax.swing.JFrame {
      */
     public VistaAdministrador() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         this.setLocationRelativeTo(null);
         inicializarAyuda();
 

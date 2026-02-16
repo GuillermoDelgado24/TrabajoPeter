@@ -4,6 +4,10 @@
  */
 package src.com.tic.utils;
 
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author alumno
@@ -13,6 +17,6 @@ public class Configuration {
     public static final String URL = "jdbc:mysql://localhost:3306/InterfazTic";
     public static final String USER = "interfaz";
     public static final String PASSWORD = "interfaz123";
-    
+    public static final String RUTA_LOGO = "./src/img/LogoTicBeyondMini.png";
     public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 }

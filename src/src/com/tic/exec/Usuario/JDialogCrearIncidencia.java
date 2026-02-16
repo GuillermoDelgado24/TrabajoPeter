@@ -4,6 +4,8 @@
  */
 package src.com.tic.exec.Usuario;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.time.LocalDate;
@@ -13,6 +15,7 @@ import src.com.tic.dao.UsuarioDAOimpl;
 import src.com.tic.exec.Usuario.VistaUsuario;
 import src.com.tic.pojo.Dispositivo;
 import src.com.tic.pojo.Incidencia;
+import src.com.tic.utils.Configuration;
 
 /**
  *
@@ -34,6 +37,8 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
         this.idUsuario = idUsuario;
         this.padre = (VistaUsuario) parent;
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(Configuration.RUTA_LOGO);
+        setIconImage(icono);
         this.setSize(1130, 410);
         this.setLocationRelativeTo(null);
 
@@ -198,7 +203,7 @@ public class JDialogCrearIncidencia extends javax.swing.JDialog {
 
     private void jButtonCrearIndicenciaDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearIndicenciaDialogActionPerformed
         try {
-            Incidencia in = new Incidencia(this.jComboBoxTipoIncidencia.getSelectedItem().toString(), this.jTextArea1.getText(), this.idUsuario, (int)this.jSpinnerPrioridad.getValue());
+            Incidencia in = new Incidencia(this.jComboBoxTipoIncidencia.getSelectedItem().toString(), this.jTextArea1.getText(), this.idUsuario, (int) this.jSpinnerPrioridad.getValue());
             usuarioDAO.crearIncidencia(in, map.get(this.jComboBoxEspacio.getSelectedItem().toString()));
             dispose();
         } catch (Exception ex) {
